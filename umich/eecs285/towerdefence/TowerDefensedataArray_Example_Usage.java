@@ -1,4 +1,4 @@
-package towerdefence.eecs285.umich;
+package umich.eecs285.towerdefence;
 
 /*
  * Example of use
