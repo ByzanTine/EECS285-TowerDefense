@@ -10,7 +10,7 @@ public interface TowerDefensedataArray {
    */
   public static final int TowerDefenseObject_Array_Size = 100;
   
-  public static class TowerDefense_TransData{
+  public class TowerDefense_TransData{
     public TowerDefenseObject[] TowerDefense_TransArray;
     private long timestamp;
     private int clientId;
@@ -48,7 +48,7 @@ public interface TowerDefensedataArray {
     }
   }
     
-  public static class TowerDefenseObject {
+  public class TowerDefenseObject {
     /*
      * Instance included: object id, life, location(x,y) and action type
      */
