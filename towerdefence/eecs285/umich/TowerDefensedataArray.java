@@ -1,6 +1,9 @@
 /*
  * Basic DataStruct
  */
+
+package towerdefence.eecs285.umich;
+
 public interface TowerDefensedataArray {
   /*
    * For the primitive usage Instance included: Array of TowerDefenseObject
