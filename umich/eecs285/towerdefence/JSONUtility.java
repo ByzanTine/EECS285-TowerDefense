@@ -36,11 +36,11 @@ public final class JSONUtility {
   
   public static TowerDefense_TransData JOSNToArray(String jsonString) {
     JSONParser parser = new JSONParser();
-    TowerDefense_TransData towerDefense_TransData = new TowerDefense_TransData();
+    TowerDefense_TransData towerDefense_TransData = null;
     try {
       JSONObject jsonObject = (JSONObject) parser.parse(jsonString);
-      towerDefense_TransData.setClientId( ((Long) jsonObject.get("clientId")).intValue());
-      towerDefense_TransData.setTimeStamp( (Long) jsonObject.get("timestamp") );
+      towerDefense_TransData = new TowerDefense_TransData( 
+              ((Long) jsonObject.get("clientId")).intValue(), (Long) jsonObject.get("timestamp"));
       JSONArray arrayObj = (JSONArray) jsonObject.get("arrayObj");
       for (int i = 0; i < TowerDefensedataArray.TowerDefenseObject_Array_Size; i++) {
         JSONObject data = (JSONObject) arrayObj.get(i);

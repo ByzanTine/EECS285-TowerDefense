@@ -15,8 +15,21 @@ public interface TowerDefensedataArray {
     private long timestamp;
     private int clientId;
     
-    public TowerDefense_TransData() {
+    public TowerDefense_TransData(int clientId, long timestamp) {
       TowerDefense_TransArray = new TowerDefenseObject[TowerDefenseObject_Array_Size];
+      this.clientId = clientId;
+      this.timestamp = timestamp;
+    }
+    
+    public TowerDefense_TransData(int clientId) {
+      TowerDefense_TransArray = new TowerDefenseObject[TowerDefenseObject_Array_Size];
+      this.clientId = clientId;
+      this.timestamp = System.currentTimeMillis() / 1000L;
+    }
+    
+    public static TowerDefense_TransData createEmptyTransData(int clientId) {
+      TowerDefense_TransData towerDefense_TransData = new TowerDefense_TransData(clientId);
+      return towerDefense_TransData;
     }
     
     public String toString(){
@@ -31,16 +44,8 @@ public interface TowerDefensedataArray {
       return result;
     }
     
-    public void setTimeStamp(long timestamp) {
-      this.timestamp = timestamp;
-    }
-    
     public long getTimeStamp() {
       return this.timestamp;
-    }
-    
-    public void setClientId(int clientId) {
-      this.clientId = clientId;
     }
     
     public int getClientId() {
