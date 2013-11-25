@@ -24,6 +24,12 @@ public interface TowerDefensedataArray {
       }
       return result;
     }
+    public void setTimeStamp(long timestamp){
+      this.timestamp=timestamp;
+    }
+    public long getTimeStamp(){
+      return this.timestamp;
+    }
   }
   public static class TowerDefenseObject {
     /*
