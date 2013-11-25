@@ -3,7 +3,6 @@ package umich.eecs285.towerdefence;
 import java.net.*;
 import java.io.*;
 
-import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefenseObject;
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class ServerMessager extends Thread {

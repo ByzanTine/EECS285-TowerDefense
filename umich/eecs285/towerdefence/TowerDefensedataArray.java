@@ -8,27 +8,29 @@ public interface TowerDefensedataArray {
   /*
    * For the primitive usage Instance included: Array of TowerDefenseObject
    */
-  public static final int TowerDefenseObject_Array_Size = 100;
   
   public class TowerDefense_TransData{
     public TowerDefenseObject[] TowerDefense_TransArray;
     private long timestamp;
     private int clientId;
+    private int size;
     
-    public TowerDefense_TransData(int clientId, long timestamp) {
-      TowerDefense_TransArray = new TowerDefenseObject[TowerDefenseObject_Array_Size];
+    public TowerDefense_TransData(int clientId, long timestamp, int size) {
+      TowerDefense_TransArray = new TowerDefenseObject[size];
       this.clientId = clientId;
       this.timestamp = timestamp;
+      this.size = size;
     }
     
-    public TowerDefense_TransData(int clientId) {
-      TowerDefense_TransArray = new TowerDefenseObject[TowerDefenseObject_Array_Size];
+    public TowerDefense_TransData(int clientId, int size) {
+      TowerDefense_TransArray = new TowerDefenseObject[size];
       this.clientId = clientId;
       this.timestamp = System.currentTimeMillis() / 1000L;
+      this.size = size;
     }
     
     public static TowerDefense_TransData createEmptyTransData(int clientId) {
-      TowerDefense_TransData towerDefense_TransData = new TowerDefense_TransData(clientId);
+      TowerDefense_TransData towerDefense_TransData = new TowerDefense_TransData(clientId, 0);
       return towerDefense_TransData;
     }
     
@@ -36,7 +38,7 @@ public interface TowerDefensedataArray {
       String result = "timestamp: ";
       result += timestamp;
       
-      for(int i = 0; i < TowerDefenseObject_Array_Size; i++) {
+      for(int i = 0; i < size; i++) {
         result += "\n";
         result += TowerDefense_TransArray[i].toString();
         
@@ -50,6 +52,14 @@ public interface TowerDefensedataArray {
     
     public int getClientId() {
       return clientId;
+    }
+    
+    public int getSize() {
+      return size;
+    }
+    
+    public boolean isEmpty() {
+      return (size == 0);
     }
   }
     
@@ -127,6 +137,7 @@ public interface TowerDefensedataArray {
       return "id: " + id + " life: " + life + " location: " + x + " " + y
           + " Action: " + action;
     }
+    
   }
   
 }

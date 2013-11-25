@@ -21,7 +21,8 @@ public final class JSONUtility {
     JSONArray arrayObj = new JSONArray();
     obj.put("clientId", towerDefense_TransData.getClientId());
     obj.put("timestamp", towerDefense_TransData.getTimeStamp());
-    for(int i = 0; i < TowerDefensedataArray.TowerDefenseObject_Array_Size; i++) {
+    obj.put("size", towerDefense_TransData.getSize());
+    for(int i = 0; i < towerDefense_TransData.getSize(); i++) {
       JSONObject arrayData = new JSONObject();
       arrayData.put("id", towerDefense_TransData.TowerDefense_TransArray[i].getId());
       arrayData.put("life", towerDefense_TransData.TowerDefense_TransArray[i].getLife());
@@ -40,9 +41,12 @@ public final class JSONUtility {
     try {
       JSONObject jsonObject = (JSONObject) parser.parse(jsonString);
       towerDefense_TransData = new TowerDefense_TransData( 
-              ((Long) jsonObject.get("clientId")).intValue(), (Long) jsonObject.get("timestamp"));
+              ((Long) jsonObject.get("clientId")).intValue(),
+              (Long) jsonObject.get("timestamp"),
+              ((Long) jsonObject.get("size")).intValue()
+          );
       JSONArray arrayObj = (JSONArray) jsonObject.get("arrayObj");
-      for (int i = 0; i < TowerDefensedataArray.TowerDefenseObject_Array_Size; i++) {
+      for (int i = 0; i < towerDefense_TransData.getSize(); i++) {
         JSONObject data = (JSONObject) arrayObj.get(i);
         towerDefense_TransData.TowerDefense_TransArray[i] = new TowerDefenseObject();
         towerDefense_TransData.TowerDefense_TransArray[i].setId( ((Long) data.get("id")).intValue() );
