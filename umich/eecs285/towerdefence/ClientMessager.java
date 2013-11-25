@@ -3,17 +3,16 @@ package umich.eecs285.towerdefence;
 import java.net.*;
 import java.io.*;
 
-public class ClientWrapper extends Thread {
+public class ClientMessager extends Thread {
   private String serverIp;
   private int port;
-  private int id;
-  private String message;
+  private String sendMessage;
+  private String receiveMessage;
   
-  public ClientWrapper(String inServerIp, String inPort, int inId, String inMessage) throws IOException {
+  public ClientMessager(String inServerIp, String inPort, int inId, String inSendMessage) throws IOException {
     serverIp = inServerIp;
     port = Integer.parseInt(inPort);
-    id = inId;
-    message = inMessage;
+    sendMessage = inSendMessage;
   }
   
   public void run() {
@@ -26,15 +25,19 @@ public class ClientWrapper extends Thread {
       OutputStream outToServer = client.getOutputStream();
       DataOutputStream out =
           new DataOutputStream(outToServer);
-      out.writeUTF(id + ": " + message);
+      out.writeUTF(sendMessage);
       InputStream inFromServer = client.getInputStream();
       DataInputStream in =
           new DataInputStream(inFromServer);
-      System.out.println("Server: " + in.readUTF());
+      receiveMessage = in.readUTF();
       client.close();
     } catch(IOException e) {
       e.printStackTrace();
     }
+  }
+  
+  public String getReceiveMessage() {
+    return receiveMessage;
   }
   
 }
