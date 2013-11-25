@@ -4,7 +4,6 @@ package umich.eecs285.towerdefence;
  * This is a utility class providing method to transfer TowerDefense_TransData to JSON or vice versa.
  */
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,40 +16,44 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 public final class JSONUtility {
   
   @SuppressWarnings("unchecked")
-  public String arrayToJSON(int clientId, TowerDefense_TransData towerDefense_TransData) throws IOException {
+  public static String arrayToJSON(TowerDefense_TransData towerDefense_TransData) throws IOException {
     JSONObject obj = new JSONObject();
     JSONArray arrayObj = new JSONArray();
-    obj.put("clientId", clientId);
-    obj.put("timestamp", new Timestamp(System.currentTimeMillis()));
+    obj.put("clientId", towerDefense_TransData.getClientId());
+    obj.put("timestamp", towerDefense_TransData.getTimeStamp());
     for(int i = 0; i < TowerDefensedataArray.TowerDefenseObject_Array_Size; i++) {
       JSONObject arrayData = new JSONObject();
-      arrayData.put("id", TowerDefense_TransData.TowerDefense_TransArray[i].getId());
-      arrayData.put("life", TowerDefense_TransData.TowerDefense_TransArray[i].getLife());
-      arrayData.put("x", TowerDefense_TransData.TowerDefense_TransArray[i].getX());
-      arrayData.put("y", TowerDefense_TransData.TowerDefense_TransArray[i].getY());
-      arrayData.put("action", TowerDefense_TransData.TowerDefense_TransArray[i].getAction());
+      arrayData.put("id", towerDefense_TransData.TowerDefense_TransArray[i].getId());
+      arrayData.put("life", towerDefense_TransData.TowerDefense_TransArray[i].getLife());
+      arrayData.put("x", towerDefense_TransData.TowerDefense_TransArray[i].getX());
+      arrayData.put("y", towerDefense_TransData.TowerDefense_TransArray[i].getY());
+      arrayData.put("action", towerDefense_TransData.TowerDefense_TransArray[i].getAction());
       arrayObj.add(arrayData);
     }
     obj.put("arrayObj", arrayObj);
     return obj.toString();
   }
   
-  public TowerDefense_TransData JOSNToArray(String jsonString) {
+  public static TowerDefense_TransData JOSNToArray(String jsonString) {
     JSONParser parser = new JSONParser();
     TowerDefense_TransData towerDefense_TransData = new TowerDefense_TransData();
     try {
       JSONObject jsonObject = (JSONObject) parser.parse(jsonString);
+      towerDefense_TransData.setClientId( ((Long) jsonObject.get("clientId")).intValue());
+      towerDefense_TransData.setTimeStamp( (Long) jsonObject.get("timestamp") );
+      JSONArray arrayObj = (JSONArray) jsonObject.get("arrayObj");
       for (int i = 0; i < TowerDefensedataArray.TowerDefenseObject_Array_Size; i++) {
-        TowerDefense_TransData.TowerDefense_TransArray[i] = new TowerDefenseObject();
-//        int id = (Integer) jsonObject.get("id");
-//        int life = (Integer) jsonObject.get("life");
-//        int x = (Integer) jsonObject.get("x");
-//        int y = (Integer) jsonObject.get("y");
-//        int action = (Integer) jsonObject.get("action");
+        JSONObject data = (JSONObject) arrayObj.get(i);
+        towerDefense_TransData.TowerDefense_TransArray[i] = new TowerDefenseObject();
+        towerDefense_TransData.TowerDefense_TransArray[i].setId( ((Long) data.get("id")).intValue() );
+        towerDefense_TransData.TowerDefense_TransArray[i].setLife( ((Long) data.get("life")).intValue() );
+        towerDefense_TransData.TowerDefense_TransArray[i].setX( ((Long) data.get("x")).intValue() );
+        towerDefense_TransData.TowerDefense_TransArray[i].setY( ((Long) data.get("y")).intValue() );
+        towerDefense_TransData.TowerDefense_TransArray[i].setAction( ((Long) data.get("action")).intValue() );
       }
     } catch (ParseException e) {
       e.printStackTrace();
     }
-    return null;
+    return towerDefense_TransData;
   }
 }

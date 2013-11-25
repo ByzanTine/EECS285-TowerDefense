@@ -11,12 +11,14 @@ public interface TowerDefensedataArray {
   public static final int TowerDefenseObject_Array_Size = 100;
   
   public static class TowerDefense_TransData{
-    public static TowerDefenseObject[] TowerDefense_TransArray;
+    public TowerDefenseObject[] TowerDefense_TransArray;
     private long timestamp;
+    private int clientId;
     
     public TowerDefense_TransData() {
       TowerDefense_TransArray = new TowerDefenseObject[TowerDefenseObject_Array_Size];
     }
+    
     public String toString(){
       String result = "timestamp: ";
       result += timestamp;
@@ -28,11 +30,21 @@ public interface TowerDefensedataArray {
       }
       return result;
     }
+    
     public void setTimeStamp(long timestamp) {
       this.timestamp = timestamp;
     }
+    
     public long getTimeStamp() {
       return this.timestamp;
+    }
+    
+    public void setClientId(int clientId) {
+      this.clientId = clientId;
+    }
+    
+    public int getClientId() {
+      return clientId;
     }
   }
     

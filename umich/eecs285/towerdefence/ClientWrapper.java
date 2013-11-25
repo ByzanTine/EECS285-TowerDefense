@@ -37,19 +37,4 @@ public class ClientWrapper extends Thread {
     }
   }
   
-  public static void main(String [] args)
-  {
-    for (int i = 0; i < 100000; i++) {
-      try
-      {
-         Thread t = new ClientWrapper(args[0], args[1], Integer.parseInt(args[2]), Integer.toString(i));
-         t.start();
-         Thread.sleep(10);
-      } catch(IOException e) {
-         e.printStackTrace();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } 
-    }
-  }
 }
