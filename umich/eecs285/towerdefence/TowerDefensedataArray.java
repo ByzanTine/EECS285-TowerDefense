@@ -12,28 +12,30 @@ public interface TowerDefensedataArray {
   
   public static class TowerDefense_TransData{
     public static TowerDefenseObject[] TowerDefense_TransArray;
-    public long timestamp;
-    public TowerDefense_TransData(){
+    private long timestamp;
+    
+    public TowerDefense_TransData() {
       TowerDefense_TransArray = new TowerDefenseObject[TowerDefenseObject_Array_Size];
     }
     public String toString(){
       String result = "timestamp: ";
-      result+=timestamp;
+      result += timestamp;
       
-      for(int i=0;i<TowerDefenseObject_Array_Size;i++){
-        result+="\n";
-        result+=TowerDefense_TransArray[i].toString();
+      for(int i = 0; i < TowerDefenseObject_Array_Size; i++) {
+        result += "\n";
+        result += TowerDefense_TransArray[i].toString();
         
       }
       return result;
     }
-    public void setTimeStamp(long timestamp){
-      this.timestamp=timestamp;
+    public void setTimeStamp(long timestamp) {
+      this.timestamp = timestamp;
     }
-    public long getTimeStamp(){
+    public long getTimeStamp() {
       return this.timestamp;
     }
   }
+    
   public static class TowerDefenseObject {
     /*
      * Instance included: object id, life, location(x,y) and action type
@@ -64,10 +66,49 @@ public interface TowerDefensedataArray {
       
     }
     
+    public void setId(int id) {
+      this.id = id;
+    }
+    
+    public int getId() {
+      return id;
+    }
+    
+    public void setLife(int life) {
+      this.life = life;
+    }
+    
+    public int getLife() {
+      return life;
+    }
+    
+    public void setX(int x) {
+      this.x = x;
+    }
+    
+    public int getX() {
+      return x;
+    }
+    
+    public void setY(int y) {
+      this.y = y;
+    }
+    
+    public int getY() {
+      return y;
+    }
+    
+    public void setAction(int action) {
+      this.action = action;
+    }
+    
+    public int getAction() {
+      return action;
+    }
+    
     public String toString() {
       return "id: " + id + " life: " + life + " location: " + x + " " + y
           + " Action: " + action;
-      
     }
   }
   
