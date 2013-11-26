@@ -13,7 +13,7 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
         // TODO Auto-generated method stub
         removeAll();
         if (frameID == 0) {
-            for (Integer i = 0; i < TowerDefenseObject_Array_Size; ++i) {
+            for (Integer i = 0; i < t.getSize(); ++i) {
                 TowerDefense_Button b = new TowerDefense_Button(
                         "res/alien_selected.gif", "res/alien_selected.gif",
                         "res/alien.gif");
@@ -23,7 +23,7 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
             }
         }
         if (frameID == 1) {
-            for (Integer i = 0; i < TowerDefenseObject_Array_Size; ++i) {
+            for (Integer i = 0; i < t.getSize(); ++i) {
                 TowerDefense_Button b = new TowerDefense_Button(
                         "res/alien_selected.gif", "res/alien_selected.gif",
                         "res/alien2.gif");
@@ -33,7 +33,7 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
             }
         }
         if (frameID == 2) {
-            for (Integer i = 0; i < TowerDefenseObject_Array_Size; ++i) {
+            for (Integer i = 0; i < t.getSize(); ++i) {
                 TowerDefense_Button b = new TowerDefense_Button(
                         "res/alien_selected.gif", "res/alien_selected.gif",
                         "res/alien3.gif");

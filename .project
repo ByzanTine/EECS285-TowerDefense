@@ -20,10 +20,5 @@
 			<type>2</type>
 			<location>C:/Users/Administrator/Desktop/EECS285/EECS285-TowerDefense/bin</location>
 		</link>
-		<link>
-			<name>src</name>
-			<type>2</type>
-			<location>C:/Users/Administrator/Desktop/EECS285/EECS285-TowerDefense/src</location>
-		</link>
 	</linkedResources>
 </projectDescription>
