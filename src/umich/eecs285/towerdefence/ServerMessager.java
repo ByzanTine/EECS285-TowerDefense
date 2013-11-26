@@ -5,7 +5,7 @@ import java.io.*;
 
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
-public class ServerMessager extends Thread {
+public class ServerMessager implements Runnable {
   public final static int Num_Of_Clients = 2;
   private TowerDefense_TransData[] clientMessageBufferList;
   private ServerSocket serverSocket;
@@ -41,12 +41,12 @@ public class ServerMessager extends Thread {
       DataInputStream in =
            new DataInputStream(server.getInputStream());
       TowerDefense_TransData towerDefense_TransData = JSONUtility.JOSNToArray(in.readUTF());
-      clientMessageBufferList[towerDefense_TransData.getId()] = towerDefense_TransData;
+      clientMessageBufferList[towerDefense_TransData.getClientId()] = towerDefense_TransData;
       // TODO need to change for more than two players
      
       // send out output message
       int sendId;
-      if (towerDefense_TransData.getId() == 1)
+      if (towerDefense_TransData.getClientId() == 1)
         sendId = 0;
       else
         sendId = 1;
