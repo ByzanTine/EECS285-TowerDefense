@@ -8,14 +8,14 @@ import javax.swing.Timer;
 
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
-public class mainFrame extends JFrame implements TowerDefensedataArray {
+public class MainFrame extends JFrame implements TowerDefensedataArray {
 
-    private mainPanel mP;
+    private MainPanel mP;
     private int frameID;
 
     public Timer timer;
 
-    mainFrame() {
+    MainFrame() {
 
         super("Tower Defence");
         this.setSize(1200, 900);
@@ -23,7 +23,7 @@ public class mainFrame extends JFrame implements TowerDefensedataArray {
         this.setLayout(null);
         this.frameID = 0;
 
-        mP = new mainPanel();
+        mP = new MainPanel();
         add(mP);
     }
 

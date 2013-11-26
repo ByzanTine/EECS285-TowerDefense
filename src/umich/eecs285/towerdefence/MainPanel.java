@@ -2,9 +2,9 @@ package umich.eecs285.towerdefence;
 
 import javax.swing.JPanel;
 
-public class mainPanel extends JPanel implements TowerDefensedataArray {
+public class MainPanel extends JPanel implements TowerDefensedataArray {
 
-    mainPanel() {
+    MainPanel() {
         this.setLayout(null);
         this.setBounds(0, 0, 1200, 900);
     }
