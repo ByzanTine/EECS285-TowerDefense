@@ -6,12 +6,17 @@
               as the first entry and export the buildfile again. -->
 <project basedir="." default="build" name="EECS285-TowerDefense">
     <property environment="env"/>
+    <property name="src.link" value="../../C:/Users/Administrator/Desktop/EECS285/EECS285-TowerDefense/src"/>
+    <property name="JRE_LIB" value="../../../../usr/local/java/jdk1.6.0_38/jre/lib/rt.jar"/>
     <property name="ECLIPSE_HOME" value="../../../../usr/lib/eclipse"/>
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.6"/>
-    <property name="source" value="1.6"/>
+    <property name="target" value="1.5"/>
+    <property name="source" value="1.5"/>
+    <path id="home/think/workspace/EECS285-TowerDefense/bin.libraryclasspath"/>
     <path id="EECS285-TowerDefense.classpath">
         <pathelement location="bin"/>
+        <pathelement location="${JRE_LIB}"/>
+        <path refid="home/think/workspace/EECS285-TowerDefense/bin.libraryclasspath"/>
         <pathelement location="lib/lwjgl-2.9.0/jar/AppleJavaExtensions.jar"/>
         <pathelement location="lib/lwjgl-2.9.0/jar/asm-debug-all.jar"/>
         <pathelement location="lib/lwjgl-2.9.0/jar/jinput.jar"/>
@@ -21,11 +26,27 @@
         <pathelement location="lib/lwjgl-2.9.0/jar/lwjgl-debug.jar"/>
         <pathelement location="lib/lwjgl-2.9.0/jar/lwjgl.jar"/>
         <pathelement location="lib/lwjgl-2.9.0/jar/lzma.jar"/>
+        <pathelement location="lib/json-simple-1.1.1.jar"/>
     </path>
+    <path id="run.StandardButton (1).classpath">
+        <pathelement location="${JRE_LIB}"/>
+        <path refid="EECS285-TowerDefense.classpath"/>
+    </path>
+    <path id="run.StandardButton (1).bootclasspath"/>
+    <path id="run.TowerDefensedataArray_Example_Usage (1).classpath">
+        <pathelement location="${JRE_LIB}"/>
+        <path refid="EECS285-TowerDefense.classpath"/>
+    </path>
+    <path id="run.TowerDefensedataArray_Example_Usage (1).bootclasspath"/>
+    <path id="run.WheelOfFortune (1).classpath">
+        <pathelement location="${JRE_LIB}"/>
+        <path refid="EECS285-TowerDefense.classpath"/>
+    </path>
+    <path id="run.WheelOfFortune (1).bootclasspath"/>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
+            <fileset dir="${src.link}">
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -39,7 +60,7 @@
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
-            <src path="src"/>
+            <src path="${src.link}"/>
             <classpath refid="EECS285-TowerDefense.classpath"/>
         </javac>
     </target>
@@ -56,5 +77,29 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
+    </target>
+    <target name="StandardButton (1)">
+        <java classname="StandardButton" failonerror="true" fork="yes">
+            <classpath refid="run.StandardButton (1).classpath"/>
+            <bootclasspath>
+                <path refid="run.StandardButton (1).bootclasspath"/>
+            </bootclasspath>
+        </java>
+    </target>
+    <target name="TowerDefensedataArray_Example_Usage (1)">
+        <java classname="umich.eecs285.towerdefence.TowerDefensedataArray_Example_Usage" failonerror="true" fork="yes">
+            <classpath refid="run.TowerDefensedataArray_Example_Usage (1).classpath"/>
+            <bootclasspath>
+                <path refid="run.TowerDefensedataArray_Example_Usage (1).bootclasspath"/>
+            </bootclasspath>
+        </java>
+    </target>
+    <target name="WheelOfFortune (1)">
+        <java classname="WheelOfFortune" failonerror="true" fork="yes">
+            <classpath refid="run.WheelOfFortune (1).classpath"/>
+            <bootclasspath>
+                <path refid="run.WheelOfFortune (1).bootclasspath"/>
+            </bootclasspath>
+        </java>
     </target>
 </project>
