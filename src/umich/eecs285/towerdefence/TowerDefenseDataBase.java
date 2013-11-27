@@ -28,7 +28,8 @@ public class TowerDefenseDataBase {
 			}
 		}
 		for (int i = 0; i < ID_SIZE; i++) {
-			// Units unit=new Units(1,1,1,1,1,1);
+			Units unit=new Units(1,1,1,1,1,1,1);
+			Unit_table.put(i, unit);
 
 		}
 
@@ -63,7 +64,7 @@ public class TowerDefenseDataBase {
 	 * @param id
 	 * @return Unit
 	 */
-	public Units search(int rawId) {
+	public Units searchUnit(int rawId) {
 		return Unit_table.get(this.processID(rawId));
 	}
 
