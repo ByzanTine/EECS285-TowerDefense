@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
-
 public class MainFrame extends JFrame implements TowerDefensedataArray {
 
     private MainPanel mP;
