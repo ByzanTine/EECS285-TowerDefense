@@ -17,7 +17,7 @@ public class ServerMessager extends Thread {
     
     clientMessageBufferList = new TowerDefense_TransData[Num_Of_Clients];
     for (int i = 0; i < Num_Of_Clients; i++) {
-      clientMessageBufferList[i] = TowerDefense_TransData.createEmptyTransData(i);
+      clientMessageBufferList[i] = TowerDefense_TransData.createEmptyTransData(i, TowerDefensedataArray.Transmit_Type_Regular);
     }
   }
 
@@ -42,8 +42,8 @@ public class ServerMessager extends Thread {
            new DataInputStream(server.getInputStream());
       TowerDefense_TransData towerDefense_TransData = JSONUtility.JOSNToArray(in.readUTF());
       clientMessageBufferList[towerDefense_TransData.getClientId()] = towerDefense_TransData;
+      
       // TODO need to change for more than two players
-     
       // send out output message
       int sendId;
       if (towerDefense_TransData.getClientId() == 1)
@@ -53,7 +53,7 @@ public class ServerMessager extends Thread {
       DataOutputStream out =
           new DataOutputStream(server.getOutputStream());
       out.writeUTF(JSONUtility.arrayToJSON(clientMessageBufferList[sendId]));
-      clientMessageBufferList[sendId] = TowerDefense_TransData.createEmptyTransData(sendId);
+      clientMessageBufferList[sendId] = TowerDefense_TransData.createEmptyTransData(sendId, TowerDefensedataArray.Transmit_Type_Regular);
        
       // close server
       server.close();

@@ -8,6 +8,7 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
  * @author Jiaxi Luo
  *
  */
+
 public class ClientWrapper {
   private String serverIp;
   private String port;

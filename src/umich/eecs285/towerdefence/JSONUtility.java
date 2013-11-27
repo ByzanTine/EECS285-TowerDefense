@@ -22,6 +22,7 @@ public final class JSONUtility {
     obj.put("clientId", towerDefense_TransData.getClientId());
     obj.put("timestamp", towerDefense_TransData.getTimeStamp());
     obj.put("size", towerDefense_TransData.getSize());
+    obj.put("transmitType", towerDefense_TransData.getTransmitType());
     for(int i = 0; i < towerDefense_TransData.getSize(); i++) {
       JSONObject arrayData = new JSONObject();
       arrayData.put("id", towerDefense_TransData.TowerDefense_TransArray[i].getId());
@@ -43,7 +44,8 @@ public final class JSONUtility {
       towerDefense_TransData = new TowerDefense_TransData( 
               ((Long) jsonObject.get("clientId")).intValue(),
               (Long) jsonObject.get("timestamp"),
-              ((Long) jsonObject.get("size")).intValue()
+              ((Long) jsonObject.get("size")).intValue(),
+              ((Long) jsonObject.get("transmitType")).byteValue()
           );
       JSONArray arrayObj = (JSONArray) jsonObject.get("arrayObj");
       for (int i = 0; i < towerDefense_TransData.getSize(); i++) {

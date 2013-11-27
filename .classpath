@@ -4,5 +4,6 @@
 	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
 	<classpathentry kind="con" path="G:/GameDesign/EECS285-TowerDefense/bin"/>
 	<classpathentry kind="con" path="G:/usr/local/java/jdk1.6.0_38/jre/lib/rt.jar"/>
+	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
