@@ -11,6 +11,7 @@ public interface TowerDefensedataArray {
   
   public static final byte Transmit_Type_Regular = 0;
   public static final byte Transmit_Type_New_Round = 1;
+  public static final byte Transmit_Type_New_Round_Ready = 2;
   
   public class TowerDefense_TransData{
     public TowerDefenseObject[] TowerDefense_TransArray;
@@ -53,8 +54,12 @@ public interface TowerDefensedataArray {
       return result;
     }
     
+    public void setTimeStamp(long timestamp) {
+      this.timestamp = timestamp;
+    }
+    
     public long getTimeStamp() {
-      return this.timestamp;
+      return timestamp;
     }
     
     public int getClientId() {
@@ -63,6 +68,10 @@ public interface TowerDefensedataArray {
     
     public int getSize() {
       return size;
+    }
+    
+    public void setTransmitType(byte transmitType) {
+      this.transmitType = transmitType;
     }
     
     public byte getTransmitType() {
