@@ -3,7 +3,7 @@ package umich.eecs285.towerdefence;
 import java.net.*;
 import java.io.*;
 
-public class ClientMessager implements Runnable {
+public class ClientMessager extends Thread {
   private String serverIp;
   private int port;
   private String sendMessage;

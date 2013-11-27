@@ -5,7 +5,7 @@ import java.io.*;
 
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
-public class ServerMessager implements Runnable {
+public class ServerMessager extends Thread {
   public final static int Num_Of_Clients = 2;
   private TowerDefense_TransData[] clientMessageBufferList;
   private ServerSocket serverSocket;
