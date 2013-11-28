@@ -3,7 +3,7 @@ package umich.eecs285.towerdefence;
 public class Units {
 	public int HP, MaxHP, Speed, Radius, ID, Action, Sight, Range, Attack,
 			Cooldown, AttackFrequency;
-	public int positionX, positionY, Group, pointX, pointY, number, Face;
+	public int positionX, positionY, Group, pointX, pointY, Face;
 	// Action: 0(still), 1(attack), 2(move), 3(dead)
 	public int X[], Y[];
 
@@ -27,6 +27,7 @@ public class Units {
 	public Units(int MaxHP, int Speed, int Radius, int Sight, int Range,
 			int Attack, int AttackFrequency) {
 		this.MaxHP = MaxHP;
+		this.HP=MaxHP;
 		this.Speed = Speed;
 		this.Radius = Radius;
 		this.Sight = Sight;
@@ -38,6 +39,7 @@ public class Units {
 	public Units(Units Unit) {
 		
 		this.MaxHP = Unit.MaxHP;
+		this.HP=Unit.MaxHP;
 		this.Speed = Unit.Speed;
 		this.Radius = Unit.Radius;
 		this.Sight = Unit.Sight;
@@ -56,16 +58,14 @@ public class Units {
 	 * @param face
 	 * @param group
 	 */
-	public void set(int x, int y, int hitpoint, int num, int face, int group) {
+	public void set(int x, int y, int num, int face, int group) {
 		positionX = x;
 		positionY = y;
-		HP = hitpoint;
-		MaxHP = hitpoint;
-		number = num;
 		Face = face;
 		Group = group;
 		Cooldown = 0;
 		Action = 0;
+		ID=num;
 		X = new int[8];
 		Y = new int[8];
 		for (int i = 0; i < 8; i++) {
@@ -165,5 +165,9 @@ public class Units {
 		
 		return basic_info;
 	}
+	public TowerDefensedataArray.TowerDefenseObject getInfo(int frame){
+		return new TowerDefensedataArray.TowerDefenseObject(ID,HP,X[frame],Y[frame],(Action*8+Face)+frame/2);
+	}
+
 
 }
