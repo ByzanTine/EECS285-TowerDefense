@@ -22,7 +22,7 @@ import java.util.Hashtable;
  */
 public class TowerDefenseDataBase {
 	private static final int ID_SIZE = 100;
-	private static final int ACTION_SIZE = 50;
+	private static final int ACTION_SIZE = 200;
 	private static final double Speed_Ratio = 0.2;
 	private static final double Cool_Down_Ratio = 3;
 	private static final int Image_size = 30;
@@ -70,9 +70,9 @@ public class TowerDefenseDataBase {
 			for (int i = 0; i < ID_SIZE && (line = br.readLine()) != null; i++) {
 
 				String[] nums = line.split(",");
-				for (int j = 0; j < nums.length; j++)
-					System.out.print(j + ":" + nums[j] + " ");
-				System.out.print("\n");
+//				for (int j = 0; j < nums.length; j++)
+//					System.out.print(j + ":" + nums[j] + " ");
+//				System.out.print("\n");
 
 				Units unit = new Units(Integer.parseInt(nums[2]),
 						(int) Double.parseDouble(nums[8]), Image_size,
@@ -110,6 +110,19 @@ public class TowerDefenseDataBase {
 	}
 
 	/**
+	 * 
+	 * @param action
+	 * @param Direction
+	 * @param FrameId
+	 * @return
+	 */
+	public int generateActionId(int action,int Direction,int FrameId){
+		int ActionCode=(action*8+Direction)*4+FrameId;
+		/*Action: 0(still), 1(attack), 2(move), 3(dead)*/
+		return ActionCode;
+	}
+
+	/**
 	 * Obtain a filename string by id and action
 	 * 
 	 * @param id
@@ -117,7 +130,33 @@ public class TowerDefenseDataBase {
 	 * @return filename
 	 */
 	public String searchImage(int rawId, int action) {
-		return image_table.get(this.processID(rawId)).get(action);
+		int Action=action/32;//0-3
+		int Direction=(action/4)%8;
+		int FrameId=action%4;
+		if(Action==0){
+			int newActionId=this.generateActionId(0, Direction, 1);
+			return image_table.get(this.processID(rawId)).get(newActionId);
+		}
+		if(Action==1){
+			return image_table.get(this.processID(rawId)).get(action);
+		}
+		if(Action==2){
+			if(FrameId==3||FrameId==1){
+				int newActionId=this.generateActionId(0, Direction, 1);
+				return image_table.get(this.processID(rawId)).get(newActionId);
+			}
+			else{
+				int newActionId=this.generateActionId(0, Direction, FrameId);
+				return image_table.get(this.processID(rawId)).get(newActionId);
+			}
+		}
+		if(Action==3)
+			return image_table.get(this.processID(rawId)).get(100);
+		
+		
+		return "Error Not Found";
+		
+		
 	}
 
 	/**
