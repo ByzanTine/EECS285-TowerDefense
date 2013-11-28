@@ -19,10 +19,11 @@ public class TowerDefenseDataBase {
 	public void init() {
 		for (int i = 0; i < ID_SIZE; i++) {
 			for (int j = 0; j < ACTION_SIZE; j++) {
-				String filename = "id";
+				String filename = "res/id";
 				filename += i;
 				filename += '/';
 				filename += j;
+				filename+=".png";
 
 				this.insert(i, j, filename);
 			}
