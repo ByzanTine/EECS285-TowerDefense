@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
+	<classpathentry kind="src" path="TestAndExample"/>
 	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
 	<classpathentry kind="con" path="G:/GameDesign/EECS285-TowerDefense/bin"/>
 	<classpathentry kind="con" path="G:/usr/local/java/jdk1.6.0_38/jre/lib/rt.jar"/>

@@ -35,6 +35,17 @@ public class Units {
 		this.AttackFrequency = AttackFrequency;
 	}
 
+	public Units(Units Unit) {
+		
+		this.MaxHP = Unit.MaxHP;
+		this.Speed = Unit.Speed;
+		this.Radius = Unit.Radius;
+		this.Sight = Unit.Sight;
+		this.Range = Unit.Range;
+		this.Attack = Unit.Attack;
+		this.AttackFrequency = Unit.AttackFrequency;
+	}
+
 	/**
 	 * Set Logic element
 	 * 
