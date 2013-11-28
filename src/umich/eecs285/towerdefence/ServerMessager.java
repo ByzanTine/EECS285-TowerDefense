@@ -31,6 +31,10 @@ public class ServerMessager extends Thread {
     }
     return result;
   }
+  
+  public String getHostIp() throws UnknownHostException {
+    return InetAddress.getLocalHost().getHostAddress();
+  }
 
   public void run() {
     while(true) {
