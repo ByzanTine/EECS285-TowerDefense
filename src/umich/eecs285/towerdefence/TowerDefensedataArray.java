@@ -45,6 +45,12 @@ public interface TowerDefensedataArray {
     public String toString(){
       String result = "timestamp: ";
       result += timestamp;
+      result += "clientId: ";
+      result += clientId;
+      result += "size: ";
+      result += size;
+      result += "transmitType: ";
+      result += transmitType;
       
       for(int i = 0; i < size; i++) {
         result += "\n";

@@ -29,23 +29,23 @@ public class ClientWrapper {
     this.id = id;
   }
   
-  synchronized void setTransData(TowerDefense_TransData towerDefense_TransData) {
+  public synchronized void setTransData(TowerDefense_TransData towerDefense_TransData) {
     this.towerDefense_TransData = towerDefense_TransData;
   }
   
-  synchronized TowerDefense_TransData getTransData() {
+  public synchronized TowerDefense_TransData getTransData() {
     return towerDefense_TransData;
   }
   
-  synchronized void setReceiveData(TowerDefense_TransData receiveTowerDefense_TransData) {
+  public synchronized void setReceiveData(TowerDefense_TransData receiveTowerDefense_TransData) {
     this.receiveTowerDefense_TransData = receiveTowerDefense_TransData;
   }
   
-  synchronized TowerDefense_TransData getReceiveData() {
+  public synchronized TowerDefense_TransData getReceiveData() {
     return receiveTowerDefense_TransData;
   }
   
-  void transmitData() {
+  public void transmitData() {
     try {
       ClientMessager clientMessager = new ClientMessager( serverIp, port, id, JSONUtility.arrayToJSON(getTransData()) );
       clientMessager.start();
