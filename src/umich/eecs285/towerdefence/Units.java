@@ -137,12 +137,19 @@ public class Units {
 
 	public String toString() {
 		String basic_info = "Basic:";
+		basic_info += " MaxHP:";
 		basic_info += MaxHP;
+		basic_info += " Speed:";
 		basic_info += Speed;
+		basic_info += " Radius:";
 		basic_info += Radius;
+		basic_info += " Sight:";
 		basic_info += Sight;
+		basic_info += " Range:";
 		basic_info += Range;
+		basic_info += " Attack:";
 		basic_info += Attack;
+		basic_info += " AttackFrequency:";
 		basic_info += AttackFrequency;
 		
 		return basic_info;
