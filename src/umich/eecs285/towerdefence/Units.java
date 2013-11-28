@@ -1,7 +1,5 @@
 package umich.eecs285.towerdefence;
 
-import com.sun.swing.internal.plaf.basic.resources.basic;
-
 public class Units {
 	public int HP, MaxHP, Speed, Radius, ID, Action, Sight, Range, Attack,
 			Cooldown, AttackFrequency;
