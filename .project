@@ -16,9 +16,19 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>C</name>
+			<type>2</type>
+			<location>C:/Users/asus/Documents/UM/C</location>
+		</link>
+		<link>
 			<name>bin</name>
 			<type>2</type>
 			<location>C:/Users/Administrator/Desktop/EECS285/EECS285-TowerDefense/bin</location>
+		</link>
+		<link>
+			<name>rt.jar</name>
+			<type>2</type>
+			<location>C:/Users/asus/usr/local/java/jdk1.6.0_38/jre/lib/rt.jar</location>
 		</link>
 	</linkedResources>
 </projectDescription>

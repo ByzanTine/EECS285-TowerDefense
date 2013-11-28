@@ -107,11 +107,11 @@ public class Controller {
 		return mysoldiers==0;
 	}
 	public void startTurn(int n,int []ids){
-		int height=mymap.HEIGHT*mymap.CELL_SIZE;
-		int wide=mymap.HEIGHT*mymap.CELL_SIZE;
-		int k=wide/(mymap.MAX_R*2);
+		int height=Map.HEIGHT*Map.CELL_SIZE;
+		int wide=Map.HEIGHT*Map.CELL_SIZE;
+		int k=wide/(Map.MAX_R*2);
 		for(int i=0;i<n;i++){
-			addUnit(ids[i],(n%k*2+1)*mymap.MAX_R,height-(n/k*2+1)*mymap.MAX_R,11);
+			addUnit(ids[i],(n%k*2+1)*Map.MAX_R,height-(n/k*2+1)*Map.MAX_R,11);
 		}
 		deadpre=0;
 		deadstart=0;
