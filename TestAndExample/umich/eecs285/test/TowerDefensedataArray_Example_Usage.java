@@ -1,4 +1,8 @@
-package umich.eecs285.towerdefence;
+package umich.eecs285.test;
+
+import umich.eecs285.towerdefence.TowerDefensedataArray;
+import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefenseObject;
+import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 /*
  * Example of use
