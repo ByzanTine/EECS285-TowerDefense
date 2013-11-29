@@ -32,7 +32,7 @@ public interface TowerDefensedataArray {
     public TowerDefense_TransData(int clientId, int size, byte transmitType) {
       TowerDefense_TransArray = new TowerDefenseObject[size];
       this.clientId = clientId;
-      this.timestamp = System.currentTimeMillis() / 1000L;
+      this.timestamp = System.currentTimeMillis();
       this.size = size;
       this.transmitType = transmitType;
     }

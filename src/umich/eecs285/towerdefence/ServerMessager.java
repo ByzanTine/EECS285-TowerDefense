@@ -77,7 +77,7 @@ public class ServerMessager extends Thread {
       if (isNewRoundReady()) {
         for (int i = 0; i < Num_Of_Clients; i++) {
           clientMessageBufferList[i].setTransmitType(TowerDefensedataArray.Transmit_Type_New_Round_Ready);
-          clientMessageBufferList[i].setTimeStamp(System.currentTimeMillis() / 1000L + 1000);
+          clientMessageBufferList[i].setTimeStamp(System.currentTimeMillis() + 1000);
         }
       }
       
