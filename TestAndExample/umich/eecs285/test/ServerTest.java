@@ -73,20 +73,20 @@ public class ServerTest {
 //  }
   
   // Server Test
-  public static void main() {
+  public static void main(String args[]) {
     ServerMessager sm;
     ClientWrapper cw0;
     ClientWrapper cw1;
+    TowerDefense_TransData t1, t2;
     try {
       sm = new ServerMessager(8888);
       sm.start();
       String serverIp = sm.getHostIp();
-      cw0 = new ClientWrapper(0, serverIp, "8888");
-      cw1 = new ClientWrapper(1, serverIp, "8888");
       
-      TowerDefense_TransData t1, t2;
       while (true) {
         Thread.sleep(50);
+        cw0 = new ClientWrapper(0, serverIp, "8888");
+        cw1 = new ClientWrapper(1, serverIp, "8888");
         t1 = new TowerDefense_TransData(0, 100, TowerDefensedataArray.Transmit_Type_Regular);
         for (int i = 0; i < t1.getSize(); i++) {
           t1.TowerDefense_TransArray[i] = new TowerDefenseObject();
@@ -102,7 +102,7 @@ public class ServerTest {
           t1.TowerDefense_TransArray[i].setAction(action);
         }
       
-        t2 = new TowerDefense_TransData(0, 50, TowerDefensedataArray.Transmit_Type_Regular);
+        t2 = new TowerDefense_TransData(1, 50, TowerDefensedataArray.Transmit_Type_Regular);
         for (int i = 0; i < t2.getSize(); i++) {
           t2.TowerDefense_TransArray[i] = new TowerDefenseObject();
           int id = i;
@@ -115,9 +115,10 @@ public class ServerTest {
           t2.TowerDefense_TransArray[i].setX(x);
           t2.TowerDefense_TransArray[i].setY(y);
           t2.TowerDefense_TransArray[i].setAction(action);
-          }
+        }
         cw0.setTransData(t1);
         cw0.transmitData();
+
         cw1.setTransData(t2);
         cw1.transmitData();
         

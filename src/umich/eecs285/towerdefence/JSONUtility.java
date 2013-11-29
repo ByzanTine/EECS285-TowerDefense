@@ -47,15 +47,17 @@ public final class JSONUtility {
               ((Long) jsonObject.get("size")).intValue(),
               ((Long) jsonObject.get("transmitType")).byteValue()
           );
-      JSONArray arrayObj = (JSONArray) jsonObject.get("arrayObj");
-      for (int i = 0; i < towerDefense_TransData.getSize(); i++) {
-        JSONObject data = (JSONObject) arrayObj.get(i);
-        towerDefense_TransData.TowerDefense_TransArray[i] = new TowerDefenseObject();
-        towerDefense_TransData.TowerDefense_TransArray[i].setId( ((Long) data.get("id")).intValue() );
-        towerDefense_TransData.TowerDefense_TransArray[i].setLife( ((Long) data.get("life")).intValue() );
-        towerDefense_TransData.TowerDefense_TransArray[i].setX( ((Long) data.get("x")).intValue() );
-        towerDefense_TransData.TowerDefense_TransArray[i].setY( ((Long) data.get("y")).intValue() );
-        towerDefense_TransData.TowerDefense_TransArray[i].setAction( ((Long) data.get("action")).intValue() );
+      if (!towerDefense_TransData.isEmpty()) {
+        JSONArray arrayObj = (JSONArray) jsonObject.get("arrayObj");
+        for (int i = 0; i < towerDefense_TransData.getSize(); i++) {
+          JSONObject data = (JSONObject) arrayObj.get(i);
+          towerDefense_TransData.TowerDefense_TransArray[i] = new TowerDefenseObject();
+          towerDefense_TransData.TowerDefense_TransArray[i].setId( ((Long) data.get("id")).intValue() );
+          towerDefense_TransData.TowerDefense_TransArray[i].setLife( ((Long) data.get("life")).intValue() );
+          towerDefense_TransData.TowerDefense_TransArray[i].setX( ((Long) data.get("x")).intValue() );
+          towerDefense_TransData.TowerDefense_TransArray[i].setY( ((Long) data.get("y")).intValue() );
+          towerDefense_TransData.TowerDefense_TransArray[i].setAction( ((Long) data.get("action")).intValue() );
+        }
       }
     } catch (ParseException e) {
       e.printStackTrace();

@@ -14,7 +14,7 @@ public class ServerMessager extends Thread {
   public ServerMessager(int port) throws IOException {
     // TODO figure out proper server settings
     serverSocket = new ServerSocket(port, 100000);
-    serverSocket.setSoTimeout(1000);
+    serverSocket.setSoTimeout(10000);
     
     clientMessageBufferList = new TowerDefense_TransData[Num_Of_Clients];
     newRoundReady = new boolean[Num_Of_Clients];
@@ -42,14 +42,14 @@ public class ServerMessager extends Thread {
       // initialize server
       InetAddress hostIp;
       hostIp = InetAddress.getLocalHost();
-      System.out.println("Waiting for client on " + hostIp.getHostAddress() + ":" +
+      System.out.println("Server: waiting for client on " + hostIp.getHostAddress() + ":" +
       serverSocket.getLocalPort() + "...");
       
       // setup connection
       Socket server = serverSocket.accept();
       
       // get connection
-      System.out.println("Just connected to "
+      System.out.println("Server: connected to "
            + server.getRemoteSocketAddress());
       
       // get input message

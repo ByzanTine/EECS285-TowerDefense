@@ -49,9 +49,12 @@ public class ClientWrapper {
     try {
       ClientMessager clientMessager = new ClientMessager( serverIp, port, id, JSONUtility.arrayToJSON(getTransData()) );
       clientMessager.start();
+      clientMessager.join();
       String receiveMessage = clientMessager.getReceiveMessage();
       setReceiveData(JSONUtility.JOSNToArray(receiveMessage));
     } catch (IOException e) {
+      e.printStackTrace();
+    } catch (InterruptedException e) {
       e.printStackTrace();
     }
   }
