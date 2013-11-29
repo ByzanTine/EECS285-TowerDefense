@@ -15,19 +15,20 @@ import javax.swing.JButton;
 public class TowerDefense_Button extends JButton {
 
 	String PressedImage;
-	String RolloverImage;
 	String defaultImage;
 	/**
 	 * 
 	 * @param PressedImage
-	 * @param RolloverImage
 	 * @param defaultImage
 	 */
-	public TowerDefense_Button(String PressedImage, String RolloverImage,
+//	public TowerDefense_Button() {
+//	  super();
+//	}
+	
+	public TowerDefense_Button(String PressedImage, //String RolloverImage,
 			String defaultImage) {
 		super();
 		this.PressedImage = PressedImage;
-		this.RolloverImage = RolloverImage;
 		this.defaultImage = defaultImage;
 
 		setContentAreaFilled(false);
@@ -52,19 +53,19 @@ public class TowerDefense_Button extends JButton {
 			g2d.dispose();
 
 		}
-		if (!model.isEnabled()) {
-
-		} else {
-
-			// setForeground(Color.WHITE);
-			if (model.isRollover()) {
-
-				BufferedImage bimg = loadImage(RolloverImage);
-				g2d.drawImage(bimg, null, 0, 0);
-				g2d.dispose();
-
-			}
-		}
+//		if (!model.isEnabled()) {
+//
+//		} else {
+//
+//			// setForeground(Color.WHITE);
+//			if (model.isRollover()) {
+//
+//				BufferedImage bimg = loadImage(RolloverImage);
+//				g2d.drawImage(bimg, null, 0, 0);
+//				g2d.dispose();
+//
+//			}
+//		}
 
 		BufferedImage bimg = loadImage(defaultImage);
 		g2d.drawImage(bimg, null, 0, 0);
