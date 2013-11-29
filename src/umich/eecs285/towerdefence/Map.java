@@ -3,7 +3,7 @@ package umich.eecs285.towerdefence;
 public class Map {
 	public MapCells [][]cell;
 	static final int order[][]={{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1}};
-	static final int mod[]={1,2,1,2,1,2,1,2},WIDE=4,HEIGHT=6,CELL_SIZE=160,MAX_R=15;
+	static final int mod[]={1,2,1,2,1,2,1,2},WIDE=4,HEIGHT=6,CELL_SIZE=160,MAX_R=35;
 	Map(){
 		cell=new MapCells[HEIGHT][];
 		for(int i=0;i<HEIGHT;i++){
@@ -89,8 +89,9 @@ public class Map {
 	}
 	private Units searchHelp(Units target,int current,int i,int j,int x,int y,int centerX,int centerY,int R,int group,boolean all){
 		if(mod[current]==1){
-			if(j+order[current][0]>=0&&j+order[current][0]<WIDE&&Math.abs(x+R*order[current][0]-centerX)>CELL_SIZE/2-MAX_R
-					||i+order[current][1]>=0&&i+order[current][1]<HEIGHT&&Math.abs(y+R*order[current][1]-centerY)>CELL_SIZE/2-MAX_R)
+			if(j+order[current][0]>=0&&j+order[current][0]<WIDE&&i+order[current][1]>=0&&i+order[current][1]<HEIGHT&&
+					(Math.abs(x+R*order[current][0]-centerX)>CELL_SIZE/2-MAX_R
+					||Math.abs(y+R*order[current][1]-centerY)>CELL_SIZE/2-MAX_R))
 				return search(target,cell[i+order[current][1]][j+order[current][0]],x,y,R,group,all);
 		}
 		else{

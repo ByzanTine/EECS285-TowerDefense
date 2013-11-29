@@ -1,5 +1,6 @@
 package umich.eecs285.towerdefence;
 
+import umich.eecs285.towerdefence.TowerDefensedataArray.*;
 public class Units {
 	public int HP, MaxHP, Speed, Radius, ID, Action, Sight, Range, Attack,
 			Cooldown, AttackFrequency;
@@ -37,7 +38,6 @@ public class Units {
 	}
 
 	public Units(Units Unit) {
-		
 		this.MaxHP = Unit.MaxHP;
 		this.HP=Unit.MaxHP;
 		this.Speed = Unit.Speed;
@@ -138,12 +138,24 @@ public class Units {
 		else {
 			Cooldown--;
 			Action = 0;
+			for (int i = 0; i < 8; i++) {
+				X[i] = positionX;
+				Y[i] = positionY;
+			}
+			Action = 0;
 			return false;
 		}
 	}
 
-	public void levelUp() {
-
+	public void levelUp(Units Unit) {
+		this.MaxHP = Unit.MaxHP;
+		this.HP=Unit.MaxHP;
+		this.Speed = Unit.Speed;
+		this.Radius = Unit.Radius;
+		this.Sight = Unit.Sight;
+		this.Range = Unit.Range;
+		this.Attack = Unit.Attack;
+		this.AttackFrequency = Unit.AttackFrequency;
 	}
 
 	public String toString() {
@@ -165,8 +177,8 @@ public class Units {
 		
 		return basic_info;
 	}
-	public TowerDefensedataArray.TowerDefenseObject getInfo(int frame){
-		return new TowerDefensedataArray.TowerDefenseObject(ID,HP,X[frame],Y[frame],(Action*8+Face)+frame/2);
+	public TowerDefenseObject getInfo(int frame){
+		return new TowerDefenseObject(ID,HP,X[frame],Y[frame],(Action*8+Face)*4+frame/2);
 	}
 
 

@@ -1,6 +1,6 @@
 package umich.eecs285.towerdefence;
 
-
+import umich.eecs285.towerdefence.TowerDefensedataArray.*;
 public class Controller {
 	static final int MAX_SOLDIERS=20,MAX_UNITS=100,CYCLE=8;
 	private Units []soldiers=new Units[MAX_UNITS],deadArray=new Units[MAX_UNITS];
@@ -9,12 +9,14 @@ public class Controller {
 	private boolean reachKing;
 	private TowerDefenseDataBase Data=new TowerDefenseDataBase();
 	static final int order[][]={{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1}};
-	static final int mod[]={1,2,1,2,1,2,1,2},KingX=40,KingY=40;
+	static final int mod[]={1,2,1,2,1,2,1,2},KingX=300,KingY=40;
+	static final int systemSoldiers[]={0,15,15,15,15,20,15,15,15,15,3};
 	public Controller(){
 		for(int i=0;i<MAX_UNITS;i++){
 			soldiers[i]=null;
 			deadArray[i]=null;
 		}
+		Data.init();
 		enemy=0;
 		cooldown=0;
 		mysoldiers=0;
@@ -24,30 +26,31 @@ public class Controller {
 		deadnum=0;
 		reachKing=false;
 		addUnit(0,KingX,KingY,1);
-		mysoldiers++;
-		totlesoldiers++;
 	}
 	public boolean addUnit(int ID,int x,int y,int Group){
 		if(Group<10&&totlesoldiers>=MAX_SOLDIERS||Group>10&&enemy>=MAX_UNITS-MAX_SOLDIERS)
 			return false;
-		if(mymap.ACT(null, x, y, 15, 0, Group, true)!=null)
-			return false;
+		if(mymap.ACT(null, x, y, Map.MAX_R, 0, Group, true)!=null){System.out.println(mymap.ACT(null, x, y, 15, 0, Group, true));
+			return false;}
 		int tag=totlesoldiers+enemy;
+		//System.out.println(Data.searchUnit(0));
 		if(ID%100==0){
 			soldiers[tag]=new King(Data.searchUnit(ID));
-			soldiers[tag].set(x, y, ID+tag*100, 0, Group);
+			soldiers[tag].set(x, y, ID%100+tag*100, 0, Group);
 			mysoldiers++;
+			totlesoldiers++;
 		}
 		else if(ID%100<=10){
 			soldiers[tag]=new AttackUnits(Data.searchUnit(ID));
-			soldiers[tag].set(x, y, ID+tag*100, 4, Group);
+			soldiers[tag].set(x, y, ID%100+tag*100, 4, Group);
 			enemy++;
 		}
 		else{
 			soldiers[tag]=new DefenceUnits(Data.searchUnit(ID));
-			soldiers[tag].set(x, y, ID+tag*100, 0, Group);
+			soldiers[tag].set(x, y, ID%100+tag*100, 0, Group);
 			mysoldiers++;
 		}
+		mymap.addMoveUnits(soldiers[tag]);
 		return true;
 	}
 	public void run(){
@@ -85,16 +88,18 @@ public class Controller {
 							dx=soldiers[i].pointX-soldiers[i].positionX;
 							dy=soldiers[i].pointY-soldiers[i].positionY;
 						}
-						face=getFace(dx,dy);
-						if(moveSoldier(soldiers[i],face)==false){
-							if(moveSoldier(soldiers[i],(face+7)%8)==false)
-								if(moveSoldier(soldiers[i],(face+1)%8))
-									soldiers[i].still();
+						if(temp!=null||soldiers[i].positionX!=soldiers[i].pointX&&soldiers[i].positionY!=soldiers[i].pointY){
+							face=getFace(dx,dy);
+							if(moveSoldier(soldiers[i],face)==false){
+								if(moveSoldier(soldiers[i],(face+7)%8)==false)
+									if(moveSoldier(soldiers[i],(face+1)%8))
+										soldiers[i].still();
+							}
 						}
 					}
 				}
 			}
-			cooldown=8;
+			cooldown=CYCLE-1;
 		}
 		else{
 			cooldown--;
@@ -106,17 +111,18 @@ public class Controller {
 	public boolean isDead(){
 		return mysoldiers==0;
 	}
-	public void startTurn(int n,int []ids){
+	public void startTurn(int turn,int n,int ids[]){
 		int height=Map.HEIGHT*Map.CELL_SIZE;
-		int wide=Map.HEIGHT*Map.CELL_SIZE;
+		int wide=Map.WIDE*Map.CELL_SIZE;
 		int k=wide/(Map.MAX_R*2);
 		for(int i=0;i<n;i++){
-			addUnit(ids[i],(n%k*2+1)*Map.MAX_R,height-(n/k*2+1)*Map.MAX_R,11);
+			addUnit(ids[i],(i%k*2+1)*Map.MAX_R,height-(i/k*2+1)*Map.MAX_R,11);
 		}
+		for(int i=0;i<systemSoldiers[turn];i++)
+			addUnit(turn,((i+n)%k*2+1)*Map.MAX_R,height-((i+n)/k*2+1)*Map.MAX_R,11);
 		deadpre=0;
 		deadstart=0;
 		deadnum=0;
-		enemy=n;
 		reachKing=false;
 	}
 	public void endTurn(){
@@ -133,15 +139,16 @@ public class Controller {
 				mymap.addMoveUnits(soldiers[i]);
 			}
 		}
+		enemy=0;
 	}
 	public boolean hasReachedKing(){
 		return reachKing;
 	}
-	public TowerDefensedataArray.TowerDefense_TransData getInfo(int clientId, long timestamp){
+	public TowerDefense_TransData getInfo(int clientId, long timestamp){
 		int size=mysoldiers+enemy+deadnum-deadpre,i,k=0;
-		TowerDefensedataArray.TowerDefense_TransData temp=new TowerDefensedataArray.TowerDefense_TransData(clientId,timestamp,size,(byte) 0);
+		TowerDefense_TransData temp=new TowerDefense_TransData(clientId,timestamp,size,(byte) 0);
 		for(i=0;i<MAX_UNITS;i++)
-			if(soldiers!=null&&soldiers[i].HP>0){
+			if(soldiers[i]!=null&&soldiers[i].HP>0){
 				temp.TowerDefense_TransArray[k]=soldiers[i].getInfo(cooldown);
 				k++;
 			}
@@ -150,6 +157,13 @@ public class Controller {
 			k++;
 		} 
 		return temp;
+	}
+	public boolean levelUp(int id){
+		Units model=Data.searchUnit(id+10);
+		if(model==null)
+			return false;
+		soldiers[id/100].levelUp(model);
+		return true;
 	}
 	private int getFace(int dx,int dy){
 		int tan,cot;
@@ -197,6 +211,11 @@ public class Controller {
 		int dx,dy;
 		dx=target.Speed*order[face][0]/mod[face];
 		dy=target.Speed*order[face][1]/mod[face];
+		if(target.positionX+dx-target.Radius<0
+				||target.positionX+dx+target.Radius>Map.CELL_SIZE*Map.WIDE
+				||target.positionY+dy-target.Radius<0
+						||target.positionY+dy+target.Radius>Map.CELL_SIZE*Map.HEIGHT)
+				return false;
 		temp=mymap.ACT(target,target.positionX+dx, target.positionY+dy, target.Radius, face, target.Group, true);
 		if(temp==null){
 			mymap.move(target, dx, dy);
