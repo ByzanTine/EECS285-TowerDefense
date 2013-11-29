@@ -26,7 +26,7 @@ public class MainFrameBackup extends JFrame implements TowerDefensedataArray {
         PlayerPanel pp = new PlayerPanel();
         add(pp);
         
-        mP = new MainPanel();
+        mP = new MainPanel(pp);
         add(mP);
         addMouseListener(new MouseAdapter() {
           public void mouseClicked(MouseEvent e) {

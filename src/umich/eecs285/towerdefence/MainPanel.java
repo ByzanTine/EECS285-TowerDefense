@@ -17,7 +17,7 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
     this.pp = pp;
   }
 
-  public void nextPanel(TowerDefense_TransData t, int frameID) {
+  public void nextPanel(TowerDefense_TransData t) {
     // TODO Auto-generated method stub
     removeAll();
     TowerDefenseDataBase d = new TowerDefenseDataBase();
