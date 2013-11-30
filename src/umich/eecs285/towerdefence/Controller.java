@@ -8,7 +8,7 @@ public class Controller {
 	private int enemy,cooldown,mysoldiers,totlesoldiers,deadnum,deadpre,deadstart;
 	private boolean reachKing;
 	private TowerDefenseDataBase Data=new TowerDefenseDataBase();
-	static final int order[][]={{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1}};
+	static final int order[][]={{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1}};
 	static final int mod[]={1,2,1,2,1,2,1,2},KingX=300,KingY=40;
 	static final int systemSoldiers[]={0,15,15,15,15,20,15,15,15,15,3};
 	public Controller(){
@@ -36,18 +36,18 @@ public class Controller {
 		//System.out.println(Data.searchUnit(0));
 		if(ID%100==0){
 			soldiers[tag]=new King(Data.searchUnit(ID));
-			soldiers[tag].set(x, y, ID%100+tag*100, 0, Group);
+			soldiers[tag].set(x, y, ID%100+tag*100, 4, Group);
 			mysoldiers++;
 			totlesoldiers++;
 		}
 		else if(ID%100<=10){
 			soldiers[tag]=new AttackUnits(Data.searchUnit(ID));
-			soldiers[tag].set(x, y, ID%100+tag*100, 4, Group);
+			soldiers[tag].set(x, y, ID%100+tag*100, 0, Group);
 			enemy++;
 		}
 		else{
 			soldiers[tag]=new DefenceUnits(Data.searchUnit(ID));
-			soldiers[tag].set(x, y, ID%100+tag*100, 0, Group);
+			soldiers[tag].set(x, y, ID%100+tag*100, 4, Group);
 			mysoldiers++;
 		}
 		mymap.addMoveUnits(soldiers[tag]);
@@ -59,17 +59,17 @@ public class Controller {
 			deadpre=deadstart;
 			deadstart=deadnum;
 			for(int i=deadpre;i<deadstart;i++){
-				deadArray[i].dead();
+				deadArray[i].dead();//System.out.println(deadArray[i]);
 				mymap.deleteUnits(deadArray[i]);
 			}
 			for(int i=0;i<MAX_UNITS;i++){
 				if(soldiers[i]!=null&&soldiers[i].HP>0&&soldiers[i].isFree()){
 					temp=mymap.ACT(soldiers[i],soldiers[i].positionX, soldiers[i].positionY, soldiers[i].Range, soldiers[i].Face, soldiers[i].Group, false);
-					//System.out.println(soldiers[i].positionX+" "+soldiers[i].positionY+" "+soldiers[i].Range);
+					//if(i==0)System.out.println(temp);
 					if(temp!=null&&temp.HP>0){
 						soldiers[i].attack();
 						if(temp.attacked(soldiers[i].Attack)){
-							deadArray[deadnum]=temp;System.out.println(deadArray[deadnum]);
+							deadArray[deadnum]=temp;//System.out.println(deadArray[deadnum]);
 							deadnum++;
 							if(temp.Group>10)
 								enemy--;
@@ -97,6 +97,10 @@ public class Controller {
 										if(moveSoldier(soldiers[i],face,true)==false)
 											if(moveSoldier(soldiers[i],(face+7)%8,true)==false)
 												if(moveSoldier(soldiers[i],(face+1)%8,true)==false)
+													if(moveSoldier(soldiers[i],(face+6)%8,false)==false)
+														if(moveSoldier(soldiers[i],(face+2)%8,false)==false)
+															if(moveSoldier(soldiers[i],(face+6)%8,true)==false)
+																if(moveSoldier(soldiers[i],(face+2)%8,true)==false)
 													soldiers[i].still();
 							}
 						}
@@ -135,7 +139,7 @@ public class Controller {
 		cooldown=0;
 		mymap.endTurn();
 		mysoldiers=totlesoldiers;
-		for(int i=0;i<100;i++){
+		for(int i=0;i<MAX_UNITS;i++){
 			if(soldiers[i]!=null){
 				if(soldiers[i].Group>10)
 					soldiers[i]=null;
@@ -158,7 +162,7 @@ public class Controller {
 				temp.TowerDefense_TransArray[k]=soldiers[i].getInfo(cooldown);
 				k++;
 			}
-		for(i=deadpre;i<deadnum;i++){System.out.println(deadpre+" "+deadnum+" "+k+" "+size);
+		for(i=deadpre;i<deadnum;i++){//System.out.println(deadpre+" "+deadnum+" "+k+" "+size);
 			temp.TowerDefense_TransArray[k]=deadArray[i].getInfo(cooldown);
 			k++;
 		} 
@@ -175,9 +179,9 @@ public class Controller {
 		int tan,cot;
 		if(dx==0){
 			if(dy>0)
-				return 0;
-			else
 				return 4;
+			else
+				return 0;
 		}
 		else if(dy==0){
 			if(dx>0)
@@ -190,9 +194,9 @@ public class Controller {
 			cot=dx/dy;
 			if(tan>=2||tan<-2){
 				if(dy>0)
-					return 0;
-				else
 					return 4;
+				else
+					return 0;
 			}
 			else if(cot>=2||cot<-2){
 				if(dx>0)
@@ -202,14 +206,14 @@ public class Controller {
 			}
 			else if(dx>0){
 				if(dy>0)
-					return 1;
-				else
 					return 3;
+				else
+					return 1;
 			}
 			else if(dy>0)
-				return 7;
-			else
 				return 5;
+			else
+				return 7;
 		}
 	}
 	private boolean moveSoldier(Units target,int face,boolean half){

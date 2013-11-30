@@ -162,6 +162,8 @@ public class Units {
 		String basic_info = "Basic:";
 		basic_info += " MaxHP:";
 		basic_info += MaxHP;
+		basic_info += " HP:";
+		basic_info += HP;
 		basic_info += " Speed:";
 		basic_info += Speed;
 		basic_info += " Radius:";
@@ -178,7 +180,7 @@ public class Units {
 		return basic_info;
 	}
 	public TowerDefenseObject getInfo(int frame){
-		return new TowerDefenseObject(ID,HP,X[frame],Y[frame],(Action*8+Face)*4+frame/2);
+		return new TowerDefenseObject(ID,HP,X[frame],Y[frame],(Action*8+Face)*4+frame/2);//Map.HEIGHT*Map.CELL_SIZE-
 	}
 
 

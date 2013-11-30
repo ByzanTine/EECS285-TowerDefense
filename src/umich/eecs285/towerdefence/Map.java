@@ -2,7 +2,7 @@ package umich.eecs285.towerdefence;
 
 public class Map {
 	public MapCells [][]cell;
-	static final int order[][]={{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0},{-1,1}};
+	static final int order[][]={{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1}};
 	static final int mod[]={1,2,1,2,1,2,1,2},WIDE=4,HEIGHT=6,CELL_SIZE=160,MAX_R=35;
 	Map(){
 		cell=new MapCells[HEIGHT][];
@@ -25,10 +25,8 @@ public class Map {
 	public void deleteUnits(Units target){
 		int i=target.positionY/CELL_SIZE;
 		int j=target.positionX/CELL_SIZE;
-		if(target.Group==0)
+		if(target.Group!=0)
 			cell[i][j].move.remove(target);
-		else
-			cell[i][j].move.add(target);
 	}
 	public void move(Units target,int x,int y){
 		int i=target.positionY/CELL_SIZE;

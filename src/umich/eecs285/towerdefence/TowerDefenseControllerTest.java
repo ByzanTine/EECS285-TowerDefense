@@ -76,6 +76,14 @@ public class TowerDefenseControllerTest implements TowerDefensedataArray{
 			}
 			System.out.println(timestamp);
 		}/**/
+		for(int i=0;i<16;i++){
+			
+			
+			control.run();
+			data=control.getInfo(clientId, timestamp);
+			//paint
+			mainFrame.nextFrame(data);
+		}
 		
 		control.endTurn();
 		player.addCandy(1, control.hasReachedKing());
