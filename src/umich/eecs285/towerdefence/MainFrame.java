@@ -30,6 +30,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
           cb.setCreateUnitRequest(true);
           cb.setX(e.getPoint().x);
           cb.setY(e.getPoint().y);
+          cb.setId(pp.CreateIndex() + 11);
           System.out.print(e.getPoint().x + " " + e.getPoint().y + " ");
           System.out.println(pp.CreateIndex());
           pp.CreateButtonRecover();
