@@ -25,8 +25,8 @@ public class PlayerPanel extends JPanel{
         
     }
 
-    public void displayInfo() {
-      ip.displayInfo();
+    public void displayInfo(int ID, int CurrentLife) {
+      ip.displayInfo(ID, CurrentLife);
     }
     
     public int CreateIndex() {

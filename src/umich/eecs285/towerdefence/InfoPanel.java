@@ -3,6 +3,7 @@ package umich.eecs285.towerdefence;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InfoPanel extends JPanel {
@@ -17,10 +18,14 @@ public class InfoPanel extends JPanel {
     g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
   }
 
-  public void displayInfo() {
+  public void displayInfo(int ID, Integer CurrentLife) {
+    removeAll();
     CreatePokemonButton c = new CreatePokemonButton("res/alien.gif", "res/alien.gif");
     c.setBounds(10, 10, 50, 50);
     add(c);
+    JLabel LifeLabel = new JLabel(CurrentLife.toString());
+    LifeLabel.setBounds(80, 10, 50, 20);
+    add(LifeLabel);
     repaint();
   }
 }

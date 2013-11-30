@@ -8,12 +8,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class MainPanel extends JPanel implements TowerDefensedataArray {
-  PlayerPanel pp;
+  private PlayerPanel pp;
   private ClientBridge cb;
+  private boolean InfoShown;
+  private int InfoID;
 
   MainPanel(PlayerPanel pp) {
     this.setLayout(null);
     this.setBounds(0, 0, 1200, 600);
+    InfoShown = false;
     
     this.pp = pp;
   }
@@ -27,10 +30,13 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
       String temp = d.searchImage(7, t.TowerDefense_TransArray[i].getAction());
       PokemonButton b = new PokemonButton("res/alien_selected.gif", temp,
           t.TowerDefense_TransArray[i].getId());
-      b.addActionListener(new PokemonButtonListener());
-      b.setBounds(t.TowerDefense_TransArray[i].getX(),
-          t.TowerDefense_TransArray[i].getY(), 50, 50);
+      b.addActionListener(new PokemonButtonListener(t.TowerDefense_TransArray[i].getId(), t.TowerDefense_TransArray[i].getLife()));
+      b.setBounds(t.TowerDefense_TransArray[i].getX() - 25,
+          t.TowerDefense_TransArray[i].getY() - 25, 50, 50);
       add(b);
+      if (InfoShown && t.TowerDefense_TransArray[i].getId() == InfoID) {
+        pp.displayInfo(InfoID, t.TowerDefense_TransArray[i].getLife());
+      }
     }
 
     repaint();
@@ -39,9 +45,19 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
 
   private class PokemonButtonListener implements ActionListener {
 
+    private int ID;
+    private int CurrentLife;
+
+    public PokemonButtonListener(int id, int CurrentLife) {
+      this.ID = id;
+      this.CurrentLife = CurrentLife;
+    }
+
     public void actionPerformed(ActionEvent e) {
-      System.out.println("fighting " + ((PokemonButton) e.getSource()).getID());
-      pp.displayInfo();
+      System.out.println("fighting " + ID);
+      pp.displayInfo(ID, CurrentLife);
+      InfoShown = true;
+      InfoID = ID;
     }
 
   }
