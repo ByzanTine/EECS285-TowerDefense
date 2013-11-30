@@ -38,6 +38,7 @@ public class Messager {
     nextRoundReady = false;
   }
   
+  // initialization for client side
   public void initialization(String serverIp) {
     this.serverIp = serverIp;
     initialization();
@@ -63,6 +64,17 @@ public class Messager {
     return nextRoundReady;
   }
   
+  // for giving out units
+  public void transmitRoundReady(TowerDefense_TransData towerDefense_TransData) {
+    nextRoundReady = false;
+    clientWrapper = new ClientWrapper(id, serverIp, Integer.toString(Port));
+    this.towerDefense_TransData = towerDefense_TransData;
+    this.towerDefense_TransData.setTransmitType(TowerDefensedataArray.Transmit_Type_New_Round);
+    clientWrapper.setTransData(this.towerDefense_TransData);
+    clientWrapper.transmitData();
+    checkNextRoundReady();
+  }
+  
   public void transmitRoundReady() {
     nextRoundReady = false;
     clientWrapper = new ClientWrapper(id, serverIp, Integer.toString(Port));
@@ -81,6 +93,10 @@ public class Messager {
     clientWrapper = new ClientWrapper(id, serverIp, Integer.toString(Port));
     clientWrapper.setTransData(this.towerDefense_TransData);
     clientWrapper.transmitData();
+  }
+  
+  public TowerDefense_TransData getReceivedData() {
+    return clientWrapper.getReceiveData();
   }
   
   public long getNextRoundStartTime() {
@@ -105,9 +121,3 @@ public class Messager {
   
   
 }
-
-
-
-
-
-
