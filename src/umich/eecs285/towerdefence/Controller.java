@@ -30,8 +30,8 @@ public class Controller {
 	public boolean addUnit(int ID,int x,int y,int Group){
 		if(Group<10&&totlesoldiers>=MAX_SOLDIERS||Group>10&&enemy>=MAX_UNITS-MAX_SOLDIERS)
 			return false;
-		if(mymap.ACT(null, x, y, Map.MAX_R, 0, Group, true)!=null){System.out.println(mymap.ACT(null, x, y, 15, 0, Group, true));
-			return false;}
+		if(mymap.ACT(null, x, y, Map.MAX_R, 0, Group, true)!=null)
+			return false;
 		int tag=totlesoldiers+enemy;
 		//System.out.println(Data.searchUnit(0));
 		if(ID%100==0){
@@ -65,6 +65,7 @@ public class Controller {
 			for(int i=0;i<MAX_UNITS;i++){
 				if(soldiers[i]!=null&&soldiers[i].HP>0&&soldiers[i].isFree()){
 					temp=mymap.ACT(soldiers[i],soldiers[i].positionX, soldiers[i].positionY, soldiers[i].Range, soldiers[i].Face, soldiers[i].Group, false);
+					System.out.println(soldiers[i].positionX+" "+soldiers[i].positionY+" "+soldiers[i].Range);
 					if(temp!=null){
 						soldiers[i].attack();
 						if(temp.attacked(soldiers[i].Attack)){
@@ -88,12 +89,15 @@ public class Controller {
 							dx=soldiers[i].pointX-soldiers[i].positionX;
 							dy=soldiers[i].pointY-soldiers[i].positionY;
 						}
-						if(temp!=null||soldiers[i].positionX!=soldiers[i].pointX&&soldiers[i].positionY!=soldiers[i].pointY){
+						if(temp!=null||soldiers[i].positionX!=soldiers[i].pointX||soldiers[i].positionY!=soldiers[i].pointY){
 							face=getFace(dx,dy);
-							if(moveSoldier(soldiers[i],face)==false){
-								if(moveSoldier(soldiers[i],(face+7)%8)==false)
-									if(moveSoldier(soldiers[i],(face+1)%8))
-										soldiers[i].still();
+							if(moveSoldier(soldiers[i],face,false)==false){
+								if(moveSoldier(soldiers[i],(face+7)%8,false)==false)
+									if(moveSoldier(soldiers[i],(face+1)%8,false)==false)
+										if(moveSoldier(soldiers[i],face,true)==false)
+											if(moveSoldier(soldiers[i],(face+7)%8,true)==false)
+												if(moveSoldier(soldiers[i],(face+1)%8,true)==false)
+													soldiers[i].still();
 							}
 						}
 					}
@@ -132,11 +136,13 @@ public class Controller {
 		mymap.endTurn();
 		mysoldiers=totlesoldiers;
 		for(int i=0;i<100;i++){
-			if(soldiers[i].Group>2)
-				soldiers[i]=null;
-			else{
-				soldiers[i].reNew();
-				mymap.addMoveUnits(soldiers[i]);
+			if(soldiers[i]!=null){
+				if(soldiers[i].Group>10)
+					soldiers[i]=null;
+				else{
+					soldiers[i].reNew();
+					mymap.addMoveUnits(soldiers[i]);
+				}
 			}
 		}
 		enemy=0;
@@ -206,11 +212,15 @@ public class Controller {
 				return 5;
 		}
 	}
-	private boolean moveSoldier(Units target,int face){
+	private boolean moveSoldier(Units target,int face,boolean half){
 		Units temp;
 		int dx,dy;
 		dx=target.Speed*order[face][0]/mod[face];
 		dy=target.Speed*order[face][1]/mod[face];
+		if(half){
+			dx/=2;
+			dy/=2;
+		}
 		if(target.positionX+dx-target.Radius<0
 				||target.positionX+dx+target.Radius>Map.CELL_SIZE*Map.WIDE
 				||target.positionY+dy-target.Radius<0
