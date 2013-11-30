@@ -37,13 +37,10 @@ public class playerTest {
 		 System.out.println(myPlayer.getMoney()); //should print 50
 		 
 		 // get the attackingList
-		 Vector <Integer> attackingList = myPlayer.getAttackingId();
+		 int[] attackingList = myPlayer.getAttackingId();
 		  
 		 System.out.println("I am going to print the attacking unit ID");
-		 for (int i = 0; i< attackingList.size(); i++)
-		 {
-			 System.out.println(attackingList.get(i));
-		 }
+		 
 		 System.out.println("END OF the attacking unit ID");
 		 System.out.println(myPlayer.canCreateAttackingUnit(54));  //should print false
 		

@@ -3,7 +3,7 @@ package umich.eecs285.towerdefence;
 public class ClientBridge {
 	// attacking units
 	private boolean createAttackUnitRequest = false;
-
+	private int AttackUnitId;
 	public boolean isCreateAttackUnitRequest() {
 		return createAttackUnitRequest;
 	}
@@ -86,6 +86,15 @@ public class ClientBridge {
 
 	public void setLevelupId(int levelupId) {
 		LevelupId = levelupId;
+	}
+
+	public int getAttackUnitId() {
+		return AttackUnitId;
+	}
+
+
+	public void setAttackUnitId(int attackUnitId) {
+		AttackUnitId = attackUnitId;
 	}
 
 	private int x;

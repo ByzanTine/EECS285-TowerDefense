@@ -68,8 +68,11 @@ public class Player {
 		moneyTable.put(56, 150);
 	}
 
-	public Vector getAttackingId() {
-		return attackingId;
+	public int[] getAttackingId() {
+		int[] temp=new int[attackingId.size()];
+		for(int i=0;i<attackingId.size();i++)
+			temp[i]=attackingId.get(i);
+		return temp;
 	}
 
 	public int getMeomeoNum() {
