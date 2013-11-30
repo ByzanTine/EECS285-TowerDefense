@@ -52,7 +52,7 @@ public class MainFrameBackup extends JFrame implements TowerDefensedataArray {
 
         public void actionPerformed(ActionEvent e) {
             if (frameID < 4) {
-                mP.nextPanel(t, frameID);
+                mP.nextPanel(t);
                 //repaint();
                 ++frameID;
             } else {
