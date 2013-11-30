@@ -9,7 +9,7 @@ public class Controller {
 	private boolean reachKing;
 	private TowerDefenseDataBase Data=new TowerDefenseDataBase();
 	static final int order[][]={{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1}};
-	static final int mod[]={1,2,1,2,1,2,1,2},KingX=300,KingY=40;
+	static final int mod[]={1,2,1,2,1,2,1,2},KingX=300,KingY=60,Edge=24;
 	static final int systemSoldiers[]={0,15,15,15,15,20,15,15,15,15,3};
 	static final int mapUnit[][]={{294,195},{175,297},{155,317},{72,377},{196,494},{300,374},{359,307},{460,185},{462,341},{358,462}};
 	public Controller(){
@@ -236,10 +236,10 @@ public class Controller {
 			dx/=2;
 			dy/=2;
 		}
-		if(target.positionX+dx-target.Radius<0
-				||target.positionX+dx+target.Radius>Map.CELL_SIZE*Map.WIDE
-				||target.positionY+dy-target.Radius<0
-						||target.positionY+dy+target.Radius>Map.CELL_SIZE*Map.HEIGHT)
+		if(target.positionX+dx-target.Radius<Edge
+				||target.positionX+dx+target.Radius>Map.CELL_SIZE*Map.WIDE-Edge
+				||target.positionY+dy-target.Radius<Edge
+						||target.positionY+dy+target.Radius>Map.CELL_SIZE*Map.HEIGHT-Edge)
 				return false;
 		temp=mymap.ACT(target,target.positionX+dx, target.positionY+dy, target.Radius, face, target.Group, true);
 		if(temp==null){

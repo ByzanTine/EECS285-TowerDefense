@@ -3,7 +3,7 @@ package umich.eecs285.towerdefence;
 public class Map {
 	public MapCells [][]cell;
 	static final int order[][]={{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1}};
-	static final int mod[]={1,2,1,2,1,2,1,2},WIDE=4,HEIGHT=6,CELL_SIZE=160,MAX_R=35;
+	static final int mod[]={1,2,1,2,1,2,1,2},WIDE=4,HEIGHT=5,CELL_SIZE=150,MAX_R=35;
 	Map(){
 		cell=new MapCells[HEIGHT][];
 		for(int i=0;i<HEIGHT;i++){
