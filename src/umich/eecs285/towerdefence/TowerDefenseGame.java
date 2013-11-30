@@ -1,5 +1,7 @@
 package umich.eecs285.towerdefence;
 
+import java.util.Timer;
+
 import javax.swing.JFrame;
 
 public class TowerDefenseGame implements TowerDefensedataArray {
@@ -21,6 +23,7 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 		player = new Player();
 		turn = 1;
 		control = new Controller();
+		control.init();
 		DB = new TowerDefenseDataBase();
 		DB.init();
 		client_bridge = new ClientBridge();

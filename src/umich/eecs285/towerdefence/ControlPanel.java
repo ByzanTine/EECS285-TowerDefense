@@ -17,14 +17,14 @@ public class ControlPanel extends JPanel {
   private ClientBridge cb;
 
   ControlPanel() {
-    setBounds(600, 0, 500, 200);
+    setBounds(0, 0, 150, 300);
     setLayout(null);
 
     CreateButtons = new CreatePokemonButton[CreateButtonSize];
     for (int i = 0; i < CreateButtonSize; ++i) {
       CreateButtons[i] = new CreatePokemonButton("res/alien_selected.gif",
           "res/alien.gif");
-      CreateButtons[i].setBounds(10 + 55 * i, 10, 50, 50);
+      CreateButtons[i].setBounds(10, 10 + MainFrame.ButtonSize * i, MainFrame.ButtonSize, MainFrame.ButtonSize);
       CreateButtons[i].addActionListener(new CreationListener(i));
       add(CreateButtons[i]);
     }
@@ -32,8 +32,8 @@ public class ControlPanel extends JPanel {
     addMeoMeo = new UpgradeEarningButton("res/alien.gif", "res/alien.gif");
     upgradeMeoMeo = new UpgradeEarningButton("res/alien.gif", "res/alien.gif");
     
-    addMeoMeo.setBounds(10, 70, 50, 50);
-    upgradeMeoMeo.setBounds(70, 70, 50, 50);
+    addMeoMeo.setBounds(55, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
+    upgradeMeoMeo.setBounds(55, 50, MainFrame.ButtonSize, MainFrame.ButtonSize);
     
     addMeoMeo.addActionListener(new addMeoMeoListener());
     upgradeMeoMeo.addActionListener(new upgradeMeoMeoListener());
@@ -45,7 +45,7 @@ public class ControlPanel extends JPanel {
     for (int i = 0; i < CreateButtonSize; ++i) {
       SendButtons[i] = new SendPokemonButton("res/alien_selected.gif",
           "res/alien.gif");
-      SendButtons[i].setBounds(10 + 55 * i, 130, 50, 50);
+      SendButtons[i].setBounds(100, 10 + MainFrame.ButtonSize * i, MainFrame.ButtonSize, MainFrame.ButtonSize);
       SendButtons[i].addActionListener(new SendListener(i));
       add(SendButtons[i]);
     }
@@ -109,7 +109,7 @@ public class ControlPanel extends JPanel {
   }
   
   public void paintComponent(Graphics g) {
-    ImageIcon Icon = new ImageIcon("res/cat.jpg");
+    ImageIcon Icon = new ImageIcon("res/Panel/Pattern.jpg");
     g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
   }
 

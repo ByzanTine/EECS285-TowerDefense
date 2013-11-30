@@ -12,7 +12,7 @@ public class PlayerPanel extends JPanel{
   private ClientBridge cb;
   
     PlayerPanel(){
-        setBounds(0, 600, 1000, 200);
+        setBounds(Map.CELL_SIZE * Map.WIDE, 0, 150, Map.CELL_SIZE * Map.HEIGHT);
         setLayout(null);
         
         cp = new ControlPanel();

@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame implements TowerDefensedataArray {
 
+  final static int ButtonSize = 40;
+  
   private MainPanel mP;
   private PlayerPanel pp;
   private ClientBridge cb;
@@ -14,7 +16,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   MainFrame() {
 
     super("Tower Defence");
-    this.setSize(1200, 900);
+    this.setSize(750, 750);
     this.setResizable(false);
     this.setLayout(null);
 

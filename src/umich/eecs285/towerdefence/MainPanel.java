@@ -15,7 +15,8 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
 
   MainPanel(PlayerPanel pp) {
     this.setLayout(null);
-    this.setBounds(0, 0, 1200, 600);
+    this.setBounds(0, 0, Map.CELL_SIZE * Map.WIDE, Map.CELL_SIZE * Map.HEIGHT);
+//    this.setBounds(0, 0, 1200, 600);
     InfoShown = false;
     
     this.pp = pp;
@@ -27,12 +28,13 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
     d.init();
 
     for (Integer i = 0; i < t.getSize(); ++i) {
+//      String temp = d.searchImage(t.TowerDefense_TransArray[i].getId(), t.TowerDefense_TransArray[i].getAction());
       String temp = d.searchImage(7, t.TowerDefense_TransArray[i].getAction());
       PokemonButton b = new PokemonButton("res/alien_selected.gif", temp,
           t.TowerDefense_TransArray[i].getId());
       b.addActionListener(new PokemonButtonListener(t.TowerDefense_TransArray[i].getId(), t.TowerDefense_TransArray[i].getLife()));
-      b.setBounds(t.TowerDefense_TransArray[i].getX() - 25,
-          t.TowerDefense_TransArray[i].getY() - 25, 50, 50);
+      b.setBounds(t.TowerDefense_TransArray[i].getX() - 14,
+          t.TowerDefense_TransArray[i].getY() - 28, MainFrame.ButtonSize, MainFrame.ButtonSize);
       add(b);
       if (InfoShown && t.TowerDefense_TransArray[i].getId() == InfoID) {
         pp.displayInfo(InfoID, t.TowerDefense_TransArray[i].getLife());
@@ -68,7 +70,7 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
  
   
   public void paintComponent(Graphics g) {
-    ImageIcon Icon = new ImageIcon("res/cat.jpg");
+    ImageIcon Icon = new ImageIcon("res/Background/back.png");
     g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
   }
 
