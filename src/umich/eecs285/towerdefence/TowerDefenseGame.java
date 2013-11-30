@@ -60,7 +60,7 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 		long run=timestamp;
 		while (!control.isEnd()) {
 			game.setTimestamp();
-			if (run+30<=timestamp) {
+			if (run+80<=timestamp) {
 				run=timestamp;
 				game.checkRunBridge();
 				control.run();
@@ -68,7 +68,7 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 				// paint
 
 				mainFrame.nextFrame(data);
-				System.out.println(data.toString());
+				//System.out.println(data.toString());
 				if(control.isDead()){
 					for(int i=0;i<3000;i++){
 						
@@ -82,7 +82,7 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 				}
 
 			}
-			System.out.println(timestamp);
+			//System.out.println(timestamp);
 //			if (control.isDead()) {
 //				break;
 //			}
