@@ -72,63 +72,63 @@ public class ServerTest {
 //    }
 //  }
   
-  // Server Test
+//  // Server Test
+//  public static void main(String args[]) {
+//    ServerMessager sm;
+//    ClientWrapper cw0;
+//    ClientWrapper cw1;
+//    TowerDefense_TransData t1, t2;
+//    try {
+//      sm = new ServerMessager(8888);
+//      sm.start();
+//      String serverIp = sm.getHostIp();
+//      
+//      while (true) {
+//        Thread.sleep(50);
+//        cw0 = new ClientWrapper(0, serverIp, "8888");
+//        cw1 = new ClientWrapper(1, serverIp, "8888");
+//        t1 = TowerDefense_TransData.createEmptyTransData(0, TowerDefensedataArray.Transmit_Type_Regular);
+//      
+//        t2 = new TowerDefense_TransData(1, 50, TowerDefensedataArray.Transmit_Type_Regular);
+//        for (int i = 0; i < t2.getSize(); i++) {
+//          t2.TowerDefense_TransArray[i] = new TowerDefenseObject();
+//          int id = i;
+//          int life = i*2;
+//          int x = i*3;
+//          int y = i*4;
+//          int action = i*5;
+//          t2.TowerDefense_TransArray[i].setId(id);
+//          t2.TowerDefense_TransArray[i].setLife(life);
+//          t2.TowerDefense_TransArray[i].setX(x);
+//          t2.TowerDefense_TransArray[i].setY(y);
+//          t2.TowerDefense_TransArray[i].setAction(action);
+//        }
+//        cw0.setTransData(t1);
+//        cw0.transmitData();
+//
+//        cw1.setTransData(t2);
+//        cw1.transmitData();
+//        
+//        System.out.println(cw0.getReceiveData().toString());
+//        System.out.println(cw1.getReceiveData().toString());
+//      }
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//  }
+  // Messager Test
   public static void main(String args[]) {
-    ServerMessager sm;
-    ClientWrapper cw0;
-    ClientWrapper cw1;
-    TowerDefense_TransData t1, t2;
+    MessagerServerExample mse = new MessagerServerExample();
+    MessagerClientExample mce = new MessagerClientExample();
+    
+    mse.start();
     try {
-      sm = new ServerMessager(8888);
-      sm.start();
-      String serverIp = sm.getHostIp();
-      
-      while (true) {
-        Thread.sleep(50);
-        cw0 = new ClientWrapper(0, serverIp, "8888");
-        cw1 = new ClientWrapper(1, serverIp, "8888");
-        t1 = new TowerDefense_TransData(0, 100, TowerDefensedataArray.Transmit_Type_Regular);
-        for (int i = 0; i < t1.getSize(); i++) {
-          t1.TowerDefense_TransArray[i] = new TowerDefenseObject();
-          int id = i;
-          int life = i*2;
-          int x = i*3;
-          int y = i*4;
-          int action = i*5;
-          t1.TowerDefense_TransArray[i].setId(id);
-          t1.TowerDefense_TransArray[i].setLife(life);
-          t1.TowerDefense_TransArray[i].setX(x);
-          t1.TowerDefense_TransArray[i].setY(y);
-          t1.TowerDefense_TransArray[i].setAction(action);
-        }
-      
-        t2 = new TowerDefense_TransData(1, 50, TowerDefensedataArray.Transmit_Type_Regular);
-        for (int i = 0; i < t2.getSize(); i++) {
-          t2.TowerDefense_TransArray[i] = new TowerDefenseObject();
-          int id = i;
-          int life = i*2;
-          int x = i*3;
-          int y = i*4;
-          int action = i*5;
-          t2.TowerDefense_TransArray[i].setId(id);
-          t2.TowerDefense_TransArray[i].setLife(life);
-          t2.TowerDefense_TransArray[i].setX(x);
-          t2.TowerDefense_TransArray[i].setY(y);
-          t2.TowerDefense_TransArray[i].setAction(action);
-        }
-        cw0.setTransData(t1);
-        cw0.transmitData();
-
-        cw1.setTransData(t2);
-        cw1.transmitData();
-        
-        System.out.println(cw0.getReceiveData().toString());
-        System.out.println(cw1.getReceiveData().toString());
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
+      Thread.sleep(50);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    mce.start();
   }
 }

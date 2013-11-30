@@ -5,31 +5,33 @@ import umich.eecs285.towerdefence.TowerDefensedataArray;
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefenseObject;
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
-public class MessagerClientExample {
+public class MessagerClientExample extends Thread {
   // TODO Local data! Subject to change!
   public final static String serverIp = "10.0.0.44"; 
   
-  public static void main(String args[]) {
+  public void run() {
     // initialization
-    System.out.println("initialization");
+    System.out.println("Client1: initialization " + System.currentTimeMillis());
     Messager messager = new Messager(Messager.Id_Client);
     messager.initialization(serverIp);
     while(!messager.ifNextRoundReady()) {
-      System.out.println("Wait for NextRoundReady");
+      System.out.println("Client1: Wait for NextRoundReady " + System.currentTimeMillis());
       try {
         Thread.sleep(50); // wait 50 ms
       } catch (InterruptedException e) {
         e.printStackTrace();
       } 
       messager.transmitRoundReady();
+      // do something with messager.getReceivedData()
+      System.out.println(messager.getReceivedData().toString());
     }
-    long nextRoundStartTime = messager.getNextRoundStartTime();
     TowerDefense_TransData towerDefense_TransData;
     
-    for (int i = 0; i < 5; i++) { // 5 rounds
-      System.out.println("wait till nextRoundStartTime");
+    for (int i = 0; i < 3; i++) { // 3 rounds
+      long nextRoundStartTime = messager.getNextRoundStartTime();
       // wait till nextRoundStartTime
       while (System.currentTimeMillis() < nextRoundStartTime) {
+        System.out.println("Client1: wait till nextRoundStartTime " + System.currentTimeMillis());
         try {
           Thread.sleep(10);
         } catch (InterruptedException e) {
@@ -38,7 +40,7 @@ public class MessagerClientExample {
       }
       
       // round start!
-      System.out.println("round start!");
+      System.out.println("Client1: round start! " + System.currentTimeMillis());
       for (int k = 0; k < 3; k++) {
         try {
           Thread.sleep(50);
@@ -46,7 +48,7 @@ public class MessagerClientExample {
           e.printStackTrace();
         }
         // some fake data
-        towerDefense_TransData = new TowerDefense_TransData(Messager.Id_Client, 100, TowerDefensedataArray.Transmit_Type_Regular);
+        towerDefense_TransData = new TowerDefense_TransData(Messager.Id_Client, 5, TowerDefensedataArray.Transmit_Type_Regular);
         for (int j = 0; j < towerDefense_TransData.getSize(); j++) {
           towerDefense_TransData.TowerDefense_TransArray[j] = new TowerDefenseObject();
           int id = j;
@@ -66,11 +68,10 @@ public class MessagerClientExample {
       }
       
       // round end
-      System.out.println("round end");
+      System.out.println("Client1: round end " + System.currentTimeMillis());
       // sending out some units
-      towerDefense_TransData = new TowerDefense_TransData(Messager.Id_Client, 10, TowerDefensedataArray.Transmit_Type_New_Round);
+      towerDefense_TransData = new TowerDefense_TransData(Messager.Id_Client, 2, TowerDefensedataArray.Transmit_Type_New_Round);
       // some fake data
-      towerDefense_TransData = new TowerDefense_TransData(Messager.Id_Client, 100, TowerDefensedataArray.Transmit_Type_Regular);
       for (int j = 0; j < towerDefense_TransData.getSize(); j++) {
         towerDefense_TransData.TowerDefense_TransArray[j] = new TowerDefenseObject();
         int id = j;
@@ -84,9 +85,11 @@ public class MessagerClientExample {
         towerDefense_TransData.TowerDefense_TransArray[j].setY(y);
         towerDefense_TransData.TowerDefense_TransArray[j].setAction(action);
       } // some fake data end
-      messager.transmitRegularData(towerDefense_TransData);
+      messager.transmitRoundReady(towerDefense_TransData);
+      // do something with messager.getReceivedData()
+      System.out.println(messager.getReceivedData().toString());
       while(!messager.ifNextRoundReady()) {
-        System.out.println("wait for NextRoundReady");
+        System.out.println("Client1: wait for NextRoundReady " + System.currentTimeMillis());
         try {
           Thread.sleep(50); // wait 50 ms
         } catch (InterruptedException e) {

@@ -111,13 +111,11 @@ public class Messager {
     return Integer.toString(Port);
   }
   
-  
   private void checkNextRoundReady() {
     if (clientWrapper.getReceiveData().getTransmitType() == TowerDefensedataArray.Transmit_Type_New_Round_Ready) {
       nextRoundReady = true;
       nextRoundStartTime = clientWrapper.getReceiveData().getTimeStamp();
     }
   }
-  
   
 }
