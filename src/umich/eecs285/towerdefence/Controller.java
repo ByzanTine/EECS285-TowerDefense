@@ -11,6 +11,7 @@ public class Controller {
 	static final int order[][]={{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1}};
 	static final int mod[]={1,2,1,2,1,2,1,2},KingX=300,KingY=40;
 	static final int systemSoldiers[]={0,15,15,15,15,20,15,15,15,15,3};
+	static final int mapUnit[][]={{294,195},{175,297},{155,317},{72,377},{196,494},{300,374},{359,307},{460,185},{462,341},{358,462}};
 	public Controller(){
 		for(int i=0;i<MAX_UNITS;i++){
 			soldiers[i]=null;
@@ -26,6 +27,10 @@ public class Controller {
 		deadnum=0;
 		reachKing=false;
 		addUnit(0,KingX,KingY,1);
+	}
+	public void init(){
+		for(int i=0;i<10;i++)
+			mymap.addStillUnits(new MapUnits(mapUnit[i][0],mapUnit[i][1],12));
 	}
 	public boolean addUnit(int ID,int x,int y,int Group){
 		if(Group<10&&totlesoldiers>=MAX_SOLDIERS||Group>10&&enemy>=MAX_UNITS-MAX_SOLDIERS)
@@ -45,11 +50,16 @@ public class Controller {
 			soldiers[tag].set(x, y, ID%100+tag*100, 0, Group);
 			enemy++;
 		}
-		else{
+		else if(ID%100<=50){
 			soldiers[tag]=new DefenceUnits(Data.searchUnit(ID));
 			soldiers[tag].set(x, y, ID%100+tag*100, 4, Group);
 			mysoldiers++;
 			totlesoldiers++;
+		}
+		else{
+			soldiers[tag]=new AttackUnits(Data.searchUnit(ID));
+			soldiers[tag].set(x, y, ID%100+tag*100, 0, Group);
+			enemy++;
 		}
 		mymap.addMoveUnits(soldiers[tag]);
 		return true;
