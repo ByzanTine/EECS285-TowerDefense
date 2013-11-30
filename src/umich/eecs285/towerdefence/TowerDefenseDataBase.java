@@ -23,10 +23,10 @@ import java.util.Hashtable;
 public class TowerDefenseDataBase {
 	private static final int ID_SIZE = 100;
 	private static final int ACTION_SIZE = 200;
-	private static final double Speed_Ratio = 0.2;
-	private static final double Cool_Down_Ratio = 3;
-	private static final int Image_size = 30;
-	
+	private static final double Speed_Ratio = 0.3;
+	private static final double Cool_Down_Ratio = 2;
+	private static final int Image_size = 14;
+	private static final double Attack_Ratio=0.5;
 	Hashtable<Integer, Hashtable<Integer, String>> image_table;
 	
 	Hashtable<Integer, Units> Unit_table;
@@ -64,7 +64,7 @@ public class TowerDefenseDataBase {
 
 		try {
 			// For king
-			Units king = new Units(1, 1, 1, 1, 1, 1, 1);
+			Units king = new Units(100000, 1, 1, 1, 100, 10, 1);
 			Unit_table.put(0, king);
 			// For others
 			for (int i = 0; i < ID_SIZE && (line = br.readLine()) != null; i++) {
@@ -75,9 +75,9 @@ public class TowerDefenseDataBase {
 //				System.out.print("\n");
 
 				Units unit = new Units(Integer.parseInt(nums[2]),
-						(int) Double.parseDouble(nums[8]), Image_size,
+						(int) (Double.parseDouble(nums[8])*Speed_Ratio), Image_size,
 						(int) (500 * Speed_Ratio),
-						(int) (Double.parseDouble(nums[7]) * Speed_Ratio),
+						(int) (Double.parseDouble(nums[7]) * Attack_Ratio),
 						(int) Double.parseDouble(nums[3]),
 						(int) (Double.parseDouble(nums[4]) * Cool_Down_Ratio));
 

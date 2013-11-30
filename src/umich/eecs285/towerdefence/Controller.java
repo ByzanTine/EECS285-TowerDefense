@@ -65,11 +65,11 @@ public class Controller {
 			for(int i=0;i<MAX_UNITS;i++){
 				if(soldiers[i]!=null&&soldiers[i].HP>0&&soldiers[i].isFree()){
 					temp=mymap.ACT(soldiers[i],soldiers[i].positionX, soldiers[i].positionY, soldiers[i].Range, soldiers[i].Face, soldiers[i].Group, false);
-					System.out.println(soldiers[i].positionX+" "+soldiers[i].positionY+" "+soldiers[i].Range);
-					if(temp!=null){
+					//System.out.println(soldiers[i].positionX+" "+soldiers[i].positionY+" "+soldiers[i].Range);
+					if(temp!=null&&temp.HP>0){
 						soldiers[i].attack();
 						if(temp.attacked(soldiers[i].Attack)){
-							deadArray[deadnum]=temp;
+							deadArray[deadnum]=temp;System.out.println(deadArray[deadnum]);
 							deadnum++;
 							if(temp.Group>10)
 								enemy--;
@@ -158,7 +158,7 @@ public class Controller {
 				temp.TowerDefense_TransArray[k]=soldiers[i].getInfo(cooldown);
 				k++;
 			}
-		for(i=deadpre;i<deadnum;i++){
+		for(i=deadpre;i<deadnum;i++){System.out.println(deadpre+" "+deadnum+" "+k+" "+size);
 			temp.TowerDefense_TransArray[k]=deadArray[i].getInfo(cooldown);
 			k++;
 		} 

@@ -62,14 +62,55 @@ public class TowerDefenseControllerTest implements TowerDefensedataArray{
 					System.out.println(data.toString());
 				
 				
-				if(control.isDead()||timestamp>500000){
+				if(control.isDead()||timestamp>10000000){
+					for(int i=0;i<16;i++){
+						
+					
+						control.run();
+						data=control.getInfo(clientId, timestamp);
+						//paint
+						mainFrame.nextFrame(data);
+					}
 					break;
 				}
 			}
 			System.out.println(timestamp);
 		}/**/
+		
 		control.endTurn();
 		player.addCandy(1, control.hasReachedKing());
+		turn++;
+		/*control.startTurn(turn, 0, null);
+		data=control.getInfo(clientId, timestamp);
+		
+		mainFrame.nextFrame(data);
+		while(!control.isEnd()){
+			timestamp++;
+			if(timestamp%3000==1){
+				game.checkRunBridge();
+				control.run();
+				data=control.getInfo(clientId, timestamp);
+				//paint
+					mainFrame.nextFrame(data);
+					System.out.println(data.toString());
+				
+				
+				if(control.isDead()||timestamp>1000000){
+					for(int i=0;i<16;i++){
+						
+					
+						control.run();
+						data=control.getInfo(clientId, timestamp);
+						//paint
+						mainFrame.nextFrame(data);
+					}
+					break;
+				}
+			}
+			System.out.println(timestamp);
+		}
+		
+		control.endTurn();*/
 		// TODO player automatically increase money
 	}
 
