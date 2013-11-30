@@ -70,7 +70,7 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 				mainFrame.nextFrame(data);
 				System.out.println(data.toString());
 				if(control.isDead()){
-					for(int i=0;i<16;i++){
+					for(int i=0;i<3000;i++){
 						
 					
 						control.run();
@@ -86,6 +86,14 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 //			if (control.isDead()) {
 //				break;
 //			}
+		}
+		for(int i=0;i<3000;i++){
+			
+			
+			control.run();
+			data=control.getInfo(clientId, timestamp);
+			//paint
+			mainFrame.nextFrame(data);
 		}
 		System.out.print("End Round");
 		control.endTurn();
@@ -109,27 +117,40 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 			}
 		}
 		if (client_bridge.isMeoMeoNumIncreaseRequest()) {
-
+			if(player.canCreateMeoMeo()){
+				player.createMeoMeo();
+			}
 		}
 		if (client_bridge.isMeoMeoTechUpgradeRequest()) {
-
+			if(player.canUpdateMeoMeo()){
+				player.updateMeoMeo();
+			}
 		}
 		if (client_bridge.isUnitLevelupRequest()) {
-
+			if(player.canUpdateUnit(client_bridge.getLevelupId())){
+				player.updateUnit(client_bridge.getLevelupId());
+				control.levelUp(client_bridge.getLevelupId());
+			}
 		}
 	}
 
 	private void checkRunBridge() {
 		// TODO Auto-generated method stub
 		if (client_bridge.isCreateAttackUnitRequest()) {
+			if (player.canCreateAttackingUnit(client_bridge.getAttackUnitId())) {
+				player.createAttackingUnit(client_bridge.getAttackUnitId());
 
+			}
 		}
-
 		if (client_bridge.isMeoMeoNumIncreaseRequest()) {
-
+			if(player.canCreateMeoMeo()){
+				player.createMeoMeo();
+			}
 		}
 		if (client_bridge.isMeoMeoTechUpgradeRequest()) {
-
+			if(player.canUpdateMeoMeo()){
+				player.updateMeoMeo();
+			}
 		}
 
 	}
