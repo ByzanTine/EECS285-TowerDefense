@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class InfoPanel extends JPanel {
 
   InfoPanel() {
-    setBounds(400, 0, 300, 200);
+    setBounds(300, 0, 300, 200);
     setLayout(null);
   }
 

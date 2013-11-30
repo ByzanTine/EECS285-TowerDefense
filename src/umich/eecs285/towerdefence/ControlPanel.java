@@ -8,13 +8,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class ControlPanel extends JPanel {
-  final int CreateButtonSize = 5;
+  final int CreateButtonSize = 6;
+  final int SendButtonSize  = 6;
   private CreatePokemonButton[] CreateButtons;
   private UpgradeEarningButton addMeoMeo;
   private UpgradeEarningButton upgradeMeoMeo;
+  private SendPokemonButton[] SendButtons;
+  private ClientBridge cb;
 
   ControlPanel() {
-    setBounds(700, 0, 300, 200);
+    setBounds(600, 0, 500, 200);
     setLayout(null);
 
     CreateButtons = new CreatePokemonButton[CreateButtonSize];
@@ -37,6 +40,15 @@ public class ControlPanel extends JPanel {
     
     add(addMeoMeo);
     add(upgradeMeoMeo);
+    
+    SendButtons = new SendPokemonButton[SendButtonSize];
+    for (int i = 0; i < CreateButtonSize; ++i) {
+      SendButtons[i] = new SendPokemonButton("res/alien_selected.gif",
+          "res/alien.gif");
+      SendButtons[i].setBounds(10 + 55 * i, 130, 50, 50);
+      SendButtons[i].addActionListener(new SendListener(i));
+      add(SendButtons[i]);
+    }
   }
 
   public int CreationIndex() {
@@ -56,7 +68,7 @@ public class ControlPanel extends JPanel {
 
     public void actionPerformed(ActionEvent e) {
       CreateButtons[index].setIsClicked(true);
-      System.out.println("create");
+      System.out.println("create " + index);
     }
     
   }
@@ -64,7 +76,7 @@ public class ControlPanel extends JPanel {
   private class addMeoMeoListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
-      
+      cb.setMeoMeoNumIncreaseRequest(true);
     }
     
   }
@@ -72,11 +84,29 @@ public class ControlPanel extends JPanel {
   private class upgradeMeoMeoListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
-      
+      cb.setMeoMeoTechUpgradeRequest(true);
     }
     
   }
   
+  private class SendListener implements ActionListener {
+    private int index;
+
+    public SendListener(int i) {
+      index = i;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+      cb.setCreateAttackUnitRequest(true);
+      cb.setAttackUnitId(index);
+      System.out.println("send " + index);
+    }
+    
+  }
+  
+  public void setClientBridge(ClientBridge cb) {
+    this.cb = cb;
+  }
   
   public void paintComponent(Graphics g) {
     ImageIcon Icon = new ImageIcon("res/cat.jpg");

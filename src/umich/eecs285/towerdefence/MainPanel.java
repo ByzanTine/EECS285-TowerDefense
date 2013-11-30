@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 public class MainPanel extends JPanel implements TowerDefensedataArray {
   PlayerPanel pp;
+  private ClientBridge cb;
 
   MainPanel(PlayerPanel pp) {
     this.setLayout(null);
@@ -18,7 +19,6 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
   }
 
   public void nextPanel(TowerDefense_TransData t) {
-    // TODO Auto-generated method stub
     removeAll();
     TowerDefenseDataBase d = new TowerDefenseDataBase();
     d.init();
@@ -40,12 +40,15 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
   private class PokemonButtonListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
-      System.out.println("fighting");
+      System.out.println("fighting " + ((PokemonButton) e.getSource()).getID());
       pp.displayInfo();
     }
 
   }
 
+  public void setClientBridge(ClientBridge cb) {
+    this.cb = cb;
+  }
  
   
   public void paintComponent(Graphics g) {

@@ -9,6 +9,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
 
   private MainPanel mP;
   private PlayerPanel pp;
+  private ClientBridge cb;
 
   MainFrame() {
 
@@ -26,11 +27,18 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         if (pp.CreateIndex() != -1) {
+          cb.setCreateUnitRequest(true);
+          cb.setX(e.getPoint().x);
+          cb.setY(e.getPoint().y);
+          System.out.print(e.getPoint().x + " " + e.getPoint().y + " ");
           System.out.println(pp.CreateIndex());
           pp.CreateButtonRecover();
         }
       }
     });
+    
+    setVisible(true);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   public void nextFrame(TowerDefense_TransData t) {
@@ -38,4 +46,11 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
 
   }
 
+  public void setClientBridge(ClientBridge cb) {
+    this.cb = cb;
+    pp.setClientBridge(cb);
+    mP.setClientBridge(cb);
+  }
+  
+  
 }
