@@ -1,14 +1,13 @@
 package umich.eecs285.towerdefence;
-
 import java.util.Hashtable;
 import java.util.Vector;
 
 public class Player {
 
-	private static final int initialMoney = 300;
+	private static final int initialMoney = 100;
 	private static final int initialBall = 0;
 	private static final int maximumMeoNumber = 7;
-	private static final int initialCandy = 0;
+	private static final int initialCandy = 300;
 	private static final int meomeoCreateCost = 100; // subject to change
 	private static final int meomeoUpdateCost = 200; // subject to change
 	private static final int meomeoMaximumLevel = 3; // subject to change
@@ -97,7 +96,7 @@ public class Player {
 
 	// judge the ability to create defending unit
 	public boolean canCreateUnit(int id) {
-
+		
 		if (id >= 11 && id <= 16 && candy >= candyTable.get(id))
 			return true;
 

@@ -49,6 +49,7 @@ public class Controller {
 			soldiers[tag]=new DefenceUnits(Data.searchUnit(ID));
 			soldiers[tag].set(x, y, ID%100+tag*100, 4, Group);
 			mysoldiers++;
+			totlesoldiers++;
 		}
 		mymap.addMoveUnits(soldiers[tag]);
 		return true;
