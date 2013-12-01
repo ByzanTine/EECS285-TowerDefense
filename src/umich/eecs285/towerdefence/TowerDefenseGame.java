@@ -36,14 +36,13 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   private Messager messager;
   private byte clientId;
 
-  // TODO create game: Messager.Id_Server
-  // TODO join game: Messager.Id_Client
   public void setClientId(byte clientId) {
     this.clientId = clientId;
   }
 
   private void init() {
     messager = new Messager(clientId);
+    // TODO change client side initialization to get ip from player
     messager.initialization();
     mainFrame = new MainFrame();
     mainFrame.setVisible(true);
@@ -65,9 +64,8 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   public void run() {
     init();
 
-    // Round 1
+    // Round start
     setTimestamp();
-
     while (!messager.ifNextRoundReady()) {
       System.out.println("Client: Wait for NextRoundReady "
           + System.currentTimeMillis());
@@ -135,7 +133,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     }
     
     cushion();
-    System.out.print("End Round");
+    // round end
+    System.out.println("Client: round end " + System.currentTimeMillis());
+    
     control.endTurn();
     cushion();
     player.addCandy(1, control.hasReachedKing());
