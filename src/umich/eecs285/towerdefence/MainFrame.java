@@ -4,6 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements TowerDefensedataArray {
 
@@ -11,13 +13,14 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   
   private MainPanel mP;
   private PlayerPanel pp;
+  private JPanel RoundPanel;
   private ClientBridge cb;
 
   MainFrame() {
 
     super("Tower Defence");
     this.setSize(770, 750);
-//    this.setResizable(false);
+    this.setResizable(false);
     this.setLayout(null);
 
     pp = new PlayerPanel();
@@ -25,6 +28,10 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
 
     mP = new MainPanel(pp);
     add(mP);
+    
+    RoundPanel = new JPanel();
+    RoundPanel.setOpaque(false);
+    RoundPanel.setBounds(100, 250, 400, 200);
 
     addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
@@ -55,5 +62,14 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     mP.setClientBridge(cb);
   }
   
+  public void turnOnRound(Integer RoundNumber) {
+    JLabel text = new JLabel("Round " + RoundNumber.toString());
+    RoundPanel.add(text);
+    add(RoundPanel);
+  }
+  
+  public void turnOnRound() {
+    remove(RoundPanel);
+  }
   
 }
