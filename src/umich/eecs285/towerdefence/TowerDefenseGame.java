@@ -107,7 +107,10 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       checkRunBridge();
       control.run();
       towerDefense_TransData = control.getInfo(clientId, timestamp);
-
+      towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
+      messager.transmitRegularData(towerDefense_TransData);
+      opponentData = messager.getReceivedData();
+      
       try {
         // paint
         mainFrame.nextFrame(towerDefense_TransData);
@@ -117,32 +120,35 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
       System.out.println(towerDefense_TransData.toString());
       if (control.isDead()) {
-        for (int i = 0; i < 16; i++) {
-          control.run();
-          towerDefense_TransData = control.getInfo(clientId, timestamp);
-          // paint
-          mainFrame.nextFrame(towerDefense_TransData);
-        }
+        cushion();
         break;
       }
     }
-
-    for (int i = 0; i < 16; i++) {
-      control.run();
-      towerDefense_TransData = control.getInfo(clientId, timestamp);
-      // paint
-      mainFrame.nextFrame(towerDefense_TransData);
-    }
+    
+    cushion();
     System.out.print("End Round");
     control.endTurn();
-    for (int i = 0; i < 16; i++) {
+    cushion();
+    player.addCandy(1, control.hasReachedKing());
+    // TODO player automatically increase money
+  }
+  
+  private void cushion() {
+    final int CushionRound = 16;
+    for (int i = 0; i < CushionRound; i++) {
+      try {
+        Thread.sleep(50);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
       control.run();
       towerDefense_TransData = control.getInfo(clientId, timestamp);
+      towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
+      messager.transmitRegularData(towerDefense_TransData);
+      opponentData = messager.getReceivedData();
       // paint
       mainFrame.nextFrame(towerDefense_TransData);
     }
-    player.addCandy(1, control.hasReachedKing());
-    // TODO player automatically increase money
   }
 
   private void checkprepBridge() {
