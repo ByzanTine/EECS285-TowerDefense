@@ -106,7 +106,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       // paint data
       if(draw_state==false)
     	  mainFrame.nextFrame(towerDefense_TransData);
-      if(draw_state==true)
+      else
     	  mainFrame.nextFrame(opponentData);
     	  
     }
@@ -127,7 +127,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
        // paint
       if(draw_state==false)
     	  mainFrame.nextFrame(towerDefense_TransData);
-      if(draw_state==true)
+      else
     	  mainFrame.nextFrame(opponentData);
      
 
@@ -164,7 +164,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       // paint
       if(draw_state==false)
     	  mainFrame.nextFrame(towerDefense_TransData);
-      if(draw_state==true)
+      else
     	  mainFrame.nextFrame(opponentData);
     }
   }
@@ -208,6 +208,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     }
     if(client_bridge.isChangeViewRequest()){
     	draw_state=(!draw_state);
+    	//mainFrame.removeAll();
     }
   }
 
@@ -231,6 +232,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     }
     if(client_bridge.isChangeViewRequest()){
     	draw_state=(!draw_state);
+    	//mainFrame.removeAll();
     }
 
   }
