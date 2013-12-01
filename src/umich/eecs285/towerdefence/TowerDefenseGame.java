@@ -97,7 +97,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
         System.out.println(towerDefense_TransData.toString());
         if (control.isDead()) {
-          for (int i = 0; i < 3000; i++) {
+          for (int i = 0; i < 16; i++) {
 
             control.run();
             towerDefense_TransData = control.getInfo(clientId, timestamp);
@@ -113,7 +113,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       // break;
       // }
     }
-    for (int i = 0; i < 3000; i++) {
+    for (int i = 0; i < 16; i++) {
 
       control.run();
       towerDefense_TransData = control.getInfo(clientId, timestamp);
@@ -122,6 +122,13 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     }
     System.out.print("End Round");
     control.endTurn();
+    for (int i = 0; i < 16; i++) {
+
+        control.run();
+        towerDefense_TransData = control.getInfo(clientId, timestamp);
+        // paint
+        mainFrame.nextFrame(towerDefense_TransData);
+      }
     player.addCandy(1, control.hasReachedKing());
     // TODO player automatically increase money
   }

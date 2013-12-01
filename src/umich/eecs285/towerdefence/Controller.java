@@ -100,7 +100,7 @@ public class Controller {
 							dx=soldiers[i].pointX-soldiers[i].positionX;
 							dy=soldiers[i].pointY-soldiers[i].positionY;
 						}
-						if(temp!=null||soldiers[i].positionX!=soldiers[i].pointX||soldiers[i].positionY!=soldiers[i].pointY){
+						if(temp!=null||Math.abs(soldiers[i].positionX-soldiers[i].pointX)+Math.abs(soldiers[i].positionY-soldiers[i].pointY)>soldiers[i].Speed/2){
 							face=getFace(dx,dy);
 							if(moveSoldier(soldiers[i],face,false)==false){
 								if(moveSoldier(soldiers[i],(face+7)%8,false)==false)
@@ -112,9 +112,10 @@ public class Controller {
 														if(moveSoldier(soldiers[i],(face+2)%8,false)==false)
 															if(moveSoldier(soldiers[i],(face+6)%8,true)==false)
 																if(moveSoldier(soldiers[i],(face+2)%8,true)==false)
-													soldiers[i].still();
+																	soldiers[i].still();
 							}
 						}
+						else soldiers[i].still();
 					}
 				}
 			}
@@ -156,6 +157,7 @@ public class Controller {
 					soldiers[i]=null;
 				else{
 					soldiers[i].reNew();
+					soldiers[i].Face=4;
 					mymap.addMoveUnits(soldiers[i]);
 				}
 			}

@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class Player {
 
-	private static final int initialMoney = 100;
+	private static final int initialMoney = 150;
 	private static final int initialBall = 0;
 	private static final int maximumMeoNumber = 7;
 	private static final int initialCandy = 300;
