@@ -8,7 +8,7 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   public static long Preparation_Time = 10000;
-
+  
   public static void main(String args[]) {
     TowerDefenseGame gameSever = new TowerDefenseGame();
     TowerDefenseGame gameClient = new TowerDefenseGame();
@@ -33,8 +33,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
   private TowerDefense_TransData towerDefense_TransData;
   private TowerDefense_TransData opponentData;
-  private TowerDefense_TransData receivedUnitsData;
-  private boolean draw_state = false;
+  private boolean draw_state=false;
   private Messager messager;
   private byte clientId;
 
@@ -77,10 +76,8 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         e.printStackTrace();
       }
       messager.transmitRoundReady();
-      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
-        opponentData = messager.getReceivedData();
-      else if (messager.getReceivedData().getSize() > 0)
-        receivedUnitsData = messager.getReceivedData();
+      // do something with messager.getReceivedData()
+      System.out.println(messager.getReceivedData().toString());
     }
 
     long nextRoundStartTime = messager.getNextRoundStartTime();
@@ -104,17 +101,14 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       System.out.println(towerDefense_TransData.toString());
       towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
       messager.transmitRegularData(towerDefense_TransData);
-      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
-        opponentData = messager.getReceivedData();
-      else if (messager.getReceivedData().getSize() > 0)
-        receivedUnitsData = messager.getReceivedData();
+      opponentData = messager.getReceivedData();
 
       // paint data
-      if (draw_state == false)
-        mainFrame.nextFrame(towerDefense_TransData);
-      if (draw_state == true)
-        mainFrame.nextFrame(opponentData);
-
+      if(draw_state==false)
+    	  mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==true)
+    	  mainFrame.nextFrame(opponentData);
+    	  
     }
 
     // Running
@@ -127,16 +121,15 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       towerDefense_TransData = control.getInfo(clientId, timestamp);
       towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
       messager.transmitRegularData(towerDefense_TransData);
-      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
-        opponentData = messager.getReceivedData();
-      else if (messager.getReceivedData().getSize() > 0)
-        receivedUnitsData = messager.getReceivedData();
-
-      // paint
-      if (draw_state == false)
-        mainFrame.nextFrame(towerDefense_TransData);
-      if (draw_state == true)
-        mainFrame.nextFrame(opponentData);
+      opponentData = messager.getReceivedData();
+      
+      
+       // paint
+      if(draw_state==false)
+    	  mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==true)
+    	  mainFrame.nextFrame(opponentData);
+     
 
       System.out.println(towerDefense_TransData.toString());
       if (control.isDead()) {
@@ -144,22 +137,17 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         break;
       }
     }
-
+    
     cushion();
     // round end
     System.out.println("Client: round end " + System.currentTimeMillis());
-    messager.transmitRoundReady(player.getAttackingData(clientId));
-    if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
-      opponentData = messager.getReceivedData();
-    else if (messager.getReceivedData().getSize() > 0)
-      receivedUnitsData = messager.getReceivedData();
     
     control.endTurn();
     cushion();
     player.addCandy(1, control.hasReachedKing());
     // TODO player automatically increase money
   }
-
+  
   private void cushion() {
     final int CushionRound = 16;
     for (int i = 0; i < CushionRound; i++) {
@@ -172,15 +160,12 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       towerDefense_TransData = control.getInfo(clientId, timestamp);
       towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
       messager.transmitRegularData(towerDefense_TransData);
-      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
-        opponentData = messager.getReceivedData();
-      else if (messager.getReceivedData().getSize() > 0)
-        receivedUnitsData = messager.getReceivedData();
+      opponentData = messager.getReceivedData();
       // paint
-      if (draw_state == false)
-        mainFrame.nextFrame(towerDefense_TransData);
-      if (draw_state == true)
-        mainFrame.nextFrame(opponentData);
+      if(draw_state==false)
+    	  mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==true)
+    	  mainFrame.nextFrame(opponentData);
     }
   }
 
@@ -221,8 +206,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         control.levelUp(client_bridge.getLevelupId());
       }
     }
-    if (client_bridge.isChangeViewRequest()) {
-      draw_state = (!draw_state);
+    if(client_bridge.isChangeViewRequest()){
+    	draw_state=(!draw_state);
+    	client_bridge.setChangeViewRequest(false);
     }
   }
 
@@ -244,8 +230,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         player.updateMeoMeo();
       }
     }
-    if (client_bridge.isChangeViewRequest()) {
-      draw_state = (!draw_state);
+    if(client_bridge.isChangeViewRequest()){
+    	draw_state=(!draw_state);
+    	client_bridge.setChangeViewRequest(false);
     }
 
   }
