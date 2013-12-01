@@ -1,6 +1,8 @@
 package umich.eecs285.towerdefence;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -9,9 +11,10 @@ import javax.swing.JPanel;
 public class InfoPanel extends JPanel {
 
   private TowerDefenseDataBase d;
+  protected ClientBridge cb;
   
   InfoPanel() {
-    setBounds(0, 400, 150, 200);
+    setBounds(0, 250, 150, 200);
     setLayout(null);
     d = new TowerDefenseDataBase();
     d.init();
@@ -37,8 +40,28 @@ public class InfoPanel extends JPanel {
     if (ID % 100 >= 11 && ID % 100 <= 21) {
       TowerDefense_Button upgradeButton = new TowerDefense_Button("res/alien_selected.gif", "res/alien.gif");
       upgradeButton.setBounds(10, 100, MainFrame.ButtonSize, MainFrame.ButtonSize);
+      upgradeButton.addActionListener(new UpgradeListener(ID));
       add(upgradeButton);
     }
     repaint();
+  }
+  private class UpgradeListener implements ActionListener {
+    private int ID;
+    
+    
+    public UpgradeListener(int ID) {
+      this.ID = ID;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+      System.out.println("level up " + ID);
+      cb.setUnitLevelupRequest(true);
+      cb.setLevelupId(ID);
+    }
+    
+  }
+  
+  public void setClientBridge(ClientBridge cb) {
+    this.cb = cb;
   }
 }

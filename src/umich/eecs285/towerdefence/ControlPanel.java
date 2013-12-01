@@ -17,7 +17,7 @@ public class ControlPanel extends JPanel {
   private ClientBridge cb;
 
   ControlPanel() {
-    setBounds(0, 0, 150, 300);
+    setBounds(0, 0, 150, 250);
     setLayout(null);
 
     CreateButtons = new CreatePokemonButton[CreateButtonSize];
