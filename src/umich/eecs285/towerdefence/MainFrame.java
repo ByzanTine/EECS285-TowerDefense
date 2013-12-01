@@ -36,9 +36,11 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     removeAll();
     pp = new PlayerPanel();
     add(pp);
+    pp.setClientBridge(cb);
 
     mP = new MainPanel(pp);
     add(mP);
+    mP.setClientBridge(cb);
     
     RoundPanel = new JPanel();
     RoundPanel.setOpaque(false);
@@ -68,8 +70,6 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   public void setClientBridge(ClientBridge cb) {
     this.cb = cb;
     lp.setClientBridge(cb);
-    pp.setClientBridge(cb);
-    mP.setClientBridge(cb);
   }
   
   public void turnOnRound(String Info) {
