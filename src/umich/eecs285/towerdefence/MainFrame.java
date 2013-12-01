@@ -11,6 +11,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
 
   final static int ButtonSize = 40;
   
+  private LogPanel lp;
   private MainPanel mP;
   private PlayerPanel pp;
   private JPanel RoundPanel;
@@ -18,11 +19,20 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
 
   MainFrame() {
 
-    super("Tower Defence");
-    this.setSize(770, 750);
+    super("Pokemon Tower Defence");
+    this.setSize(755, 770);
     this.setResizable(false);
     this.setLayout(null);
 
+//    lp = new LogPanel();
+//    add(lp);
+    start();
+    
+    setVisible(true);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
+  
+  public void start() {
     pp = new PlayerPanel();
     add(pp);
 
@@ -46,9 +56,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
         }
       }
     });
-    
-    setVisible(true);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
   }
 
   public void nextFrame(TowerDefense_TransData t) {
@@ -58,12 +66,13 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
 
   public void setClientBridge(ClientBridge cb) {
     this.cb = cb;
+    lp.setClientBridge(cb);
     pp.setClientBridge(cb);
     mP.setClientBridge(cb);
   }
   
-  public void turnOnRound(Integer RoundNumber) {
-    JLabel text = new JLabel("Round " + RoundNumber.toString());
+  public void turnOnRound(String Info) {
+    JLabel text = new JLabel(Info);
     RoundPanel.add(text);
     add(RoundPanel);
   }

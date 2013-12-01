@@ -12,43 +12,49 @@ public class InfoPanel extends JPanel {
 
   private TowerDefenseDataBase d;
   protected ClientBridge cb;
-  
+
   InfoPanel() {
     setBounds(0, 250, 150, 250);
     setLayout(null);
+
+    addCandyInfo(150);
+    addMoneyInfo(100);
+
     d = new TowerDefenseDataBase();
     d.init();
   }
 
-  public void paintComponent(Graphics g) {
-    ImageIcon Icon = new ImageIcon("res/cat.jpg");
-    g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
-  }
-
   public void displayInfo(int ID, Integer CurrentLife) {
     removeAll();
-    Units obj = d.searchUnit(ID);
-    CreatePokemonButton c = new CreatePokemonButton("res/alien.gif", "res/alien.gif");
-    c.setBounds(10, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
-    add(c);
-    JLabel LifeLabel = new JLabel(CurrentLife.toString()+ " / " + obj.MaxHP);
-    LifeLabel.setBounds(60, 15, 150, 20);
-    add(LifeLabel);
-    JLabel AttackLabel = new JLabel(((Integer) obj.Attack).toString());
-    AttackLabel.setBounds(60, 50, 150, 20);
-    add(AttackLabel);
-    if (ID % 100 >= 11 && ID % 100 <= 21) {
-      TowerDefense_Button upgradeButton = new TowerDefense_Button("res/alien_selected.gif", "res/alien.gif");
-      upgradeButton.setBounds(10, 100, MainFrame.ButtonSize, MainFrame.ButtonSize);
-      upgradeButton.addActionListener(new UpgradeListener(ID));
-      add(upgradeButton);
+    addCandyInfo(150);
+    addMoneyInfo(100);
+    if (CurrentLife > 0) {
+      Units obj = d.searchUnit(ID);
+      TowerDefense_Button info = new TowerDefense_Button("res/alien.gif",
+          "res/Info/" + ((Integer) (ID % 100)).toString() + ".png");
+      info.setBounds(20, 120, MainFrame.ButtonSize, MainFrame.ButtonSize);
+      add(info);
+      JLabel LifeLabel = new JLabel(CurrentLife.toString() + " / " + obj.MaxHP);
+      LifeLabel.setBounds(70, 125, 100, 20);
+      add(LifeLabel);
+      JLabel AttackLabel = new JLabel(((Integer) obj.Attack).toString());
+      AttackLabel.setBounds(70, 170, 150, 20);
+      add(AttackLabel);
+      if (ID % 100 >= 11 && ID % 100 <= 21) {
+        TowerDefense_Button upgradeButton = new TowerDefense_Button(
+            "res/alien_selected.gif", "res/alien.gif");
+        upgradeButton.setBounds(10, 210, MainFrame.ButtonSize,
+            MainFrame.ButtonSize);
+        upgradeButton.addActionListener(new UpgradeListener(ID));
+        add(upgradeButton);
+      }
     }
     repaint();
   }
+
   private class UpgradeListener implements ActionListener {
     private int ID;
-    
-    
+
     public UpgradeListener(int ID) {
       this.ID = ID;
     }
@@ -58,10 +64,40 @@ public class InfoPanel extends JPanel {
       cb.setUnitLevelupRequest(true);
       cb.setLevelupId(ID);
     }
+
+  }
+
+  public void addCandyInfo(Integer candyNumber) {
+    TowerDefense_Button candy = new TowerDefense_Button("res/alien.gif",
+        "res/alien.gif");
+    JLabel candyQuantity = new JLabel(candyNumber.toString());
+
+    candy.setBounds(10, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
+    candyQuantity.setBounds(70, 15, 80, 20);
     
+    add(candy);
+    add(candyQuantity);
   }
   
+  public void addMoneyInfo(Integer money) {
+    TowerDefense_Button MoneyButton = new TowerDefense_Button("res/money.png",
+        "res/money.png");
+    JLabel MoneyAmount = new JLabel(money.toString());
+
+    MoneyButton.setBounds(10, 60, MainFrame.ButtonSize, MainFrame.ButtonSize);
+    MoneyAmount.setBounds(70, 70, 80, 20);
+    
+    add(MoneyButton);
+    add(MoneyAmount);
+  }
+
   public void setClientBridge(ClientBridge cb) {
     this.cb = cb;
   }
+
+  public void paintComponent(Graphics g) {
+    ImageIcon Icon = new ImageIcon("res/Panel/Siderbar.png");
+    g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
+  }
+
 }

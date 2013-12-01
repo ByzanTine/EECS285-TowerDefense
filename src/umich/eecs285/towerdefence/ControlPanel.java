@@ -23,18 +23,18 @@ public class ControlPanel extends JPanel {
     CreateButtons = new CreatePokemonButton[CreateButtonSize];
     for (int i = 0; i < CreateButtonSize; ++i) {
       CreateButtons[i] = new CreatePokemonButton("res/alien_selected.gif",
-          "res/dragonate.png");
-      CreateButtons[i].setBounds(5, 5 + (MainFrame.ButtonSize + 2) * i,
+          "res/Creation/" + ((Integer) (11 + i)).toString() + ".png");
+      CreateButtons[i].setBounds(13, 8 + MainFrame.ButtonSize * i,
           MainFrame.ButtonSize, MainFrame.ButtonSize);
       CreateButtons[i].addActionListener(new CreationListener(i));
       add(CreateButtons[i]);
     }
 
-    addMeoMeo = new UpgradeEarningButton("res/alien.gif", "res/alien.gif");
-    upgradeMeoMeo = new UpgradeEarningButton("res/alien.gif", "res/alien.gif");
+    addMeoMeo = new UpgradeEarningButton("res/meomeo.png", "res/meomeo.png");
+    upgradeMeoMeo = new UpgradeEarningButton("res/upgrade.png", "res/upgrade.png");
 
-    addMeoMeo.setBounds(52, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
-    upgradeMeoMeo.setBounds(52, 50, MainFrame.ButtonSize, MainFrame.ButtonSize);
+    addMeoMeo.setBounds(57, 5, MainFrame.ButtonSize, MainFrame.ButtonSize);
+    upgradeMeoMeo.setBounds(57, 50, MainFrame.ButtonSize, MainFrame.ButtonSize);
 
     addMeoMeo.addActionListener(new addMeoMeoListener());
     upgradeMeoMeo.addActionListener(new upgradeMeoMeoListener());
@@ -43,8 +43,8 @@ public class ControlPanel extends JPanel {
     add(upgradeMeoMeo);
 
     TowerDefense_Button SwitchButton = new TowerDefense_Button(
-        "res/meomeo.png", "res/meomeo.png");
-    SwitchButton.setBounds(52, 207, MainFrame.ButtonSize, MainFrame.ButtonSize);
+        "res/switch.png", "res/switch.png");
+    SwitchButton.setBounds(60, 207, MainFrame.ButtonSize, MainFrame.ButtonSize);
     SwitchButton.addActionListener(new ActionListener() {
 
       public void actionPerformed(ActionEvent e) {
@@ -57,8 +57,8 @@ public class ControlPanel extends JPanel {
     SendButtons = new SendPokemonButton[SendButtonSize];
     for (int i = 0; i < CreateButtonSize; ++i) {
       SendButtons[i] = new SendPokemonButton("res/alien_selected.gif",
-          "res/alien.gif");
-      SendButtons[i].setBounds(100, 10 + MainFrame.ButtonSize * i,
+          "res/Send/" + ((Integer) (51 + i)).toString() + ".png");
+      SendButtons[i].setBounds(105, 8 + MainFrame.ButtonSize * i,
           MainFrame.ButtonSize, MainFrame.ButtonSize);
       SendButtons[i].addActionListener(new SendListener(i));
       add(SendButtons[i]);
@@ -123,7 +123,7 @@ public class ControlPanel extends JPanel {
   }
 
   public void paintComponent(Graphics g) {
-    ImageIcon Icon = new ImageIcon("res/Panel/Pattern.jpg");
+    ImageIcon Icon = new ImageIcon("res/Panel/Pattern.png");
     g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
   }
 
