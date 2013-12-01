@@ -44,7 +44,7 @@ public class PlayerPanel extends JPanel{
     }
     
     public void paintComponent(Graphics g) {
-        ImageIcon Icon = new ImageIcon("res/o.jpg");
+        ImageIcon Icon = new ImageIcon("res/cat.jpg");
         g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
     }
 }

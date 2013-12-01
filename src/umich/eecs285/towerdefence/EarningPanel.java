@@ -9,14 +9,18 @@ public class EarningPanel extends JPanel {
   private int numberOfMeoMeo;
   
   EarningPanel() {
-    setBounds(0, 450, 150, 300);
+    setBounds(0, 500, 150, 250);
     setLayout(null);
     
     numberOfMeoMeo = 1;
     
-    TowerDefense_Button defaultMeoMeo = new TowerDefense_Button("res/alien.gif", "res/alien.gif");
-    defaultMeoMeo.setBounds(10, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
+    TowerDefense_Button defaultMeoMeo = new TowerDefense_Button("res/meomeo.png", "res/meomeo.png");
+    defaultMeoMeo.setBounds(10, 70, MainFrame.ButtonSize, MainFrame.ButtonSize);
     add(defaultMeoMeo);
+    
+    TowerDefense_Button defaultMoney = new TowerDefense_Button("res/money.png", "res/money.png");
+    defaultMoney.setBounds(10, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
+    add(defaultMoney);
     
   }
   
