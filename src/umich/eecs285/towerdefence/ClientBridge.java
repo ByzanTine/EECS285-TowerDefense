@@ -106,6 +106,24 @@ public class ClientBridge {
 		ChangeViewRequest = changeViewRequest;
 	}
 
+	public boolean isCreateGameRequest() {
+		return CreateGameRequest;
+	}
+
+
+	public void setCreateGameRequest(boolean createGameRequest) {
+		CreateGameRequest = createGameRequest;
+	}
+
+	public boolean isJoinGameRequest() {
+		return JoinGameRequest;
+	}
+
+
+	public void setJoinGameRequest(boolean joinGameRequest) {
+		JoinGameRequest = joinGameRequest;
+	}
+
 	private int x;
 	private int y;
 
@@ -119,4 +137,6 @@ public class ClientBridge {
 	private int LevelupId;
 	
 	private boolean ChangeViewRequest=false;
+	private boolean CreateGameRequest=false;
+	private boolean JoinGameRequest=false;
 }
