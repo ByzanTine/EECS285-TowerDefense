@@ -3,64 +3,42 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
-<project basedir="." default="build" name="EECS285-TowerDefense">
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="EECS285-TowerDefense">
     <property environment="env"/>
-    <property name="src.link" value="../../C:/Users/Administrator/Desktop/EECS285/EECS285-TowerDefense/src"/>
-    <property name="JRE_LIB" value="../../../../usr/local/java/jdk1.6.0_38/jre/lib/rt.jar"/>
-    <property name="ECLIPSE_HOME" value="../../../../usr/lib/eclipse"/>
+    <property name="ECLIPSE_HOME" value="../../eclipse"/>
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.5"/>
-    <property name="source" value="1.5"/>
-    <path id="home/think/workspace/EECS285-TowerDefense/bin.libraryclasspath"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
     <path id="EECS285-TowerDefense.classpath">
-        <pathelement location="bin"/>
-        <pathelement location="${JRE_LIB}"/>
-        <path refid="home/think/workspace/EECS285-TowerDefense/bin.libraryclasspath"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/AppleJavaExtensions.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/asm-debug-all.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/jinput.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/lwjgl_test.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/lwjgl_util_applet.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/lwjgl_util.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/lwjgl-debug.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/lwjgl.jar"/>
-        <pathelement location="lib/lwjgl-2.9.0/jar/lzma.jar"/>
+        <pathelement location="binary"/>
         <pathelement location="lib/json-simple-1.1.1.jar"/>
     </path>
-    <path id="run.StandardButton (1).classpath">
-        <pathelement location="${JRE_LIB}"/>
-        <path refid="EECS285-TowerDefense.classpath"/>
-    </path>
-    <path id="run.StandardButton (1).bootclasspath"/>
-    <path id="run.TowerDefensedataArray_Example_Usage (1).classpath">
-        <pathelement location="${JRE_LIB}"/>
-        <path refid="EECS285-TowerDefense.classpath"/>
-    </path>
-    <path id="run.TowerDefensedataArray_Example_Usage (1).bootclasspath"/>
-    <path id="run.WheelOfFortune (1).classpath">
-        <pathelement location="${JRE_LIB}"/>
-        <path refid="EECS285-TowerDefense.classpath"/>
-    </path>
-    <path id="run.WheelOfFortune (1).bootclasspath"/>
     <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="${src.link}">
+        <mkdir dir="binary"/>
+        <copy includeemptydirs="false" todir="binary">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="binary">
+            <fileset dir="TestAndExample">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
     </target>
     <target name="clean">
-        <delete dir="bin"/>
+        <delete dir="binary"/>
     </target>
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-project" name="build"/>
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
-            <src path="${src.link}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="binary" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <src path="TestAndExample"/>
             <classpath refid="EECS285-TowerDefense.classpath"/>
         </javac>
     </target>
@@ -78,28 +56,59 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="StandardButton (1)">
+    <target name="DataBaseTest (1)">
+        <java classname="umich.eecs285.towerdefence.DataBaseTest" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="DataBase_Example">
+        <java classname="umich.eecs285.test.DataBase_Example" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="FrameTest">
+        <java classname="umich.eecs285.towerdefence.FrameTest" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="frameTest2">
+        <java classname="umich.eecs285.towerdefence.frameTest2" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="playerTest">
+        <java classname="umich.eecs285.test.playerTest" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="ServerTest">
+        <java classname="umich.eecs285.test.ServerTest" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="StandardButton">
         <java classname="StandardButton" failonerror="true" fork="yes">
-            <classpath refid="run.StandardButton (1).classpath"/>
-            <bootclasspath>
-                <path refid="run.StandardButton (1).bootclasspath"/>
-            </bootclasspath>
+            <classpath refid="EECS285-TowerDefense.classpath"/>
         </java>
     </target>
-    <target name="TowerDefensedataArray_Example_Usage (1)">
-        <java classname="umich.eecs285.towerdefence.TowerDefensedataArray_Example_Usage" failonerror="true" fork="yes">
-            <classpath refid="run.TowerDefensedataArray_Example_Usage (1).classpath"/>
-            <bootclasspath>
-                <path refid="run.TowerDefensedataArray_Example_Usage (1).bootclasspath"/>
-            </bootclasspath>
+    <target name="TowerDefenseControllerTest">
+        <java classname="umich.eecs285.towerdefence.TowerDefenseControllerTest" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
         </java>
     </target>
-    <target name="WheelOfFortune (1)">
-        <java classname="WheelOfFortune" failonerror="true" fork="yes">
-            <classpath refid="run.WheelOfFortune (1).classpath"/>
-            <bootclasspath>
-                <path refid="run.WheelOfFortune (1).bootclasspath"/>
-            </bootclasspath>
+    <target name="TowerDefensedataArray_Example_Usage (2)">
+        <java classname="umich.eecs285.test.TowerDefensedataArray_Example_Usage" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="TowerDefensedataArray_Example_Usage">
+        <java classname="TowerDefensedataArray_Example_Usage" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
+        </java>
+    </target>
+    <target name="TowerDefenseGame">
+        <java classname="umich.eecs285.towerdefence.TowerDefenseGame" failonerror="true" fork="yes">
+            <classpath refid="EECS285-TowerDefense.classpath"/>
         </java>
     </target>
 </project>
