@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
+  public static long Preparation_Time = 10000;
+  
   private static Controller control;
   private static TowerDefenseDataBase DB;
   private static ClientBridge client_bridge;
@@ -16,6 +18,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   private static long timestamp;
   
   private static TowerDefense_TransData towerDefense_TransData;
+  private static TowerDefense_TransData opponentData;
   private static Messager messager;
   private static byte clientId;
   // TODO create game: Messager.Id_Server
@@ -54,27 +57,42 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     
     // Round 1
     setTimestamp();
-    // Prep
-    long prep = timestamp;
-    long begin = timestamp;
-    while (true) {
-      setTimestamp();
-      if (prep + 50 <= timestamp) {
-        // Look up Bridge
-        prep = timestamp;
-        checkprepBridge();
-        towerDefense_TransData = control.getInfo(clientId, timestamp);
-        
-        System.out.println(towerDefense_TransData.toString());
-        // paint data
-        mainFrame.nextFrame(towerDefense_TransData);
+    
+    while(!messager.ifNextRoundReady()) {
+      System.out.println("Client: Wait for NextRoundReady " + System.currentTimeMillis());
+      try {
+        Thread.sleep(50); // wait 50 ms
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
-      if (begin + 10000 <= timestamp) {
-        // Time control will be determined by the Timer
-        break;
-      }
-
+      messager.transmitRoundReady();
+      // do something with messager.getReceivedData()
+      System.out.println(messager.getReceivedData().toString());
     }
+    
+    long nextRoundStartTime = messager.getNextRoundStartTime();
+    // wait till nextRoundStartTime
+    while (System.currentTimeMillis() < nextRoundStartTime) {
+      System.out.println("Client: wait till nextRoundStartTime " + System.currentTimeMillis());
+      try {
+        Thread.sleep(50);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    // Preparation time
+    while (System.currentTimeMillis() < nextRoundStartTime + Preparation_Time) {
+      System.out.println("Client: round start! " + System.currentTimeMillis());
+      setTimestamp();
+      checkprepBridge();
+      towerDefense_TransData = control.getInfo(clientId, timestamp);
+      
+      System.out.println(towerDefense_TransData.toString());
+      // paint data
+      mainFrame.nextFrame(towerDefense_TransData);
+    }
+    
     // Running
     int[] attackingUnits = player.getAttackingId();
     control.startTurn(turn, attackingUnits.length, attackingUnits);
