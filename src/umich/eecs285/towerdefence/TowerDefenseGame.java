@@ -33,6 +33,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
   private TowerDefense_TransData towerDefense_TransData;
   private TowerDefense_TransData opponentData;
+  private boolean draw_state=false;
   private Messager messager;
   private byte clientId;
 
@@ -103,7 +104,11 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       opponentData = messager.getReceivedData();
 
       // paint data
-      mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==false)
+    	  mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==true)
+    	  mainFrame.nextFrame(opponentData);
+    	  
     }
 
     // Running
@@ -118,12 +123,13 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       messager.transmitRegularData(towerDefense_TransData);
       opponentData = messager.getReceivedData();
       
-      try {
-        // paint
-        mainFrame.nextFrame(towerDefense_TransData);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      
+       // paint
+      if(draw_state==false)
+    	  mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==true)
+    	  mainFrame.nextFrame(opponentData);
+     
 
       System.out.println(towerDefense_TransData.toString());
       if (control.isDead()) {
@@ -156,7 +162,10 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       messager.transmitRegularData(towerDefense_TransData);
       opponentData = messager.getReceivedData();
       // paint
-      mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==false)
+    	  mainFrame.nextFrame(towerDefense_TransData);
+      if(draw_state==true)
+    	  mainFrame.nextFrame(opponentData);
     }
   }
 
@@ -197,6 +206,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         control.levelUp(client_bridge.getLevelupId());
       }
     }
+    if(client_bridge.isChangeViewRequest()){
+    	draw_state=(!draw_state);
+    }
   }
 
   private void checkRunBridge() {
@@ -216,6 +228,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       if (player.canUpdateMeoMeo()) {
         player.updateMeoMeo();
       }
+    }
+    if(client_bridge.isChangeViewRequest()){
+    	draw_state=(!draw_state);
     }
 
   }

@@ -97,6 +97,15 @@ public class ClientBridge {
 		AttackUnitId = attackUnitId;
 	}
 
+	public boolean isChangeViewRequest() {
+		return ChangeViewRequest;
+	}
+
+
+	public void setChangeViewRequest(boolean changeViewRequest) {
+		ChangeViewRequest = changeViewRequest;
+	}
+
 	private int x;
 	private int y;
 
@@ -108,5 +117,6 @@ public class ClientBridge {
 	// uplevel unit
 	private boolean UnitLevelupRequest=false;
 	private int LevelupId;
-
+	
+	private boolean ChangeViewRequest=false;
 }
