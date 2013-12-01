@@ -85,9 +85,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         else if (messager.getReceivedData().getSize() > 0)
           receivedData = messager.getReceivedData();
         // paint data
-        if (draw_state == false)
+        if (draw_state == false && towerDefense_TransData != null)
           mainFrame.nextFrame(towerDefense_TransData);
-        if (draw_state == true)
+        if (draw_state == true && opponentData != null)
           mainFrame.nextFrame(opponentData);
       }
 
