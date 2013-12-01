@@ -8,7 +8,7 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   public static long Preparation_Time = 10000;
-  
+
   private static Controller control;
   private static TowerDefenseDataBase DB;
   private static ClientBridge client_bridge;
@@ -16,11 +16,12 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   private static Player player;
   private static int turn;
   private static long timestamp;
-  
+
   private static TowerDefense_TransData towerDefense_TransData;
   private static TowerDefense_TransData opponentData;
   private static Messager messager;
   private static byte clientId;
+
   // TODO create game: Messager.Id_Server
   // TODO join game: Messager.Id_Client
   public void setClientId(byte clientId) {
@@ -51,15 +52,16 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     TowerDefenseGame game = new TowerDefenseGame();
     game.start();
   }
-  
+
   public void run() {
     init();
-    
+
     // Round 1
     setTimestamp();
-    
-    while(!messager.ifNextRoundReady()) {
-      System.out.println("Client: Wait for NextRoundReady " + System.currentTimeMillis());
+
+    while (!messager.ifNextRoundReady()) {
+      System.out.println("Client: Wait for NextRoundReady "
+          + System.currentTimeMillis());
       try {
         Thread.sleep(50); // wait 50 ms
       } catch (InterruptedException e) {
@@ -69,70 +71,63 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       // do something with messager.getReceivedData()
       System.out.println(messager.getReceivedData().toString());
     }
-    
+
     long nextRoundStartTime = messager.getNextRoundStartTime();
     // wait till nextRoundStartTime
     while (System.currentTimeMillis() < nextRoundStartTime) {
-      System.out.println("Client: wait till nextRoundStartTime " + System.currentTimeMillis());
+      System.out.println("Client: wait till nextRoundStartTime "
+          + System.currentTimeMillis());
       try {
         Thread.sleep(50);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
     }
-    
+
     // Preparation time
     while (System.currentTimeMillis() < nextRoundStartTime + Preparation_Time) {
       System.out.println("Client: round start! " + System.currentTimeMillis());
       setTimestamp();
       checkprepBridge();
       towerDefense_TransData = control.getInfo(clientId, timestamp);
-      
       System.out.println(towerDefense_TransData.toString());
+      towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
+      messager.transmitRegularData(towerDefense_TransData);
+      opponentData = messager.getReceivedData();
+
       // paint data
       mainFrame.nextFrame(towerDefense_TransData);
     }
-    
+
     // Running
     int[] attackingUnits = player.getAttackingId();
     control.startTurn(turn, attackingUnits.length, attackingUnits);
-    long run = timestamp;
     while (!control.isEnd()) {
       setTimestamp();
-      if (run + 50 <= timestamp) {
-        run = timestamp;
-        checkRunBridge();
-        control.run();
-        towerDefense_TransData = control.getInfo(clientId, timestamp);
+      checkRunBridge();
+      control.run();
+      towerDefense_TransData = control.getInfo(clientId, timestamp);
+
+      try {
         // paint
-
-        try {
-          mainFrame.nextFrame(towerDefense_TransData);
-        } catch (Exception e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-
-        System.out.println(towerDefense_TransData.toString());
-        if (control.isDead()) {
-          for (int i = 0; i < 16; i++) {
-
-            control.run();
-            towerDefense_TransData = control.getInfo(clientId, timestamp);
-            // paint
-            mainFrame.nextFrame(towerDefense_TransData);
-          }
-          break;
-        }
-
+        mainFrame.nextFrame(towerDefense_TransData);
+      } catch (Exception e) {
+        e.printStackTrace();
       }
-      // System.out.println(timestamp);
-      // if (control.isDead()) {
-      // break;
-      // }
-    }
-    for (int i = 0; i < 16; i++) {
 
+      System.out.println(towerDefense_TransData.toString());
+      if (control.isDead()) {
+        for (int i = 0; i < 16; i++) {
+          control.run();
+          towerDefense_TransData = control.getInfo(clientId, timestamp);
+          // paint
+          mainFrame.nextFrame(towerDefense_TransData);
+        }
+        break;
+      }
+    }
+
+    for (int i = 0; i < 16; i++) {
       control.run();
       towerDefense_TransData = control.getInfo(clientId, timestamp);
       // paint
@@ -141,12 +136,11 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     System.out.print("End Round");
     control.endTurn();
     for (int i = 0; i < 16; i++) {
-
-        control.run();
-        towerDefense_TransData = control.getInfo(clientId, timestamp);
-        // paint
-        mainFrame.nextFrame(towerDefense_TransData);
-      }
+      control.run();
+      towerDefense_TransData = control.getInfo(clientId, timestamp);
+      // paint
+      mainFrame.nextFrame(towerDefense_TransData);
+    }
     player.addCandy(1, control.hasReachedKing());
     // TODO player automatically increase money
   }
