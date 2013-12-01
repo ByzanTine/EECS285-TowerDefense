@@ -24,15 +24,16 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     this.setResizable(false);
     this.setLayout(null);
 
-//    lp = new LogPanel();
-//    add(lp);
-    start();
+    lp = new LogPanel();
+    add(lp);
+//    start();
     
     setVisible(true);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
   
   public void start() {
+    removeAll();
     pp = new PlayerPanel();
     add(pp);
 
