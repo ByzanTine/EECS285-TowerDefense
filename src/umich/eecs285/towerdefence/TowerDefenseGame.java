@@ -33,6 +33,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
   private TowerDefense_TransData towerDefense_TransData;
   private TowerDefense_TransData opponentData;
+  
   private Messager messager;
   private byte clientId;
 
@@ -196,6 +197,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         player.updateUnit(client_bridge.getLevelupId());
         control.levelUp(client_bridge.getLevelupId());
       }
+    }
+    if(client_bridge.isChangeViewRequest()){
+    	
     }
   }
 
