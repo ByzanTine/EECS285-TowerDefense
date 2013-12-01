@@ -48,10 +48,7 @@ public class ControlPanel extends JPanel {
     SwitchButton.addActionListener(new ActionListener() {
 
       public void actionPerformed(ActionEvent e) {
-        if (cb.isChangeViewRequest())
-          cb.setChangeViewRequest(false);
-        else
-          cb.setChangeViewRequest(true);
+        cb.setChangeViewRequest(true);
       }
 
     });
