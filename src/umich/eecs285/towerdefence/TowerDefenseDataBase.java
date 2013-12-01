@@ -23,7 +23,7 @@ import java.util.Hashtable;
 public class TowerDefenseDataBase {
 	private static final int ID_SIZE = 100;
 	private static final int ACTION_SIZE = 200;
-	private static final double Speed_Ratio = 0.3;
+	private static final double Speed_Ratio = 0.3/5;
 	private static final double Cool_Down_Ratio = 2;
 	private static final int Image_size = 14;
 	private static final double Attack_Ratio=0.5;

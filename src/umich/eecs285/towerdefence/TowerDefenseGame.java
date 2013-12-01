@@ -8,6 +8,7 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   public static long Preparation_Time = 10000;
+  public static int delay=40;
 
   public static void main(String args[]) {
     TowerDefenseGame gameSever = new TowerDefenseGame();
@@ -16,7 +17,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     gameClient.setClientId(Messager.Id_Client);
     gameSever.start();
     try {
-      Thread.sleep(50);
+      Thread.sleep(delay);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -67,13 +68,13 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     init();
     for (; turn < 9; turn++) {
       // Round start
-
+    	turn=9;
       setTimestamp();
       while (!messager.ifNextRoundReady()) {
         System.out.println("Client: Wait for NextRoundReady "
             + System.currentTimeMillis());
         try {
-          Thread.sleep(50); // wait 50 ms
+          Thread.sleep(delay); // wait delay ms
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -97,7 +98,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         System.out.println("Client: wait till nextRoundStartTime "
             + System.currentTimeMillis());
         try {
-          Thread.sleep(50);
+          Thread.sleep(delay);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -169,7 +170,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     final int CushionRound = 16;
     for (int i = 0; i < CushionRound; i++) {
       try {
-        Thread.sleep(50);
+        Thread.sleep(delay);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
