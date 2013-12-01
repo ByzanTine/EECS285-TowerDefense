@@ -14,20 +14,21 @@ public class MessagerClientExample extends Thread {
     System.out.println("Client1: initialization " + System.currentTimeMillis());
     Messager messager = new Messager(Messager.Id_Client);
     messager.initialization(serverIp);
-    while(!messager.ifNextRoundReady()) {
-      System.out.println("Client1: Wait for NextRoundReady " + System.currentTimeMillis());
-      try {
-        Thread.sleep(50); // wait 50 ms
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } 
-      messager.transmitRoundReady();
-      // do something with messager.getReceivedData()
-      System.out.println(messager.getReceivedData().toString());
-    }
     TowerDefense_TransData towerDefense_TransData;
     
     for (int i = 0; i < 3; i++) { // 3 rounds
+      while(!messager.ifNextRoundReady()) {
+        System.out.println("Client1: Wait for NextRoundReady " + System.currentTimeMillis());
+        try {
+          Thread.sleep(50); // wait 50 ms
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } 
+        messager.transmitRoundReady();
+        // do something with messager.getReceivedData()
+        System.out.println(messager.getReceivedData().toString());
+      }
+      
       long nextRoundStartTime = messager.getNextRoundStartTime();
       // wait till nextRoundStartTime
       while (System.currentTimeMillis() < nextRoundStartTime) {
@@ -86,17 +87,6 @@ public class MessagerClientExample extends Thread {
         towerDefense_TransData.TowerDefense_TransArray[j].setAction(action);
       } // some fake data end
       messager.transmitRoundReady(towerDefense_TransData);
-      // do something with messager.getReceivedData()
-      System.out.println(messager.getReceivedData().toString());
-      while(!messager.ifNextRoundReady()) {
-        System.out.println("Client1: wait for NextRoundReady " + System.currentTimeMillis());
-        try {
-          Thread.sleep(50); // wait 50 ms
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        } 
-        messager.transmitRoundReady();
-      }
       // do something with messager.getReceivedData()
       System.out.println(messager.getReceivedData().toString());
     }

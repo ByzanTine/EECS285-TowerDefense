@@ -16,7 +16,7 @@ public class ServerMessager extends Thread {
   public ServerMessager(int port) throws IOException {
     // TODO figure out proper server settings
     serverSocket = new ServerSocket(port, 100000);
-    serverSocket.setSoTimeout(10000);
+    serverSocket.setSoTimeout(1000000);
     
     clientMessageBufferList = new TowerDefense_TransData[Num_Of_Clients];
     nextRoundReadyBufferList = new TowerDefense_TransData[Num_Of_Clients];
