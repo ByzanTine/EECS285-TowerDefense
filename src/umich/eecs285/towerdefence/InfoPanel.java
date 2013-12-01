@@ -14,7 +14,7 @@ public class InfoPanel extends JPanel {
   protected ClientBridge cb;
   
   InfoPanel() {
-    setBounds(0, 250, 150, 200);
+    setBounds(0, 250, 150, 250);
     setLayout(null);
     d = new TowerDefenseDataBase();
     d.init();
@@ -32,10 +32,10 @@ public class InfoPanel extends JPanel {
     c.setBounds(10, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
     add(c);
     JLabel LifeLabel = new JLabel(CurrentLife.toString()+ " / " + obj.MaxHP);
-    LifeLabel.setBounds(10, 60, 150, 20);
+    LifeLabel.setBounds(60, 15, 150, 20);
     add(LifeLabel);
     JLabel AttackLabel = new JLabel(((Integer) obj.Attack).toString());
-    AttackLabel.setBounds(10, 80, 150, 20);
+    AttackLabel.setBounds(60, 50, 150, 20);
     add(AttackLabel);
     if (ID % 100 >= 11 && ID % 100 <= 21) {
       TowerDefense_Button upgradeButton = new TowerDefense_Button("res/alien_selected.gif", "res/alien.gif");

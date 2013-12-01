@@ -16,8 +16,8 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   MainFrame() {
 
     super("Tower Defence");
-    this.setSize(750, 750);
-    this.setResizable(false);
+    this.setSize(770, 750);
+//    this.setResizable(false);
     this.setLayout(null);
 
     pp = new PlayerPanel();
