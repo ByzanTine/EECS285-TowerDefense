@@ -4,7 +4,9 @@ import java.util.Timer;
 
 import javax.swing.JFrame;
 
-public class TowerDefenseGame implements TowerDefensedataArray {
+import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
+
+public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   private static Controller control;
   private static TowerDefenseDataBase DB;
   private static ClientBridge client_bridge;
@@ -12,11 +14,19 @@ public class TowerDefenseGame implements TowerDefensedataArray {
   private static Player player;
   private static int turn;
   private static long timestamp;
-  // Increase Automatically
-  private static int clientId = 0;
+  
+  private static TowerDefense_TransData towerDefense_TransData;
+  private static Messager messager;
+  private static byte clientId;
+  // TODO create game: Messager.Id_Server
+  // TODO join game: Messager.Id_Client
+  public void setClientId(byte clientId) {
+    TowerDefenseGame.clientId = clientId;
+  }
 
   private void init() {
-
+    messager = new Messager(clientId);
+    messager.initialization();
     mainFrame = new MainFrame();
     mainFrame.setVisible(true);
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,26 +46,28 @@ public class TowerDefenseGame implements TowerDefensedataArray {
 
   public static void main(String args[]) {
     TowerDefenseGame game = new TowerDefenseGame();
-    game.init();
+    game.start();
+  }
+  
+  public void run() {
+    init();
+    
     // Round 1
-
-    TowerDefense_TransData data;
-    game.setTimestamp();
-    // paint data
+    setTimestamp();
     // Prep
     long prep = timestamp;
     long begin = timestamp;
     while (true) {
-      game.setTimestamp();
+      setTimestamp();
       if (prep + 50 <= timestamp) {
         // Look up Bridge
         prep = timestamp;
-        game.checkprepBridge();
-        data = control.getInfo(clientId, timestamp);
+        checkprepBridge();
+        towerDefense_TransData = control.getInfo(clientId, timestamp);
+        
+        System.out.println(towerDefense_TransData.toString());
         // paint data
-        System.out.println(data.toString());
-
-        mainFrame.nextFrame(data);
+        mainFrame.nextFrame(towerDefense_TransData);
       }
       if (begin + 10000 <= timestamp) {
         // Time control will be determined by the Timer
@@ -68,29 +80,29 @@ public class TowerDefenseGame implements TowerDefensedataArray {
     control.startTurn(turn, attackingUnits.length, attackingUnits);
     long run = timestamp;
     while (!control.isEnd()) {
-      game.setTimestamp();
+      setTimestamp();
       if (run + 50 <= timestamp) {
         run = timestamp;
-        game.checkRunBridge();
+        checkRunBridge();
         control.run();
-        data = control.getInfo(clientId, timestamp);
+        towerDefense_TransData = control.getInfo(clientId, timestamp);
         // paint
 
         try {
-          mainFrame.nextFrame(data);
+          mainFrame.nextFrame(towerDefense_TransData);
         } catch (Exception e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
 
-        System.out.println(data.toString());
+        System.out.println(towerDefense_TransData.toString());
         if (control.isDead()) {
           for (int i = 0; i < 3000; i++) {
 
             control.run();
-            data = control.getInfo(clientId, timestamp);
+            towerDefense_TransData = control.getInfo(clientId, timestamp);
             // paint
-            mainFrame.nextFrame(data);
+            mainFrame.nextFrame(towerDefense_TransData);
           }
           break;
         }
@@ -104,9 +116,9 @@ public class TowerDefenseGame implements TowerDefensedataArray {
     for (int i = 0; i < 3000; i++) {
 
       control.run();
-      data = control.getInfo(clientId, timestamp);
+      towerDefense_TransData = control.getInfo(clientId, timestamp);
       // paint
-      mainFrame.nextFrame(data);
+      mainFrame.nextFrame(towerDefense_TransData);
     }
     System.out.print("End Round");
     control.endTurn();
