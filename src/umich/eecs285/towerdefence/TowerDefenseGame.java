@@ -8,24 +8,38 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   public static long Preparation_Time = 10000;
+  
+  public static void main(String args[]) {
+    TowerDefenseGame gameSever = new TowerDefenseGame();
+    TowerDefenseGame gameClient = new TowerDefenseGame();
+    gameSever.setClientId(Messager.Id_Server);
+    gameClient.setClientId(Messager.Id_Client);
+    gameSever.start();
+    try {
+      Thread.sleep(50);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    gameClient.start();
+  }
 
-  private static Controller control;
-  private static TowerDefenseDataBase DB;
-  private static ClientBridge client_bridge;
-  private static MainFrame mainFrame;
-  private static Player player;
-  private static int turn;
-  private static long timestamp;
+  private Controller control;
+  private TowerDefenseDataBase DB;
+  private ClientBridge client_bridge;
+  private MainFrame mainFrame;
+  private Player player;
+  private int turn;
+  private long timestamp;
 
-  private static TowerDefense_TransData towerDefense_TransData;
-  private static TowerDefense_TransData opponentData;
-  private static Messager messager;
-  private static byte clientId;
+  private TowerDefense_TransData towerDefense_TransData;
+  private TowerDefense_TransData opponentData;
+  private Messager messager;
+  private byte clientId;
 
   // TODO create game: Messager.Id_Server
   // TODO join game: Messager.Id_Client
   public void setClientId(byte clientId) {
-    TowerDefenseGame.clientId = clientId;
+    this.clientId = clientId;
   }
 
   private void init() {
@@ -46,11 +60,6 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
   private void setTimestamp() {
     timestamp = System.currentTimeMillis();
-  }
-
-  public static void main(String args[]) {
-    TowerDefenseGame game = new TowerDefenseGame();
-    game.start();
   }
 
   public void run() {
