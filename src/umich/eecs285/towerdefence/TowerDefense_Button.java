@@ -14,76 +14,57 @@ import javax.swing.JButton;
 
 public class TowerDefense_Button extends JButton {
 
-	String PressedImage;
-	String defaultImage;
-	/**
-	 * 
-	 * @param PressedImage
-	 * @param defaultImage
-	 */
-//	public TowerDefense_Button() {
-//	  super();
-//	}
-	
-	public TowerDefense_Button(String PressedImage, //String RolloverImage,
-			String defaultImage) {
-		super();
-		this.PressedImage = PressedImage;
-		this.defaultImage = defaultImage;
+  String PressedImage;
+  String defaultImage;
 
-		setContentAreaFilled(false);
-		setBorderPainted(false);
+  /**
+   * 
+   * @param PressedImage
+   * @param defaultImage
+   */
 
-		setForeground(Color.WHITE);
-		setFocusable(false);
+  public TowerDefense_Button(String PressedImage, String defaultImage) {
+    super();
+    this.PressedImage = PressedImage;
+    this.defaultImage = defaultImage;
 
-	}
+    setContentAreaFilled(false);
+    setBorderPainted(false);
 
-	public void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+    setForeground(Color.WHITE);
+    setFocusable(false);
 
-		ButtonModel model = getModel();
-		if (model.isPressed()) {
-			// GP = new GradientPaint(0, 0, pressedColor, 0, h, pressedColor,
-			// true);
-			BufferedImage bimg = loadImage(PressedImage);
-			g2d.drawImage(bimg, null, 0, 0);
-			g2d.dispose();
+  }
 
-		}
-//		if (!model.isEnabled()) {
-//
-//		} else {
-//
-//			// setForeground(Color.WHITE);
-//			if (model.isRollover()) {
-//
-//				BufferedImage bimg = loadImage(RolloverImage);
-//				g2d.drawImage(bimg, null, 0, 0);
-//				g2d.dispose();
-//
-//			}
-//		}
+  public void paintComponent(Graphics g) {
+    Graphics2D g2d = (Graphics2D) g.create();
+    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        RenderingHints.VALUE_ANTIALIAS_ON);
 
-		BufferedImage bimg = loadImage(defaultImage);
-		g2d.drawImage(bimg, null, 0, 0);
-		g2d.dispose();
+    ButtonModel model = getModel();
+    if (model.isPressed()) {
+      BufferedImage bimg = loadImage(PressedImage);
+      g2d.drawImage(bimg, null, 0, 0);
+      g2d.dispose();
 
-		super.paintComponent(g);
-	}
+    }
 
-	private BufferedImage loadImage(String filename) {
-		File img = new File(filename);
-		BufferedImage bimg = null;
-		try {
-			bimg = ImageIO.read(img);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return bimg;
-	}
+    BufferedImage bimg = loadImage(defaultImage);
+    g2d.drawImage(bimg, null, 0, 0);
+    g2d.dispose();
+
+    super.paintComponent(g);
+  }
+
+  private BufferedImage loadImage(String filename) {
+    File img = new File(filename);
+    BufferedImage bimg = null;
+    try {
+      bimg = ImageIO.read(img);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return bimg;
+  }
 
 }

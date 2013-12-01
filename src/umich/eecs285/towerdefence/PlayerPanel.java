@@ -40,6 +40,7 @@ public class PlayerPanel extends JPanel{
     public void setClientBridge(ClientBridge cb) {
       this.cb = cb;
       cp.setClientBridge(cb);
+      ip.setClientBridge(cb);
     }
     
     public void paintComponent(Graphics g) {

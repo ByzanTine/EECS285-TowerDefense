@@ -9,7 +9,7 @@ public class EarningPanel extends JPanel {
   private int numberOfMeoMeo;
   
   EarningPanel() {
-    setBounds(0, 600, 150, 150);
+    setBounds(0, 450, 150, 300);
     setLayout(null);
     
     numberOfMeoMeo = 1;
