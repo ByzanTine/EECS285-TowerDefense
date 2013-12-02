@@ -156,6 +156,7 @@ public class Units {
 		this.Range = Unit.Range;
 		this.Attack = Unit.Attack;
 		this.AttackFrequency = Unit.AttackFrequency;
+		this.ID+=10;
 	}
 
 	public String toString() {
