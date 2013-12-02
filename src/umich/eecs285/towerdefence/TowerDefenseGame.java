@@ -107,6 +107,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         mainFrame.turnOffRound();
       long nextRoundStartTime = messager.getNextRoundStartTime();
       // wait till nextRoundStartTime
+      mainFrame.turnOnRound("Round" + turn);
       while (System.currentTimeMillis() < nextRoundStartTime) {
         System.out.println("Client: wait till nextRoundStartTime "
             + System.currentTimeMillis());
@@ -116,7 +117,8 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
           e.printStackTrace();
         }
       }
-
+      mainFrame.turnOffRound();
+      
       // Preparation time
       while (System.currentTimeMillis() < nextRoundStartTime + Preparation_Time) {
         System.out
