@@ -257,10 +257,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       else if (messager.getReceivedData().getSize() > 0)
         receivedData = messager.getReceivedData();
       player.addCandy(1, control.hasReachedKing());
-      
+      player.addMoney();
       
     }
-    // TODO player automatically increase money
   }
 
   private void cushion() {
