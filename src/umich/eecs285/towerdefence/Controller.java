@@ -182,7 +182,10 @@ public class Controller {
 		return temp;
 	}
 	public boolean levelUp(int id){
+		if(soldiers[id/100].ID!=id)
+			return false;
 		Units model=Data.searchUnit(id+10);
+		System.out.println(model.toString());
 		if(model==null)
 			return false;
 		soldiers[id/100].levelUp(model);

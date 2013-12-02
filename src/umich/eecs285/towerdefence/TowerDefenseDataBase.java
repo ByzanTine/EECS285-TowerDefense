@@ -84,10 +84,12 @@ public class TowerDefenseDataBase {
 				Unit_table.put(Integer.parseInt(nums[1]), unit);
 
 			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		try {
 			br.close();
 		} catch (IOException e) {
