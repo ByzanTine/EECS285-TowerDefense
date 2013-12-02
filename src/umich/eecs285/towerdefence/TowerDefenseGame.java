@@ -1,13 +1,6 @@
 package umich.eecs285.towerdefence;
 
 import java.io.IOException;
-import java.util.Timer;
-
-import javax.swing.JFrame;
-
-import com.sun.org.apache.bcel.internal.generic.InstructionConstants.Clinit;
-
-import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   public static long Preparation_Time = 15000;
