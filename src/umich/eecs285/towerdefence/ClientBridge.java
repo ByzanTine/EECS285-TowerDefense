@@ -124,6 +124,24 @@ public class ClientBridge {
 		JoinGameRequest = joinGameRequest;
 	}
 
+	public boolean isGameCreated() {
+		return GameCreated;
+	}
+
+
+	public void setGameCreated(boolean gameCreated) {
+		GameCreated = gameCreated;
+	}
+
+	public boolean isGameConnected() {
+		return GameConnected;
+	}
+
+
+	public void setGameConnected(boolean gameConnected) {
+		GameConnected = gameConnected;
+	}
+
 	private int x;
 	private int y;
 
@@ -139,4 +157,6 @@ public class ClientBridge {
 	private boolean ChangeViewRequest=false;
 	private boolean CreateGameRequest=false;
 	private boolean JoinGameRequest=false;
+	private boolean GameCreated=false;
+	private boolean GameConnected=false;
 }
