@@ -26,7 +26,8 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     this.setLayout(null);
     
     all = new JPanel();
-    all.setSize(755, 770);
+    all.setBounds(0, 0, 755, 770);
+    all.setLayout(null);
 
     lp = new LogPanel();
     all.add(lp);
