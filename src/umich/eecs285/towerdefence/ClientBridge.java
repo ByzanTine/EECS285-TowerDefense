@@ -160,6 +160,15 @@ public class ClientBridge {
 		this.candy = candy;
 	}
 
+	public Integer getIp() {
+		return ip;
+	}
+
+
+	public void setIp(Integer ip) {
+		this.ip = ip;
+	}
+
 	private int x;
 	private int y;
 
@@ -179,4 +188,5 @@ public class ClientBridge {
 	private boolean GameConnected=false;
 	private int Money=0;
 	private int candy=0;
+	private Integer ip=0;
 }
