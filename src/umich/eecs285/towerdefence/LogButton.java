@@ -10,7 +10,8 @@ import javax.swing.*;
 public class LogButton extends JButton {
 
 	private static boolean REPAINT_SHADOW = true;
-	private Color COLOR1 = new Color(255, 255, 255);
+//  private Color COLOR1 = new Color(0, 0, 0);
+  private Color COLOR1 = new Color(255, 255, 255);
 	private Color COLOR2 = new Color(115, 201, 29);
 	private int outerRoundRectSize = 8;
 	private int innerRoundRectSize = 6;

@@ -60,6 +60,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
       }
     });
 
+    repaint();
   }
 
   public void nextFrame(TowerDefense_TransData t) {

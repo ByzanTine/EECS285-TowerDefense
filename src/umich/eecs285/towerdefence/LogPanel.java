@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class LogPanel extends JPanel {
-  private String title = "Gametititle";
   private JButton create;
   private JButton join;
   private JButton info;
@@ -16,7 +15,7 @@ public class LogPanel extends JPanel {
   private ClientBridge cb;
 
   LogPanel() {
-    titleLabel = new JLabel(title);
+    titleLabel = new JLabel(new ImageIcon("res/Title.png"));
     create = new LogButton("Create a new game", Color.orange, Color.cyan);
     join = new LogButton("Join a new game", Color.orange, Color.cyan);
     exit = new LogButton("Exit", Color.orange, Color.cyan);
@@ -27,19 +26,18 @@ public class LogPanel extends JPanel {
     // repaint();
     setBounds(0, 0, 755, 770);
     setLayout(null);
-    titleLabel.setFont(new Font("Thoma", Font.BOLD, 16));
-    titleLabel.setBounds(275, 180, 300, 50);
+    titleLabel.setBounds(50, 0, 600, 265);
     
-    create.setBounds(275, 240, 200, 30);
+    create.setBounds(275, 260, 200, 30);
     create.addActionListener(new createGameListener());
     
-    join.setBounds(275, 310, 200, 30);
+    join.setBounds(275, 330, 200, 30);
     join.addActionListener(new joinGameListener());
     
-    exit.setBounds(275, 380, 200, 30);
+    exit.setBounds(275, 400, 200, 30);
     exit.addActionListener(new exitGameListener());
     
-    info.setBounds(275, 450, 200, 30);
+    info.setBounds(275, 470, 200, 30);
     
     add(titleLabel);
     add(create);
@@ -78,7 +76,7 @@ public class LogPanel extends JPanel {
   }
   
   public void paintComponent(Graphics g) {
-    ImageIcon Icon = new ImageIcon("res/cat.jpg");
+    ImageIcon Icon = new ImageIcon("res/background.png");
     g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
   }
 }
