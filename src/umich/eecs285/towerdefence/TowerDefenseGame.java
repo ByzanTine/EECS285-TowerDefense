@@ -20,7 +20,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   private Player player;
   private int turn;
   private long timestamp;
-
+  private BackgroundMusic backgroundMusic;
   private TowerDefense_TransData towerDefense_TransData;
   private TowerDefense_TransData opponentData;
   private TowerDefense_TransData receivedData=null;
@@ -53,10 +53,11 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     mainFrame.turnOnInput();
     this.client_bridge = new ClientBridge();
     this.mainFrame.setClientBridge(client_bridge);
+    backgroundMusic = new BackgroundMusic();
+    backgroundMusic.startWelcome();
   }
 
   private void init() {
-
     messager = new Messager(clientId);
     // TODO change client side initialization to get ip from player
     mainFrame.start();
@@ -82,6 +83,10 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
   public void run() {
     init();
+    backgroundMusic.stopWelcome();
+    if (clientId == Messager.Id_Server) {
+      backgroundMusic.startBattle();
+    }
     for (; turn < 9; turn++) {
       // Round start
       setTimestamp();
