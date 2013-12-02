@@ -322,8 +322,11 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     }
     
     if (client_bridge.isUnitLevelupRequest()) {
-      if (player.canUpdateUnit(client_bridge.getLevelupId())) {
-        player.updateUnit(client_bridge.getLevelupId());
+//    	System.out.println(player.canUpdateUnit(client_bridge.getLevelupId()%100+10));
+//    	System.exit(1);
+      if (player.canUpdateUnit(client_bridge.getLevelupId()%100+10)) {
+    	System.out.println("Can Create Unit");
+        player.updateUnit(client_bridge.getLevelupId()%100+10);
         control.levelUp(client_bridge.getLevelupId());
         client_bridge.setCandy(player.getCandy());
         client_bridge.setUnitLevelupRequest(false);
