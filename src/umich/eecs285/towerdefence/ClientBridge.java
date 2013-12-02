@@ -142,6 +142,24 @@ public class ClientBridge {
 		GameConnected = gameConnected;
 	}
 
+	public int getMoney() {
+		return Money;
+	}
+
+
+	public void setMoney(int money) {
+		Money = money;
+	}
+
+	public int getCandy() {
+		return candy;
+	}
+
+
+	public void setCandy(int candy) {
+		this.candy = candy;
+	}
+
 	private int x;
 	private int y;
 
@@ -159,4 +177,6 @@ public class ClientBridge {
 	private boolean JoinGameRequest=false;
 	private boolean GameCreated=false;
 	private boolean GameConnected=false;
+	private int Money=0;
+	private int candy=0;
 }
