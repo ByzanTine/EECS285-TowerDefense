@@ -46,7 +46,7 @@ public class InfoPanel extends JPanel {
       JLabel AttackLabel = new JLabel(((Integer) obj.Attack).toString());
       AttackLabel.setBounds(70, 150, 150, 20);
       add(AttackLabel);
-      if (ID % 100 >= 11 && ID % 100 <= 21) {
+      if (ID % 100 == 11 || ID % 100 == 21) {
         TowerDefense_Button upgradeButton = new TowerDefense_Button(
             "res/upgradePokemon.png", "res/upgradePokemon.png");
         upgradeButton.setBounds(15, 200, MainFrame.ButtonSize,
