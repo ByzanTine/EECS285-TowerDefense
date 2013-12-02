@@ -1,6 +1,8 @@
 package umich.eecs285.towerdefence;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -90,8 +92,10 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   }
   
   public void turnOnRound(String Info) {
-    text = new JLabel(Info);
-    text.setBounds(100, 250, 400, 200);
+    text = new JLabel(Info, JLabel.CENTER);
+    text.setFont(new Font("Dialog", 1, 26));
+    text.setForeground(Color.WHITE);
+    text.setBounds(0, 250, 600, 200);
     mP.add(text);
     mP.repaint();
   }
@@ -104,10 +108,6 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   public void turnOnInput() {
         lp.turnOnInput();
   }
-  
-//  public void turnOffInput() {
-//    mP.remove(InputPanel);
-//    mP.repaint();
-//  }
+
   
 }

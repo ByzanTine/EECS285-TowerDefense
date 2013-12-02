@@ -10,7 +10,7 @@ import com.sun.org.apache.bcel.internal.generic.InstructionConstants.Clinit;
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
-  public static long Preparation_Time = 10000;
+  public static long Preparation_Time = 15000;
   public static int delay = 40;
 
   private Controller control;
@@ -97,8 +97,15 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         setTimestamp();
         checkRunBridge();
         messager.transmitRoundReady();
-        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
           mainFrame.turnOnRound("You Win!");
+          try {
+            Thread.sleep(10000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          System.exit(0);
+        }
         else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
           opponentData = messager.getReceivedData();
         else if (messager.getReceivedData().getSize() > 0)
@@ -191,8 +198,14 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
         System.out.println(towerDefense_TransData.toString());
         if (control.isDead()) {
-          mainFrame.turnOnRound("You Lose!");
           cushion();
+          mainFrame.turnOnRound("You Lose!");
+          try {
+            Thread.sleep(10000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          System.exit(0);
           break;
         }
       }
@@ -294,6 +307,12 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       if (client_bridge.isChangeViewRequest()) {
         draw_state = (!draw_state);
         client_bridge.setChangeViewRequest(false);
+      }
+      if(client_bridge.isUnitLevelupRequest()){
+        if(player.canUpdateUnit(client_bridge.getLevelupId())){
+          player.updateUnit(client_bridge.getLevelupId());
+          client_bridge.setUnitLevelupRequest(false);
+        }
       }
   }
 

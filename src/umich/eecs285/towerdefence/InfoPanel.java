@@ -26,8 +26,8 @@ public class InfoPanel extends JPanel {
 
   public void displayInfo(int ID, Integer CurrentLife) {
     removeAll();
-    addCandyInfo(150);
-    addMoneyInfo(100);
+    addCandyInfo(cb.getCandy());
+    addMoneyInfo(cb.getMoney());
     if (CurrentLife > 0) {
       Units obj = d.searchUnit(ID);
       JLabel info = new JLabel(new ImageIcon("res/Info/"
@@ -46,10 +46,10 @@ public class InfoPanel extends JPanel {
       JLabel AttackLabel = new JLabel(((Integer) obj.Attack).toString());
       AttackLabel.setBounds(70, 150, 150, 20);
       add(AttackLabel);
-      if (ID % 100 >= 11 && ID % 100 <= 21) {
+      if (ID % 100 == 11 || ID % 100 == 21) {
         TowerDefense_Button upgradeButton = new TowerDefense_Button(
             "res/upgradePokemon.png", "res/upgradePokemon.png");
-        upgradeButton.setBounds(10, 190, MainFrame.ButtonSize,
+        upgradeButton.setBounds(15, 200, MainFrame.ButtonSize,
             MainFrame.ButtonSize);
         upgradeButton.addActionListener(new UpgradeListener(ID));
         add(upgradeButton);
@@ -74,8 +74,8 @@ public class InfoPanel extends JPanel {
   }
 
   public void addCandyInfo(Integer candyNumber) {
-    TowerDefense_Button candy = new TowerDefense_Button("res/alien.gif",
-        "res/alien.gif");
+    TowerDefense_Button candy = new TowerDefense_Button("res/candy.png",
+        "res/candy.png");
     JLabel candyQuantity = new JLabel(candyNumber.toString());
 
     candy.setBounds(10, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
@@ -108,8 +108,8 @@ public class InfoPanel extends JPanel {
 
   public void refresh() {
     removeAll();
-    addCandyInfo(150);
-    addMoneyInfo(100);
+    addCandyInfo(cb.getCandy());
+    addMoneyInfo(cb.getMoney());
     repaint();
   }
 
