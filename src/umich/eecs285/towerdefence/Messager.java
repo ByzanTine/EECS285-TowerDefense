@@ -84,6 +84,14 @@ public class Messager {
     checkNextRoundReady();
   }
   
+  public void transmitGameEnd() {
+    clientWrapper = new ClientWrapper(id, serverIp, Integer.toString(Port));
+    towerDefense_TransData = TowerDefense_TransData.createEmptyTransData(id, TowerDefensedataArray.Transmit_Type_Game_End);
+    clientWrapper.setTransData(towerDefense_TransData);
+    clientWrapper.transmitData();
+    checkNextRoundReady();
+  }
+  
   public void transmitRegularData(TowerDefense_TransData towerDefense_TransData) {
     this.towerDefense_TransData = towerDefense_TransData;
     this.towerDefense_TransData.setTransmitType(TowerDefensedataArray.Transmit_Type_Regular);
