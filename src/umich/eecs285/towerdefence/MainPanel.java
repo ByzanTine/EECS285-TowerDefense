@@ -45,6 +45,8 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
       LifeBar.setBounds(t.TowerDefense_TransArray[i].getX() - 14, t.TowerDefense_TransArray[i].getY() - 28, 20, 3);
       add(LifeBar);
       if (InfoShown && t.TowerDefense_TransArray[i].getId() == InfoID) {
+        if (t.TowerDefense_TransArray[i].getLife() <= 0)
+          InfoShown = false;
         pp.displayInfo(InfoID, t.TowerDefense_TransArray[i].getLife());
       }
     }
