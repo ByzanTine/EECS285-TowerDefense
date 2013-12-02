@@ -11,9 +11,9 @@ public class ControlPanel extends JPanel {
   final int CreateButtonSize = 6;
   final int SendButtonSize = 6;
   private CreatePokemonButton[] CreateButtons;
-  private UpgradeEarningButton addMeoMeo;
-  private UpgradeEarningButton upgradeMeoMeo;
-  private SendPokemonButton[] SendButtons;
+  private TowerDefense_Button addMeoMeo;
+  private TowerDefense_Button upgradeMeoMeo;
+  private TowerDefense_Button[] SendButtons;
   private ClientBridge cb;
 
   ControlPanel() {
@@ -30,8 +30,8 @@ public class ControlPanel extends JPanel {
       add(CreateButtons[i]);
     }
 
-    addMeoMeo = new UpgradeEarningButton("res/meomeo.png", "res/meomeo.png");
-    upgradeMeoMeo = new UpgradeEarningButton("res/upgrade.png", "res/upgrade.png");
+    addMeoMeo = new TowerDefense_Button("res/meomeo.png", "res/meomeo.png");
+    upgradeMeoMeo = new TowerDefense_Button("res/upgrade.png", "res/upgrade.png");
 
     addMeoMeo.setBounds(57, 5, MainFrame.ButtonSize, MainFrame.ButtonSize);
     upgradeMeoMeo.setBounds(57, 50, MainFrame.ButtonSize, MainFrame.ButtonSize);
@@ -54,9 +54,9 @@ public class ControlPanel extends JPanel {
     });
     add(SwitchButton);
 
-    SendButtons = new SendPokemonButton[SendButtonSize];
+    SendButtons = new TowerDefense_Button[SendButtonSize];
     for (int i = 0; i < CreateButtonSize; ++i) {
-      SendButtons[i] = new SendPokemonButton("res/alien_selected.gif",
+      SendButtons[i] = new TowerDefense_Button("res/alien_selected.gif",
           "res/Send/" + ((Integer) (51 + i)).toString() + ".png");
       SendButtons[i].setBounds(105, 8 + MainFrame.ButtonSize * i,
           MainFrame.ButtonSize, MainFrame.ButtonSize);
@@ -112,7 +112,7 @@ public class ControlPanel extends JPanel {
 
     public void actionPerformed(ActionEvent e) {
       cb.setCreateAttackUnitRequest(true);
-      cb.setAttackUnitId(index);
+      cb.setAttackUnitId(index + 51);
       System.out.println("send " + index);
     }
 

@@ -30,19 +30,25 @@ public class InfoPanel extends JPanel {
     addMoneyInfo(100);
     if (CurrentLife > 0) {
       Units obj = d.searchUnit(ID);
-      TowerDefense_Button info = new TowerDefense_Button("res/alien.gif",
-          "res/Info/" + ((Integer) (ID % 100)).toString() + ".png");
+      JLabel info = new JLabel("res/Info/" + ((Integer) (ID % 100)).toString()
+          + ".png");
       info.setBounds(20, 120, MainFrame.ButtonSize, MainFrame.ButtonSize);
       add(info);
+      
       JLabel LifeLabel = new JLabel(CurrentLife.toString() + " / " + obj.MaxHP);
       LifeLabel.setBounds(70, 125, 100, 20);
       add(LifeLabel);
+      
+      JLabel Attack = new JLabel("res/Attack.png");
+      Attack.setBounds(20, 170, MainFrame.ButtonSize, MainFrame.ButtonSize);
+      add(Attack);
+      
       JLabel AttackLabel = new JLabel(((Integer) obj.Attack).toString());
       AttackLabel.setBounds(70, 170, 150, 20);
       add(AttackLabel);
       if (ID % 100 >= 11 && ID % 100 <= 21) {
         TowerDefense_Button upgradeButton = new TowerDefense_Button(
-            "res/alien_selected.gif", "res/alien.gif");
+            "res/upgradePokemon.png", "res/upgradePokemon.png");
         upgradeButton.setBounds(10, 210, MainFrame.ButtonSize,
             MainFrame.ButtonSize);
         upgradeButton.addActionListener(new UpgradeListener(ID));
@@ -74,11 +80,11 @@ public class InfoPanel extends JPanel {
 
     candy.setBounds(10, 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
     candyQuantity.setBounds(70, 15, 80, 20);
-    
+
     add(candy);
     add(candyQuantity);
   }
-  
+
   public void addMoneyInfo(Integer money) {
     TowerDefense_Button MoneyButton = new TowerDefense_Button("res/money.png",
         "res/money.png");
@@ -86,7 +92,7 @@ public class InfoPanel extends JPanel {
 
     MoneyButton.setBounds(10, 60, MainFrame.ButtonSize, MainFrame.ButtonSize);
     MoneyAmount.setBounds(70, 70, 80, 20);
-    
+
     add(MoneyButton);
     add(MoneyAmount);
   }
@@ -98,6 +104,13 @@ public class InfoPanel extends JPanel {
   public void paintComponent(Graphics g) {
     ImageIcon Icon = new ImageIcon("res/Panel/Siderbar.png");
     g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
+  }
+
+  public void refresh() {
+    removeAll();
+    addCandyInfo(150);
+    addMoneyInfo(100);
+    repaint();
   }
 
 }
