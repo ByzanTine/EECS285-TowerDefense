@@ -9,11 +9,10 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 public class Player {
 
   public static final int initialMoney = 150;
-  private static final int initialBall = 0;
-  private static final int maximumMeoNumber = 7;
+  private static final int maximumMeoNumber = 6;
   public static final int initialCandy = 150;
-  private static final int meomeoCreateCost = 100; // subject to change
-  private static final int meomeoUpdateCost = 200; // subject to change
+  private static final int meomeoCreateCost = 50; // subject to change
+  private static final int meomeoUpdateCost = 60; // subject to change
   private static final int meomeoMaximumLevel = 3; // subject to change
   private static final int initialmeomeoIncome = 10;
   private static final int updatemeomeoIncome = 10; // meomeoIncome increase
@@ -43,7 +42,6 @@ public class Player {
     meomeoLevel = 0;
     money = initialMoney;
     candy = initialCandy;
-    ball = initialBall;
     meomeoNum = 0;
     meomeoIncome = initialmeomeoIncome;
 

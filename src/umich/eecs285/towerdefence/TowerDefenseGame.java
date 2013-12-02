@@ -182,6 +182,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       else{
     	  control.startTurn(turn, 0, null);
       }
+      player.clearAttackingId();
       while (!control.isEnd()) {
         setTimestamp();
         checkRunBridge();
