@@ -17,8 +17,8 @@ public class InfoPanel extends JPanel {
     setBounds(0, 250, 150, 250);
     setLayout(null);
 
-    addCandyInfo(150);
-    addMoneyInfo(100);
+    addCandyInfo(Player.initialCandy);
+    addMoneyInfo(Player.initialMoney);
 
     d = new TowerDefenseDataBase();
     d.init();

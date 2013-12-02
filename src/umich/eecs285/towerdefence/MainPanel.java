@@ -47,8 +47,10 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
       if (InfoShown && t.TowerDefense_TransArray[i].getId() == InfoID) {
         pp.displayInfo(InfoID, t.TowerDefense_TransArray[i].getLife());
       }
-//      else
-//        pp.refreshInfo();
+    }
+    
+    if (!InfoShown) {
+      pp.refreshInfo();
     }
     
     for (Integer i = 0; i < t.getSize(); ++i) {

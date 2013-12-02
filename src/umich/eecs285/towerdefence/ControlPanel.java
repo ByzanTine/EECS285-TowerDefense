@@ -22,8 +22,9 @@ public class ControlPanel extends JPanel {
 
     CreateButtons = new CreatePokemonButton[CreateButtonSize];
     for (int i = 0; i < CreateButtonSize; ++i) {
-      CreateButtons[i] = new CreatePokemonButton("res/alien_selected.gif",
-          "res/Creation/" + ((Integer) (11 + i)).toString() + ".png");
+      CreateButtons[i] = new CreatePokemonButton("res/Creation/"
+          + ((Integer) (11 + i)).toString() + ".png", "res/Creation/"
+          + ((Integer) (11 + i)).toString() + ".png");
       CreateButtons[i].setBounds(13, 8 + MainFrame.ButtonSize * i,
           MainFrame.ButtonSize, MainFrame.ButtonSize);
       CreateButtons[i].addActionListener(new CreationListener(i));
@@ -31,7 +32,8 @@ public class ControlPanel extends JPanel {
     }
 
     addMeoMeo = new TowerDefense_Button("res/meomeo.png", "res/meomeo.png");
-    upgradeMeoMeo = new TowerDefense_Button("res/upgrade.png", "res/upgrade.png");
+    upgradeMeoMeo = new TowerDefense_Button("res/upgrade.png",
+        "res/upgrade.png");
 
     addMeoMeo.setBounds(57, 5, MainFrame.ButtonSize, MainFrame.ButtonSize);
     upgradeMeoMeo.setBounds(57, 50, MainFrame.ButtonSize, MainFrame.ButtonSize);
@@ -56,8 +58,9 @@ public class ControlPanel extends JPanel {
 
     SendButtons = new TowerDefense_Button[SendButtonSize];
     for (int i = 0; i < CreateButtonSize; ++i) {
-      SendButtons[i] = new TowerDefense_Button("res/alien_selected.gif",
-          "res/Send/" + ((Integer) (51 + i)).toString() + ".png");
+      SendButtons[i] = new TowerDefense_Button("res/Send/"
+          + ((Integer) (51 + i)).toString() + ".png", "res/Send/"
+          + ((Integer) (51 + i)).toString() + ".png");
       SendButtons[i].setBounds(105, 8 + MainFrame.ButtonSize * i,
           MainFrame.ButtonSize, MainFrame.ButtonSize);
       SendButtons[i].addActionListener(new SendListener(i));
