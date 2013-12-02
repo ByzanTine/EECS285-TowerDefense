@@ -12,6 +12,7 @@ public interface TowerDefensedataArray {
   public static final byte Transmit_Type_Regular = 0;
   public static final byte Transmit_Type_New_Round = 1;
   public static final byte Transmit_Type_New_Round_Ready = 2;
+  public static final byte Transmit_Type_Game_End = 3;
   
   public class TowerDefense_TransData{
     public TowerDefenseObject[] TowerDefense_TransArray;
