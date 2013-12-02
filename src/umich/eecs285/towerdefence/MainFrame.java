@@ -11,6 +11,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
 
   final static int ButtonSize = 40;
   
+  private JPanel all;
   private LogPanel lp;
   private MainPanel mP;
   private PlayerPanel pp;
@@ -23,23 +24,27 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     this.setSize(755, 770);
     this.setResizable(false);
     this.setLayout(null);
+    
+    all = new JPanel();
+    all.setSize(755, 770);
 
     lp = new LogPanel();
-    add(lp);
-//    start();
+    all.add(lp);
+    add(all);
     
     setVisible(true);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
   
   public void start() {
-    removeAll();
+//    removeAll();
+    all.removeAll();
     pp = new PlayerPanel();
-    add(pp);
+    all.add(pp);
     pp.setClientBridge(cb);
 
     mP = new MainPanel(pp);
-    add(mP);
+    all.add(mP);
     mP.setClientBridge(cb);
     
     RoundPanel = new JPanel();
@@ -60,7 +65,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
       }
     });
 
-    repaint();
+    all.repaint();
   }
 
   public void nextFrame(TowerDefense_TransData t) {
