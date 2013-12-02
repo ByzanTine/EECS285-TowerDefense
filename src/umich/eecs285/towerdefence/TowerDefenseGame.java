@@ -230,7 +230,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     if (client_bridge.isCreateAttackUnitRequest()) {
       if (player.canCreateAttackingUnit(client_bridge.getAttackUnitId())) {
         player.createAttackingUnit(client_bridge.getAttackUnitId());
-
+        client_bridge.setCreateAttackUnitRequest(false);
       }
     }
     if (client_bridge.isCreateUnitRequest()) {
@@ -245,28 +245,36 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       }
       client_bridge.setCreateUnitRequest(false);
     }
-    if (client_bridge.isMeoMeoNumIncreaseRequest()) {
-      if (player.canCreateMeoMeo()) {
-        player.createMeoMeo();
-        client_bridge.setCanCreateMeoMeo(true);
-      }
-    }
-    if (client_bridge.isMeoMeoTechUpgradeRequest()) {
-      if (player.canUpdateMeoMeo()) {
-        player.updateMeoMeo();
-        client_bridge.setCanUpgradeMeoMeo(true);
-      }
-    }
+    
     if (client_bridge.isUnitLevelupRequest()) {
       if (player.canUpdateUnit(client_bridge.getLevelupId())) {
         player.updateUnit(client_bridge.getLevelupId());
         control.levelUp(client_bridge.getLevelupId());
       }
     }
-    if (client_bridge.isChangeViewRequest()) {
-      draw_state = (!draw_state);
-      client_bridge.setChangeViewRequest(false);
-    }
+    
+    if (client_bridge.isCreateAttackUnitRequest()) {
+        if (player.canCreateAttackingUnit(client_bridge.getAttackUnitId())) {
+          player.createAttackingUnit(client_bridge.getAttackUnitId());
+          client_bridge.setCreateAttackUnitRequest(false);
+        }
+      }
+      if (client_bridge.isMeoMeoNumIncreaseRequest()) {
+        if (player.canCreateMeoMeo()) {
+          player.createMeoMeo();
+          client_bridge.setMeoMeoNumIncreaseRequest(false);
+        }
+      }
+      if (client_bridge.isMeoMeoTechUpgradeRequest()) {
+        if (player.canUpdateMeoMeo()) {
+          player.updateMeoMeo();
+          client_bridge.setMeoMeoNumIncreaseRequest(false);
+        }
+      }
+      if (client_bridge.isChangeViewRequest()) {
+        draw_state = (!draw_state);
+        client_bridge.setChangeViewRequest(false);
+      }
   }
 
   public boolean checkInitalBridge() {
@@ -303,17 +311,19 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     if (client_bridge.isCreateAttackUnitRequest()) {
       if (player.canCreateAttackingUnit(client_bridge.getAttackUnitId())) {
         player.createAttackingUnit(client_bridge.getAttackUnitId());
-
+        client_bridge.setCreateAttackUnitRequest(false);
       }
     }
     if (client_bridge.isMeoMeoNumIncreaseRequest()) {
       if (player.canCreateMeoMeo()) {
         player.createMeoMeo();
+        client_bridge.setMeoMeoNumIncreaseRequest(false);
       }
     }
     if (client_bridge.isMeoMeoTechUpgradeRequest()) {
       if (player.canUpdateMeoMeo()) {
         player.updateMeoMeo();
+        client_bridge.setMeoMeoNumIncreaseRequest(false);
       }
     }
     if (client_bridge.isChangeViewRequest()) {
