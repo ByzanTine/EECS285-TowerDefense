@@ -8,7 +8,7 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class Player {
 
-  public static final int initialMoney = 150;
+  public static final int initialMoney = 75;
   private static final int maximumMeoNumber = 6;
   public static final int initialCandy = 150;
   private static final int meomeoCreateCost = 50; // subject to change
@@ -16,6 +16,7 @@ public class Player {
   private static final int meomeoMaximumLevel = 3; // subject to change
   private static final int initialmeomeoIncome = 10;
   private static final int updatemeomeoIncome = 10; // meomeoIncome increase
+  private static final int meomeoIncomeFactor = 10;
   // by this value
   // every time it
   // upgrades.
@@ -158,7 +159,7 @@ public class Player {
   }
 
   public void addMoney() {
-    money += meomeoIncome * meomeoNum;
+    money += meomeoIncome * meomeoNum * meomeoIncomeFactor;
   }
 
   public void createUnit(int id) {
