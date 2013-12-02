@@ -94,7 +94,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         setTimestamp();
         checkRunBridge();
         messager.transmitRoundReady();
-        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
+        if (messager.getReceivedData().getTransmitType() == Transmit_Type_Game_End) {
           mainFrame.turnOnRound("You Win!");
           try {
             sleep(10000);
@@ -139,7 +139,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         System.out.println(towerDefense_TransData.toString());
         towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
         messager.transmitRegularData(towerDefense_TransData);
-        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
+        if (messager.getReceivedData().getTransmitType() == Transmit_Type_Game_End) {
           mainFrame.turnOnRound("You Win!");
           try {
             sleep(10000);
@@ -191,7 +191,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         towerDefense_TransData = control.getInfo(clientId, timestamp);
         towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
         messager.transmitRegularData(towerDefense_TransData);
-        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
+        if (messager.getReceivedData().getTransmitType() == Transmit_Type_Game_End) {
           mainFrame.turnOnRound("You Win!");
           try {
             sleep(10000);
@@ -218,8 +218,16 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         System.out.println(towerDefense_TransData.toString());
         if (control.isDead()) {
           cushion();
-          mainFrame.turnOnRound("You Lose!");
-          messager.transmitGameEnd();
+          for (int i = 0; i < 10; i++) {
+            mainFrame.turnOnRound("You Lose!");
+            try {
+              sleep(delay);
+            } catch (InterruptedException e1) {
+              // TODO Auto-generated catch block
+              e1.printStackTrace();
+            }
+            messager.transmitGameEnd();
+          }
           try {
             sleep(10000);
           } catch (InterruptedException e) {
@@ -236,7 +244,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       control.endTurn();
       cushion();
       messager.transmitRoundReady(player.getAttackingData(clientId));
-      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
+      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Game_End) {
         mainFrame.turnOnRound("You Win!");
         try {
           sleep(10000);
@@ -268,7 +276,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       towerDefense_TransData = control.getInfo(clientId, timestamp);
       towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
       messager.transmitRegularData(towerDefense_TransData);
-      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
+      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Game_End) {
         mainFrame.turnOnRound("You Win!");
         try {
           sleep(10000);
