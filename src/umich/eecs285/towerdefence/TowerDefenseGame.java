@@ -256,11 +256,13 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     if (client_bridge.isMeoMeoNumIncreaseRequest()) {
       if (player.canCreateMeoMeo()) {
         player.createMeoMeo();
+        client_bridge.setCanCreateMeoMeo(true);
       }
     }
     if (client_bridge.isMeoMeoTechUpgradeRequest()) {
       if (player.canUpdateMeoMeo()) {
         player.updateMeoMeo();
+        client_bridge.setCanUpgradeMeoMeo(true);
       }
     }
     if (client_bridge.isUnitLevelupRequest()) {

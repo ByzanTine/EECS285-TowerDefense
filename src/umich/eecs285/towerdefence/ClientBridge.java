@@ -169,6 +169,24 @@ public class ClientBridge {
 		this.ip = ip;
 	}
 
+	public boolean isCanCreateMeoMeo() {
+		return canCreateMeoMeo;
+	}
+
+
+	public void setCanCreateMeoMeo(boolean canCreateMeoMeo) {
+		this.canCreateMeoMeo = canCreateMeoMeo;
+	}
+
+	public boolean isCanUpgradeMeoMeo() {
+		return canUpgradeMeoMeo;
+	}
+
+
+	public void setCanUpgradeMeoMeo(boolean canUpgradeMeoMeo) {
+		this.canUpgradeMeoMeo = canUpgradeMeoMeo;
+	}
+
 	private int x;
 	private int y;
 
@@ -189,4 +207,6 @@ public class ClientBridge {
 	private int Money=0;
 	private int candy=0;
 	private String ip;
+	private boolean canCreateMeoMeo=false;
+	private boolean canUpgradeMeoMeo=false;
 }

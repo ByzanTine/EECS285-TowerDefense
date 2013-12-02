@@ -47,4 +47,12 @@ public class PlayerPanel extends JPanel{
         ImageIcon Icon = new ImageIcon("res/cat.jpg");
         g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
     }
+
+    public void addMeoMeo() {
+      ep.addMeoMeo();
+    }
+
+    public void upgradeMeoMeo() {
+      ep.LevelUp();
+    }
 }
