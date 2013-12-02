@@ -8,10 +8,10 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class Player {
 
-  private static final int initialMoney = 150;
+  public static final int initialMoney = 150;
   private static final int initialBall = 0;
   private static final int maximumMeoNumber = 7;
-  private static final int initialCandy = 300;
+  public static final int initialCandy = 300;
   private static final int meomeoCreateCost = 100; // subject to change
   private static final int meomeoUpdateCost = 200; // subject to change
   private static final int meomeoMaximumLevel = 3; // subject to change
@@ -77,7 +77,9 @@ public class Player {
       temp[i] = attackingId.get(i);
     return temp;
   }
-
+  public void clearAttackingId(){
+	  attackingId.removeAllElements();
+  }
   public TowerDefense_TransData getAttackingData(int clientId) {
     int[] temp = getAttackingId();
     TowerDefense_TransData towerDefense_TransData 
