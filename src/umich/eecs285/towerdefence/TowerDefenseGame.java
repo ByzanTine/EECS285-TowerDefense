@@ -240,9 +240,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       else if (messager.getReceivedData().getSize() > 0)
         receivedData = messager.getReceivedData();
       player.addCandy(1, control.hasReachedKing());
-      if(turn==2){
-    	 control.levelUp(111);
-      }
+      
       
     }
     // TODO player automatically increase money
@@ -389,6 +387,8 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         player.createMeoMeo();
         client_bridge.setMeoMeoNumIncreaseRequest(false);
         client_bridge.setCandy(player.getCandy());
+        client_bridge.setCanCreateMeoMeo(true);
+        
       }
     }
     if (client_bridge.isMeoMeoTechUpgradeRequest()) {
@@ -396,6 +396,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         player.updateMeoMeo();
         client_bridge.setMeoMeoNumIncreaseRequest(false);
         client_bridge.setCandy(player.getCandy());
+        client_bridge.setCanUpgradeMeoMeo(true);
       }
     }
     if (client_bridge.isChangeViewRequest()) {
