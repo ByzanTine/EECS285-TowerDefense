@@ -81,7 +81,6 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     
     for (; turn < 9; turn++) {
       // Round start
-      turn = 9;
       setTimestamp();
       while (!messager.ifNextRoundReady()) {
         System.out.println("Client: Wait for NextRoundReady "
