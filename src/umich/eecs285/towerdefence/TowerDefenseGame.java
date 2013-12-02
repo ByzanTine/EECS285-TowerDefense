@@ -149,6 +149,12 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       // Running
     
       if(receivedData!=null){
+        try {
+          System.out.println(JSONUtility.arrayToJSON(receivedData));
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
     	  int attackingUnits[]=new int[receivedData.getSize()];
     	  for(int i=0;i<receivedData.getSize();i++){
     		  attackingUnits[i]=receivedData.TowerDefense_TransArray[i].getId();
@@ -190,12 +196,6 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       control.endTurn();
       cushion();
       messager.transmitRoundReady(player.getAttackingData(clientId));
-      try {
-        System.out.println("Sending units...");
-        System.out.println(JSONUtility.arrayToJSON(player.getAttackingData(clientId)));
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
       if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
         opponentData = messager.getReceivedData();
       else if (messager.getReceivedData().getSize() > 0)
