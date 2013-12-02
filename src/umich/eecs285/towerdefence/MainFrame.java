@@ -1,11 +1,13 @@
 package umich.eecs285.towerdefence;
 
+import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MainFrame extends JFrame implements TowerDefensedataArray {
 
@@ -86,5 +88,14 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     mP.remove(text);
     mP.repaint();
   }
+  
+  public void turnOnInput() {
+        lp.turnOnInput();
+  }
+  
+//  public void turnOffInput() {
+//    mP.remove(InputPanel);
+//    mP.repaint();
+//  }
   
 }

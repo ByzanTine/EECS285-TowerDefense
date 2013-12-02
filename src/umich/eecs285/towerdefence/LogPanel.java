@@ -12,6 +12,8 @@ public class LogPanel extends JPanel {
   private JButton info;
   private JButton exit;
   private JLabel titleLabel;
+  private JPanel InputPanel;
+  private JTextField Input;
   private ClientBridge cb;
 
   LogPanel() {
@@ -31,13 +33,13 @@ public class LogPanel extends JPanel {
     create.setBounds(275, 260, 200, 30);
     create.addActionListener(new createGameListener());
     
-    join.setBounds(275, 330, 200, 30);
+    join.setBounds(275, 355, 200, 30);
     join.addActionListener(new joinGameListener());
     
-    exit.setBounds(275, 400, 200, 30);
+    exit.setBounds(275, 425, 200, 30);
     exit.addActionListener(new exitGameListener());
     
-    info.setBounds(275, 470, 200, 30);
+    info.setBounds(275, 495, 200, 30);
     
     add(titleLabel);
     add(create);
@@ -59,6 +61,7 @@ public class LogPanel extends JPanel {
 
     public void actionPerformed(ActionEvent e) {
       cb.setJoinGameRequest(true);
+      cb.setIp(Input.getText());
     }
     
   }
@@ -70,6 +73,24 @@ public class LogPanel extends JPanel {
     }
     
   }
+  
+  public void turnOnInput() {
+    InputPanel = new JPanel(new BorderLayout());
+    InputPanel.setBounds(300, 330, 150, 25);
+    
+    Input = new JTextField(40);
+    Input.setHorizontalAlignment(JTextField.LEFT);
+    Input.setBounds(0, 0, 150, 25);
+    
+
+    
+    InputPanel.add(Input);
+    
+    add(InputPanel);
+    repaint();
+  }
+  
+  
 
   public void setClientBridge(ClientBridge cb) {
     this.cb = cb;
