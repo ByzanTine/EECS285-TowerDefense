@@ -82,7 +82,6 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
   public void run() {
     init();
-    
     for (; turn < 9; turn++) {
       // Round start
       setTimestamp();
