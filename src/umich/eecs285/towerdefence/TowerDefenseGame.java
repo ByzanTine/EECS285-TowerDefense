@@ -62,7 +62,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       messager.initialization();
       mainFrame.turnOnRound("Wait player to join: " + messager.getServerIp());
     } else {
-      String serverIp = client_bridge.getIp().toString();
+      String serverIp = client_bridge.getIp();
       messager.initialization(serverIp);
     }
     player = new Player();
