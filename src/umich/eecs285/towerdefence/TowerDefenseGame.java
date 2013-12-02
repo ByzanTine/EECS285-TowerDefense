@@ -182,17 +182,16 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         }
       }
 
-      cushion();
       // round end
       System.out.println("Client: round end " + System.currentTimeMillis());
-
+      cushion();
       control.endTurn();
+      cushion();
       messager.transmitRoundReady(player.getAttackingData(clientId));
       if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
         opponentData = messager.getReceivedData();
       else if (messager.getReceivedData().getSize() > 0)
         receivedData = messager.getReceivedData();
-      cushion();
       player.addCandy(1, control.hasReachedKing());
       
     }
