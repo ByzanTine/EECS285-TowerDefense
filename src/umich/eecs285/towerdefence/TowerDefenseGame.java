@@ -47,7 +47,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     this.clientId = clientId;
   }
 
-  private void initConnection() {
+  public void initConnection() {
     this.mainFrame = new MainFrame();
     mainFrame.turnOnInput();
     this.client_bridge = new ClientBridge();
@@ -268,7 +268,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     }
   }
 
-  private boolean checkInitalBridge() {
+  public boolean checkInitalBridge() {
 	  
     if (client_bridge.isCreateGameRequest()) {
 

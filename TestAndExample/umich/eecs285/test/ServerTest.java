@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import umich.eecs285.towerdefence.ClientWrapper;
 import umich.eecs285.towerdefence.ServerMessager;
+import umich.eecs285.towerdefence.TowerDefenseGame;
 import umich.eecs285.towerdefence.TowerDefensedataArray;
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefenseObject;
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
@@ -119,16 +120,44 @@ public class ServerTest {
 //    }
 //  }
   // Messager Test
+//  public static void main(String args[]) {
+//    MessagerServerExample mse = new MessagerServerExample();
+//    MessagerClientExample mce = new MessagerClientExample();
+//    
+//    mse.start();
+//    try {
+//      Thread.sleep(50);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+//    mce.start();
+//  }
   public static void main(String args[]) {
-    MessagerServerExample mse = new MessagerServerExample();
-    MessagerClientExample mce = new MessagerClientExample();
-    
-    mse.start();
-    try {
-      Thread.sleep(50);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+
+    TowerDefenseGame gameServer = new TowerDefenseGame();
+    gameServer.initConnection();
+
+    while (!gameServer.checkInitalBridge()) {
+      try {
+        Thread.sleep(TowerDefenseGame.delay);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      System.out.println("Try Create");
     }
-    mce.start();
+    
+    TowerDefenseGame gameClient = new TowerDefenseGame();
+    gameClient.initConnection();
+
+    while (!gameClient.checkInitalBridge()) {
+      try {
+        Thread.sleep(TowerDefenseGame.delay);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      System.out.println("Try Create");
+    }
+
   }
+  
 }
