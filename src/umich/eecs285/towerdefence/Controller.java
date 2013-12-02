@@ -33,7 +33,7 @@ public class Controller {
 			mymap.addStillUnits(new MapUnits(mapUnit[i][0],mapUnit[i][1],12));
 	}
 	public boolean addUnit(int ID,int x,int y,int Group){
-		if(Group<10&&totlesoldiers>=MAX_SOLDIERS||Group>10&&enemy>=MAX_UNITS-MAX_SOLDIERS)
+		if(Group<10&&(totlesoldiers>=MAX_SOLDIERS||y>Map.HEIGHT*Map.CELL_SIZE*3/5)||Group>10&&enemy>=MAX_UNITS-MAX_SOLDIERS)
 			return false;
 		if(mymap.ACT(null, x, y, Map.MAX_R, 0, Group, true)!=null)
 			return false;

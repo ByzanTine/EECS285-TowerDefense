@@ -20,7 +20,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
   private TowerDefense_TransData towerDefense_TransData;
   private TowerDefense_TransData opponentData;
-  private TowerDefense_TransData receivedData;
+  private TowerDefense_TransData receivedData=null;
   private boolean draw_state = false;
   private Messager messager;
   private byte clientId;
@@ -136,8 +136,17 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       }
 
       // Running
-      int[] attackingUnits = player.getAttackingId();
-      control.startTurn(turn, attackingUnits.length, attackingUnits);
+    
+      if(receivedData!=null){
+    	  int attackingUnits[]=new int[receivedData.getSize()];
+    	  for(int i=0;i<receivedData.getSize();i++){
+    		  attackingUnits[i]=receivedData.TowerDefense_TransArray[i].getId();
+    	  }
+    	  control.startTurn(turn, attackingUnits.length, attackingUnits);
+      }
+      else{
+    	  control.startTurn(turn, 0, null);
+      }
       while (!control.isEnd()) {
         setTimestamp();
         checkRunBridge();
