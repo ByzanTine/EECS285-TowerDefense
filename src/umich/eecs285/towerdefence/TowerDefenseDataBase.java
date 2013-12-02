@@ -75,7 +75,7 @@ public class TowerDefenseDataBase {
 //				System.out.print("\n");
 
 				Units unit = new Units(Integer.parseInt(nums[2]),
-						(int) (Double.parseDouble(nums[8])*Speed_Ratio), Image_size,
+						(int) (Double.parseDouble(nums[8])*Speed_Ratio*2), Image_size,
 						(int) (500 * Speed_Ratio),
 						(int) (Double.parseDouble(nums[7]) * Attack_Ratio),
 						(int) Double.parseDouble(nums[3]),
