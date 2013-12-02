@@ -68,8 +68,20 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   }
 
   public void nextFrame(TowerDefense_TransData t) {
+    checkEarning();
     mP.nextPanel(t);
 
+  }
+
+  private void checkEarning() {
+    if (cb.isCanCreateMeoMeo()) {
+      pp.addMeoMeo();
+      cb.setCanCreateMeoMeo(false);
+    }
+    if (cb.isCanUpgradeMeoMeo()) {
+      pp.upgradeMeoMeo();
+      cb.setCanUpgradeMeoMeo(false);
+    }
   }
 
   public void setClientBridge(ClientBridge cb) {
