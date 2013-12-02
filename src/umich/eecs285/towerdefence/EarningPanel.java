@@ -39,6 +39,7 @@ public class EarningPanel extends JPanel {
     TowerDefense_Button newMoney = new TowerDefense_Button("res/money.png", "res/money.png");
     newMoney.setBounds(10 + numberOfMoney * (MainFrame.ButtonSize + 5), 10, MainFrame.ButtonSize, MainFrame.ButtonSize);
     add(newMoney);
+    repaint();
     
     ++numberOfMoney;
   }

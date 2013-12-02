@@ -1,8 +1,5 @@
 package umich.eecs285.towerdefence;
 
-import java.awt.Graphics;
-
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class PlayerPanel extends JPanel{
@@ -41,11 +38,6 @@ public class PlayerPanel extends JPanel{
       this.cb = cb;
       cp.setClientBridge(cb);
       ip.setClientBridge(cb);
-    }
-    
-    public void paintComponent(Graphics g) {
-        ImageIcon Icon = new ImageIcon("res/cat.jpg");
-        g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
     }
 
     public void addMeoMeo() {
