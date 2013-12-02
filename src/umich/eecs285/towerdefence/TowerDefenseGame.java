@@ -1,5 +1,6 @@
 package umich.eecs285.towerdefence;
 
+import java.io.IOException;
 import java.util.Timer;
 
 import javax.swing.JFrame;
@@ -72,7 +73,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     control.init();
     DB = new TowerDefenseDataBase();
     DB.init();
-
+    receivedData = null;
   }
 
   private void setTimestamp() {
@@ -153,6 +154,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     		  attackingUnits[i]=receivedData.TowerDefense_TransArray[i].getId();
     	  }
     	  control.startTurn(turn, attackingUnits.length, attackingUnits);
+    	receivedData = null;
       }
       else{
     	  control.startTurn(turn, 0, null);
@@ -188,6 +190,12 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       control.endTurn();
       cushion();
       messager.transmitRoundReady(player.getAttackingData(clientId));
+      try {
+        System.out.println("Sending units...");
+        System.out.println(JSONUtility.arrayToJSON(player.getAttackingData(clientId)));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
       if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
         opponentData = messager.getReceivedData();
       else if (messager.getReceivedData().getSize() > 0)

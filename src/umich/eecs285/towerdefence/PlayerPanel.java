@@ -55,4 +55,8 @@ public class PlayerPanel extends JPanel{
     public void upgradeMeoMeo() {
       ep.LevelUp();
     }
+
+    public void refreshInfo() {
+      ip.refresh();
+    }
 }
