@@ -4,6 +4,8 @@ import java.util.Timer;
 
 import javax.swing.JFrame;
 
+import com.sun.org.apache.bcel.internal.generic.InstructionConstants.Clinit;
+
 import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
@@ -191,6 +193,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         receivedData = messager.getReceivedData();
       cushion();
       player.addCandy(1, control.hasReachedKing());
+      
     }
     // TODO player automatically increase money
   }
@@ -221,7 +224,8 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   }
 
   private void checkprepBridge() {
-
+	client_bridge.setCandy(player.getCandy());
+	client_bridge.setMoney(player.getMoney());
     // TODO Auto-generated method stub
     if (client_bridge.isCreateAttackUnitRequest()) {
       if (player.canCreateAttackingUnit(client_bridge.getAttackUnitId())) {
@@ -264,7 +268,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   }
 
   private boolean checkInitalBridge() {
-
+	  
     if (client_bridge.isCreateGameRequest()) {
 
       client_bridge.setGameCreated(true);
@@ -291,6 +295,8 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
   }
 
   private void checkRunBridge() {
+	client_bridge.setCandy(player.getCandy());
+	client_bridge.setMoney(player.getMoney());
     // TODO Auto-generated method stub
     if (client_bridge.isCreateAttackUnitRequest()) {
       if (player.canCreateAttackingUnit(client_bridge.getAttackUnitId())) {
