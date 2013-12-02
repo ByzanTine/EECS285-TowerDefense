@@ -17,11 +17,11 @@ public class ClientMessager extends Thread {
   
   public void run() {
     try {
-      System.out.println("Client: connecting to " + serverIp
-          + " on port " + port);
+//      System.out.println("Client: connecting to " + serverIp
+//          + " on port " + port);
       Socket client = new Socket(serverIp, port);
-      System.out.println("Client: just connected to "
-          + client.getRemoteSocketAddress());
+//      System.out.println("Client: just connected to "
+//          + client.getRemoteSocketAddress());
       OutputStream outToServer = client.getOutputStream();
       DataOutputStream out =
           new DataOutputStream(outToServer);

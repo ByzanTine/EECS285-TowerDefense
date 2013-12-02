@@ -54,15 +54,15 @@ public class ServerMessager extends Thread {
         // initialize server
         InetAddress hostIp;
         hostIp = InetAddress.getLocalHost();
-        System.out.println("Server: waiting for client on " + hostIp.getHostAddress() + ":" +
-        serverSocket.getLocalPort());
+//        System.out.println("Server: waiting for client on " + hostIp.getHostAddress() + ":" +
+//        serverSocket.getLocalPort());
         
         // setup connection
         Socket server = serverSocket.accept();
         
         // get connection
-        System.out.println("Server: connected to "
-             + server.getRemoteSocketAddress());
+//        System.out.println("Server: connected to "
+//             + server.getRemoteSocketAddress());
         
         // get input message
         DataInputStream in =
