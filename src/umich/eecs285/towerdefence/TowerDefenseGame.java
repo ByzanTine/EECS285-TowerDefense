@@ -310,7 +310,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         player.updateUnit(client_bridge.getLevelupId());
         control.levelUp(client_bridge.getLevelupId());
         client_bridge.setCandy(player.getCandy());
-       
+        client_bridge.setUnitLevelupRequest(false);
       }
     }
     
