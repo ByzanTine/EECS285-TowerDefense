@@ -56,8 +56,12 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
     messager = new Messager(clientId);
     // TODO change client side initialization to get ip from player
     mainFrame.start();
-    mainFrame.turnOnRound("Wait player to join...\n" + messager.getServerIp());
-    messager.initialization();
+    if (clientId == Messager.Id_Server) {
+      messager.initialization();
+      mainFrame.turnOnRound("Wait player to join: " + messager.getServerIp());
+    } else {
+      messager.initialization(serverIp);
+    }
     player = new Player();
     turn = 1;
     control = new Controller();
@@ -99,7 +103,8 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         if (draw_state == true && opponentData != null)
           mainFrame.nextFrame(opponentData);
       }
-
+      if (clientId == Messager.Id_Server)
+        mainFrame.turnOffRound();
       long nextRoundStartTime = messager.getNextRoundStartTime();
       // wait till nextRoundStartTime
       while (System.currentTimeMillis() < nextRoundStartTime) {
