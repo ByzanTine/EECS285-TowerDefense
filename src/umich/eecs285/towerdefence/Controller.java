@@ -129,7 +129,7 @@ public class Controller {
 		return enemy==0;
 	}
 	public boolean isDead(){
-		return mysoldiers==0;
+		return (soldiers[0].HP<0);
 	}
 	public void startTurn(int turn,int n,int ids[]){
 		int height=Map.HEIGHT*Map.CELL_SIZE;
