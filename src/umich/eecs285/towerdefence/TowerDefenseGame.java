@@ -97,7 +97,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         setTimestamp();
         checkRunBridge();
         messager.transmitRoundReady();
-        if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+          mainFrame.turnOnRound("You Win!");
+        else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
           opponentData = messager.getReceivedData();
         else if (messager.getReceivedData().getSize() > 0)
           receivedData = messager.getReceivedData();
@@ -133,7 +135,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         System.out.println(towerDefense_TransData.toString());
         towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
         messager.transmitRegularData(towerDefense_TransData);
-        if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+          mainFrame.turnOnRound("You Win!");
+        else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
           opponentData = messager.getReceivedData();
         else if (messager.getReceivedData().getSize() > 0)
           receivedData = messager.getReceivedData();
@@ -172,7 +176,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         towerDefense_TransData = control.getInfo(clientId, timestamp);
         towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
         messager.transmitRegularData(towerDefense_TransData);
-        if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+          mainFrame.turnOnRound("You Win!");
+        else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
           opponentData = messager.getReceivedData();
         else if (messager.getReceivedData().getSize() > 0)
           receivedData = messager.getReceivedData();
@@ -185,6 +191,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 
         System.out.println(towerDefense_TransData.toString());
         if (control.isDead()) {
+          mainFrame.turnOnRound("You Lose!");
           cushion();
           break;
         }
@@ -196,7 +203,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       control.endTurn();
       cushion();
       messager.transmitRoundReady(player.getAttackingData(clientId));
-      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+        mainFrame.turnOnRound("You Win!");
+      else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
         opponentData = messager.getReceivedData();
       else if (messager.getReceivedData().getSize() > 0)
         receivedData = messager.getReceivedData();
@@ -219,7 +228,9 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       towerDefense_TransData = control.getInfo(clientId, timestamp);
       towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
       messager.transmitRegularData(towerDefense_TransData);
-      if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+        mainFrame.turnOnRound("You Win!");
+      else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
         opponentData = messager.getReceivedData();
       else if (messager.getReceivedData().getSize() > 0)
         receivedData = messager.getReceivedData();
