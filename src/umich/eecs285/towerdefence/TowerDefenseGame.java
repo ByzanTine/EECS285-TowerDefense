@@ -142,9 +142,15 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         System.out.println(towerDefense_TransData.toString());
         towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
         messager.transmitRegularData(towerDefense_TransData);
-        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
           mainFrame.turnOnRound("You Win!");
-        else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+          try {
+            Thread.sleep(10000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          System.exit(0);
+        } else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
           opponentData = messager.getReceivedData();
         else if (messager.getReceivedData().getSize() > 0)
           receivedData = messager.getReceivedData();
@@ -183,9 +189,15 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         towerDefense_TransData = control.getInfo(clientId, timestamp);
         towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
         messager.transmitRegularData(towerDefense_TransData);
-        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+        if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
           mainFrame.turnOnRound("You Win!");
-        else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+          try {
+            Thread.sleep(10000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          System.exit(0);
+        } else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
           opponentData = messager.getReceivedData();
         else if (messager.getReceivedData().getSize() > 0)
           receivedData = messager.getReceivedData();
@@ -200,6 +212,7 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
         if (control.isDead()) {
           cushion();
           mainFrame.turnOnRound("You Lose!");
+          messager.transmitGameEnd();
           try {
             Thread.sleep(10000);
           } catch (InterruptedException e) {
@@ -216,9 +229,15 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       control.endTurn();
       cushion();
       messager.transmitRoundReady(player.getAttackingData(clientId));
-      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
         mainFrame.turnOnRound("You Win!");
-      else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+        try {
+          Thread.sleep(10000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        System.exit(0);
+      } else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
         opponentData = messager.getReceivedData();
       else if (messager.getReceivedData().getSize() > 0)
         receivedData = messager.getReceivedData();
@@ -241,9 +260,15 @@ public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
       towerDefense_TransData = control.getInfo(clientId, timestamp);
       towerDefense_TransData.setTransmitType(Transmit_Type_Regular);
       messager.transmitRegularData(towerDefense_TransData);
-      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End)
+      if (messager.getReceivedData().getTimeStamp() == Transmit_Type_Game_End) {
         mainFrame.turnOnRound("You Win!");
-      else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
+        try {
+          Thread.sleep(10000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        System.exit(0);
+      } else if (messager.getReceivedData().getTransmitType() == Transmit_Type_Regular)
         opponentData = messager.getReceivedData();
       else if (messager.getReceivedData().getSize() > 0)
         receivedData = messager.getReceivedData();
