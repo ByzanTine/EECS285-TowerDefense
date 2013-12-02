@@ -36,7 +36,7 @@ public class Player {
   private int meomeoNum;
   private int meomeoIncome; // used for updating the meomeo, high level meomeo
   // have high income
-  private Vector<Integer> attackingId = new Vector();
+  private Vector<Integer> attackingId = new Vector<Integer>();
 
   public Player() {
 
