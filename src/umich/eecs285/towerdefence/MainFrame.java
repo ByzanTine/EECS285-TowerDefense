@@ -15,7 +15,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   private LogPanel lp;
   private MainPanel mP;
   private PlayerPanel pp;
-  private JPanel RoundPanel;
+  private JLabel text;
   private ClientBridge cb;
 
   MainFrame() {
@@ -47,10 +47,6 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     mP = new MainPanel(pp);
     all.add(mP);
     mP.setClientBridge(cb);
-    
-    RoundPanel = new JPanel();
-    RoundPanel.setOpaque(false);
-    RoundPanel.setBounds(100, 250, 400, 200);
 
     addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
@@ -80,13 +76,15 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
   }
   
   public void turnOnRound(String Info) {
-    JLabel text = new JLabel(Info);
-    RoundPanel.add(text);
-    add(RoundPanel);
+    text = new JLabel(Info);
+    text.setBounds(100, 250, 400, 200);
+    mP.add(text);
+    mP.repaint();
   }
   
   public void turnOffRound() {
-    remove(RoundPanel);
+    mP.remove(text);
+    mP.repaint();
   }
   
 }
