@@ -30,7 +30,7 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
     for (Integer i = 0; i < t.getSize(); ++i) {
       String temp = d.searchImage(t.TowerDefense_TransArray[i].getId(),
           t.TowerDefense_TransArray[i].getAction());
-      PokemonButton b = new PokemonButton("res/alien_selected.gif", temp,
+      PokemonButton b = new PokemonButton(temp, temp,
           t.TowerDefense_TransArray[i].getId());
       b.addActionListener(new PokemonButtonListener(
           t.TowerDefense_TransArray[i].getId(), t.TowerDefense_TransArray[i]
