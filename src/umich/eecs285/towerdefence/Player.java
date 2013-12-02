@@ -16,7 +16,6 @@ public class Player {
   private static final int meomeoMaximumLevel = 3; // subject to change
   private static final int initialmeomeoIncome = 10;
   private static final int updatemeomeoIncome = 10; // meomeoIncome increase
-  private static final int meomeoIncomeFactor = 10;
   // by this value
   // every time it
   // upgrades.
@@ -40,10 +39,10 @@ public class Player {
 
   public Player() {
 
-    meomeoLevel = 0;
+    meomeoLevel = 1;
     money = initialMoney;
     candy = initialCandy;
-    meomeoNum = 0;
+    meomeoNum = 1;
     meomeoIncome = initialmeomeoIncome;
 
     candyTable = new Hashtable<Integer, Integer>();
@@ -159,7 +158,7 @@ public class Player {
   }
 
   public void addMoney() {
-    money += meomeoIncome * meomeoNum * meomeoIncomeFactor;
+    money += meomeoIncome * meomeoNum;
   }
 
   public void createUnit(int id) {
