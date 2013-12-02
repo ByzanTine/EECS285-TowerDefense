@@ -11,7 +11,7 @@ public class Player {
   public static final int initialMoney = 150;
   private static final int initialBall = 0;
   private static final int maximumMeoNumber = 7;
-  public static final int initialCandy = 300;
+  public static final int initialCandy = 150;
   private static final int meomeoCreateCost = 100; // subject to change
   private static final int meomeoUpdateCost = 200; // subject to change
   private static final int meomeoMaximumLevel = 3; // subject to change
@@ -164,8 +164,9 @@ public class Player {
   }
 
   public void createUnit(int id) {
-
+	  
     candy -= candyTable.get(id);
+    System.out.println("Candy"+candy);
     ball++;
 
   }
