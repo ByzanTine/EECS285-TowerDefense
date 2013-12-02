@@ -85,7 +85,7 @@ public class MainFrame extends JFrame implements TowerDefensedataArray {
     add(RoundPanel);
   }
   
-  public void turnOnRound() {
+  public void turnOffRound() {
     remove(RoundPanel);
   }
   
