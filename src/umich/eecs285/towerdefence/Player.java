@@ -61,8 +61,8 @@ public class Player {
     candyTable.put(26, 150);
     candyTable.put(31, 200);
     // moneyTable value has not been given!!
-    moneyTable.put(51, 10);
-    moneyTable.put(52, 25);
+    moneyTable.put(51, 20);
+    moneyTable.put(52, 100);
     moneyTable.put(53, 50);
     moneyTable.put(54, 75);
     moneyTable.put(55, 100);

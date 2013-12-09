@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class TowerDefenseGame extends Thread implements TowerDefensedataArray {
 	public static long Preparation_Time = 15000;
-	public static int delay = 40;
+	public static int delay = 30;
 
 	private Controller control;
 	private TowerDefenseDataBase DB;
