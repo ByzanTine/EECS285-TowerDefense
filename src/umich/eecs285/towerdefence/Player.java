@@ -8,7 +8,7 @@ import umich.eecs285.towerdefence.TowerDefensedataArray.TowerDefense_TransData;
 
 public class Player {
 
-  public static final int initialMoney = 75;
+  public static final int initialMoney = 500;
   private static final int maximumMeoNumber = 6;
   public static final int initialCandy = 1000;
   private static final int meomeoCreateCost = 50; // subject to change
