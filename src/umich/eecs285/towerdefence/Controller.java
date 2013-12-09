@@ -10,7 +10,7 @@ public class Controller {
 	private TowerDefenseDataBase Data=new TowerDefenseDataBase();
 	static final int order[][]={{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1}};
 	static final int mod[]={1,2,1,2,1,2,1,2},KingX=300,KingY=60,Edge=24;
-	static final int systemSoldiers[]={0,15,15,15,15,20,15,15,15,15,3};
+	static final int systemSoldiers[]={0,15,15,15,15,20,15,5,15,15,3};
 	static final int mapUnit[][]={{263,200},{175,297},{155,317},{72,377},{196,494},{300,374},{359,307},{460,185},{462,341},{358,462}};
 	public Controller(){
 		for(int i=0;i<MAX_UNITS;i++){
