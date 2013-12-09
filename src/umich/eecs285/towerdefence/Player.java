@@ -10,7 +10,7 @@ public class Player {
 
   public static final int initialMoney = 75;
   private static final int maximumMeoNumber = 6;
-  public static final int initialCandy = 150;
+  public static final int initialCandy = 1000;
   private static final int meomeoCreateCost = 50; // subject to change
   private static final int meomeoUpdateCost = 60; // subject to change
   private static final int meomeoMaximumLevel = 3; // subject to change

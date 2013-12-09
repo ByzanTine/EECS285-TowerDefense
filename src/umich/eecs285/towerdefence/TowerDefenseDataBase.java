@@ -64,7 +64,7 @@ public class TowerDefenseDataBase {
 
 		try {
 			// For king
-			Units king = new Units(3000, 0, 1, 0, (int)(700*Speed_Ratio), 50, 1);
+			Units king = new Units(3000, 0, 1, 0, (int)(250*Speed_Ratio), 50, 1);
 			Unit_table.put(0, king);
 			// For others
 			for (int i = 0; i < ID_SIZE && (line = br.readLine()) != null; i++) {
