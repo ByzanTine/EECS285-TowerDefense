@@ -3,7 +3,7 @@
 	<classpathentry kind="src" output="binary" path="src"/>
 	<classpathentry kind="src" output="binary" path="TestAndExample"/>
 	<classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
-	<classpathentry kind="con" path="/home/think/Desktop/EECS285-TowerDefense-master/binary"/>
-	<classpathentry kind="lib" path="/home/think/Desktop/EECS285-TowerDefense-master/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="con" path="binary/"/>
+	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="binary"/>
 </classpath>
