@@ -18,7 +18,12 @@
 		<link>
 			<name>bin</name>
 			<type>2</type>
-			<location>C:/Users/Administrator/Desktop/EECS285/EECS285-TowerDefense/bin</location>
+			<location>/home/think/C::/Users/Administrator/Desktop/EECS285/EECS285-TowerDefense/bin</location>
+		</link>
+		<link>
+			<name>binary</name>
+			<type>2</type>
+			<location>/home/think/Desktop/EECS285-TowerDefense-master/binary</location>
 		</link>
 	</linkedResources>
 </projectDescription>

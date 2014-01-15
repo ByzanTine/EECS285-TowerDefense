@@ -91,7 +91,7 @@ public class MainPanel extends JPanel implements TowerDefensedataArray {
   }
 
   public void paintComponent(Graphics g) {
-    ImageIcon Icon = new ImageIcon("res/Background/back.png");
+    ImageIcon Icon = new ImageIcon("res/Background/Back.png");
     g.drawImage(Icon.getImage(), 0, 0, getSize().width, getSize().height, this);
   }
 
